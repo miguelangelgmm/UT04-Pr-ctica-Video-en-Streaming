@@ -35,6 +35,6 @@ class Person {
     }
 
 		toString(){
-			return `Nombre: ${this.name} apellido: ${this.#lastname2} ${this.#lastname2} fecha nacimiento:  ${this.#born.toLocaleDateString()} picture ${this.picture}}`
+			return `Nombre: ${this.#name} apellido: ${this.#lastname1} ${this.#lastname2} fecha nacimiento:  ${this.#born.toLocaleDateString()} picture ${this.#picture}}`
 		}
 }
