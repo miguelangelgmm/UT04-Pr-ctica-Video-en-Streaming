@@ -60,6 +60,9 @@ export class Category {
         this.#name = name;
         this.#description = description;
     }
+		toString(){
+			return `Nombre Categoria: ${this.#name}, Descripción: ${this.#description}`
+		}
 }
 
 export class Resource {
@@ -69,14 +72,28 @@ export class Resource {
         if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
         if (duracion === "undefined" || duracion === "")
             throw new EmptyValueException("duracion");
-        if (Number.isNaN(link))
-            throw InvalidValueException("link", "Number");
+
+        if (link === "undefined" || link === "")
+            throw new EmptyValueException("link");
+        if (
+            !/^https?:\/\/(www\.)?[-a-zA-Z0-9@%._\+~#=]{2,256}(\:(\d){2,4})?(\/[a-zA-Z0-9_.$%._\+~#]+)*(\?(\w+=.*)(\&(\w+=.+))*)?$/.test(
+                link
+            ) ||
+            !/^(\/?[a-zA-Z0-9_.$%._\+~#]+)*(\?(\w+=.*)(\&(\w+=.+))*)?$/.test(
+                link
+            )
+        )
+            throw new InvalidValueException("link", link);
         if (typeof duracion != "string")
             throw new InvalidValueException("duracion", "String");
-        //!Añadir luego expresión regular para el link
+				this.#link = link;
         this.#duracion = duracion;
         this.#link = link;
     }
+
+		toString(){
+			return `Duración: ${this.#duracion}, Link: ${this.#link}`
+		}
 }
 //heredan movie y serie de él
 export class Production {
@@ -112,6 +129,9 @@ export class Production {
         this.#synopsis = synopsis;
         this.#image = image;
     }
+		toString(){
+			return `Título: ${this.#title}, nacionalidad: ${this.#nationality}, publciación: ${this.#publication}, sinopsis: ${this.#synopsis}, imagen: ${this.image} `
+		}
 }
 
 export class Movie extends Production {
@@ -123,19 +143,22 @@ export class Movie extends Production {
         publication,
         synopsis = "",
         image = "",
-        resource = "",
-        locations = ""
+        resource = new Resource(0, 0),
+        locations = []
     ) {
         super(title, nationality, publication, synopsis, image);
         //compruebo si el valor que le hemos introducido es un recurso o si no es vacio
-        if (resource.__proto__ != Resource.prototype || resource != "")
+        if (resource.__proto__ != Resource.prototype)
             throw new InvalidValueException("resource", "Resource");
-        if (locations.__proto__ != Locations.prototype || locations != "")
+        if (locations.some((location) => location.__proto__ != Coordinate.prototype))
             throw new InvalidValueException("Locations", "locations");
 
         this.#locations = locations;
         this.#resource = resource;
     }
+		toString(){
+			return super.toString() + ` Recursos: ${this.#resource.toString()} ` +" Localización "+ this.#locations.join("||")//mirar después el join
+		}
 }
 
 export class Serie extends Production {
@@ -148,22 +171,25 @@ export class Serie extends Production {
         publication,
         synopsis = "",
         image = "",
-        resource = "",
-        locations = "",
+        resources = [],
+        locations = [],
         season = 0
     ) {
         super(title, nationality, publication, synopsis, image);
         //compruebo si el valor que le hemos introducido es un recurso o si no es vacio
-        if (resource.__proto__ != Resource.prototype || resource != "")
-            throw new InvalidValueException("resource", "Resource");
-        if (locations.__proto__ != Locations.prototype || locations != "")
-            throw new InvalidValueException("locations", "Locations");
+        if (resources.some((resource) => resource.__proto__ != Resource.prototype))
+            throw new InvalidValueException("Resources", "resource");
+						if (locations.some((location) => location.__proto__ != Coordinate.prototype))
+            throw new InvalidValueException("Locations", "locations");
         if (Number.isNaN(season))
             throw new InvalidValueException("Number", "number");
         this.#locations = locations;
-        this.#resource = resource;
+        this.#resource = resources;
         this.#season = season;
     }
+		toString(){
+			return super.toString() + ` Recursos: ${this.#resource.toString()} ` + " Localización: "+this.#locations.join("||") + `Temporadas: ${this.#season}`//mirar después el join
+		}
 }
 
 export class User {
@@ -198,21 +224,28 @@ export class User {
         this.#password = password;
         this.#email = email;
     }
+		toString(){
+			return `usuario: ${this.#username} email: ${this.#email} contraseña: ${this.#password}`
+		}
 }
 
 export class Coordinate {
-    #latitude;
-    #longitud;
-    constructor(latitude, longitud) {
-			if (Number.isNaN(latitude))
-			throw InvalidValueException("latitude", "Number");
-			if (Number.isNaN(longitud))
-			throw InvalidValueException("longitud", "Number");
-        this.#latitude = latitude;
-        this.#longitud = longitud;
-    }
+	#latitude;
+	#longitude;
+	constructor(latitude = 0, longitude = 0){
+
+		latitude = typeof latitude !== 'undefined' ? Number(latitude).valueOf() : 0;
+		if (Number.isNaN(latitude)  || latitude < -90 || latitude > 90)
+			throw new InvalidValueException("latitude", latitude);
+		longitude = typeof longitude !== 'undefined' ? Number(longitude).valueOf() : 0;
+		if (Number.isNaN(longitude)  || longitude < -180 || longitude > 180)
+			throw new InvalidValueException("longitude", longitude);
+
+		this.#latitude = latitude;
+		this.#longitude = longitude;
+	}
+	toString(){
+		return `Latitude: ${this.#latitude} Longitud: ${this.#longitude}`
+	}
 }
 
-//!TENGO QUE AÑADIR EL TOSTRING EN TODOS
-
-//!Tengo que cambiar cosas porque Coordinete por ejemplo en movie es un array de recusos y yo he puesto un coordinate normal
