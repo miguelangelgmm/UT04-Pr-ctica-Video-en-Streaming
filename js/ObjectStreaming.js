@@ -20,7 +20,7 @@ export class Person {
             throw new EmptyValueException("name");
         if (lastname1 === "undefined" || lastname1 === "")
             throw new EmptyValueException("lastname1");
-        if (!born instanceof Date)
+        if (!(born instanceof Date))
             throw new InvalidValueException("born", "Date");
         if (typeof name != "string")
             throw new InvalidValueException("name", "String");
@@ -60,9 +60,14 @@ export class Category {
         this.#name = name;
         this.#description = description;
     }
-		toString(){
-			return `Nombre Categoria: ${this.#name}, Descripción: ${this.#description}`
-		}
+    toString() {
+        return `Nombre Categoria: ${this.#name}, Descripción: ${
+            this.#description
+        }`;
+    }
+    get name() {
+        return this.#name;
+    }
 }
 
 export class Resource {
@@ -86,14 +91,14 @@ export class Resource {
             throw new InvalidValueException("link", link);
         if (typeof duracion != "string")
             throw new InvalidValueException("duracion", "String");
-				this.#link = link;
+        this.#link = link;
         this.#duracion = duracion;
         this.#link = link;
     }
 
-		toString(){
-			return `Duración: ${this.#duracion}, Link: ${this.#link}`
-		}
+    toString() {
+        return `Duración: ${this.#duracion}, Link: ${this.#link}`;
+    }
 }
 //heredan movie y serie de él
 export class Production {
@@ -120,7 +125,7 @@ export class Production {
             throw new InvalidValueException("synopsis", "String");
         if (typeof image != "string")
             throw new InvalidValueException("image", "String");
-        if (!publication instanceof Date)
+        if (!(publication instanceof Date))
             throw new InvalidValueException("publication", "Date");
 
         this.#title = title;
@@ -129,9 +134,13 @@ export class Production {
         this.#synopsis = synopsis;
         this.#image = image;
     }
-		toString(){
-			return `Título: ${this.#title}, nacionalidad: ${this.#nationality}, publciación: ${this.#publication}, sinopsis: ${this.#synopsis}, imagen: ${this.image} `
-		}
+    toString() {
+        return `Título: ${this.#title}, nacionalidad: ${
+            this.#nationality
+        }, publciación: ${this.#publication}, sinopsis: ${
+            this.#synopsis
+        }, imagen: ${this.image} `;
+    }
 }
 
 export class Movie extends Production {
@@ -150,15 +159,24 @@ export class Movie extends Production {
         //compruebo si el valor que le hemos introducido es un recurso o si no es vacio
         if (resource.__proto__ != Resource.prototype)
             throw new InvalidValueException("resource", "Resource");
-        if (locations.some((location) => location.__proto__ != Coordinate.prototype))
+        if (
+            locations.some(
+                (location) => location.__proto__ != Coordinate.prototype
+            )
+        )
             throw new InvalidValueException("Locations", "locations");
 
         this.#locations = locations;
         this.#resource = resource;
     }
-		toString(){
-			return super.toString() + ` Recursos: ${this.#resource.toString()} ` +" Localización "+ this.#locations.join("||")//mirar después el join
-		}
+    toString() {
+        return (
+            super.toString() +
+            ` Recursos: ${this.#resource.toString()} ` +
+            " Localización " +
+            this.#locations.join("||")
+        ); //mirar después el join
+    }
 }
 
 export class Serie extends Production {
@@ -177,9 +195,17 @@ export class Serie extends Production {
     ) {
         super(title, nationality, publication, synopsis, image);
         //compruebo si el valor que le hemos introducido es un recurso o si no es vacio
-        if (resources.some((resource) => resource.__proto__ != Resource.prototype))
+        if (
+            resources.some(
+                (resource) => resource.__proto__ != Resource.prototype
+            )
+        )
             throw new InvalidValueException("Resources", "resource");
-						if (locations.some((location) => location.__proto__ != Coordinate.prototype))
+        if (
+            locations.some(
+                (location) => location.__proto__ != Coordinate.prototype
+            )
+        )
             throw new InvalidValueException("Locations", "locations");
         if (Number.isNaN(season))
             throw new InvalidValueException("Number", "number");
@@ -187,9 +213,15 @@ export class Serie extends Production {
         this.#resource = resources;
         this.#season = season;
     }
-		toString(){
-			return super.toString() + ` Recursos: ${this.#resource.toString()} ` + " Localización: "+this.#locations.join("||") + `Temporadas: ${this.#season}`//mirar después el join
-		}
+    toString() {
+        return (
+            super.toString() +
+            ` Recursos: ${this.#resource.toString()} ` +
+            " Localización: " +
+            this.#locations.join("||") +
+            `Temporadas: ${this.#season}`
+        ); //mirar después el join
+    }
 }
 
 export class User {
@@ -224,28 +256,30 @@ export class User {
         this.#password = password;
         this.#email = email;
     }
-		toString(){
-			return `usuario: ${this.#username} email: ${this.#email} contraseña: ${this.#password}`
-		}
+    toString() {
+        return `usuario: ${this.#username} email: ${this.#email} contraseña: ${
+            this.#password
+        }`;
+    }
 }
 
 export class Coordinate {
-	#latitude;
-	#longitude;
-	constructor(latitude = 0, longitude = 0){
+    #latitude;
+    #longitude;
+    constructor(latitude = 0, longitude = 0) {
+        latitude =
+            typeof latitude !== "undefined" ? Number(latitude).valueOf() : 0;
+        if (Number.isNaN(latitude) || latitude < -90 || latitude > 90)
+            throw new InvalidValueException("latitude", latitude);
+        longitude =
+            typeof longitude !== "undefined" ? Number(longitude).valueOf() : 0;
+        if (Number.isNaN(longitude) || longitude < -180 || longitude > 180)
+            throw new InvalidValueException("longitude", longitude);
 
-		latitude = typeof latitude !== 'undefined' ? Number(latitude).valueOf() : 0;
-		if (Number.isNaN(latitude)  || latitude < -90 || latitude > 90)
-			throw new InvalidValueException("latitude", latitude);
-		longitude = typeof longitude !== 'undefined' ? Number(longitude).valueOf() : 0;
-		if (Number.isNaN(longitude)  || longitude < -180 || longitude > 180)
-			throw new InvalidValueException("longitude", longitude);
-
-		this.#latitude = latitude;
-		this.#longitude = longitude;
-	}
-	toString(){
-		return `Latitude: ${this.#latitude} Longitud: ${this.#longitude}`
-	}
+        this.#latitude = latitude;
+        this.#longitude = longitude;
+    }
+    toString() {
+        return `Latitude: ${this.#latitude} Longitud: ${this.#longitude}`;
+    }
 }
-
