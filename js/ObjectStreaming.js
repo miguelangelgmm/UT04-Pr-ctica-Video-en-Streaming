@@ -45,6 +45,10 @@ export class Person {
             this.#picture
         }}`;
     }
+
+    get name() {
+        return this.#name;
+    }
 }
 export class Category {
     #name;
@@ -61,9 +65,7 @@ export class Category {
         this.#description = description;
     }
     toString() {
-        return `Nombre Categoria: ${this.#name}, Descripción: ${
-            this.#description
-        }`;
+        return `Categoria: ${this.#name}, Descripción: ${this.#description}`;
     }
     get name() {
         return this.#name;
@@ -83,14 +85,14 @@ export class Resource {
         if (
             !/^https?:\/\/(www\.)?[-a-zA-Z0-9@%._\+~#=]{2,256}(\:(\d){2,4})?(\/[a-zA-Z0-9_.$%._\+~#]+)*(\?(\w+=.*)(\&(\w+=.+))*)?$/.test(
                 link
-            ) ||
+            ) &&
             !/^(\/?[a-zA-Z0-9_.$%._\+~#]+)*(\?(\w+=.*)(\&(\w+=.+))*)?$/.test(
                 link
             )
         )
             throw new InvalidValueException("link", link);
-        if (typeof duracion != "string")
-            throw new InvalidValueException("duracion", "String");
+        if (typeof duracion != "number")
+            throw new InvalidValueException("duracion", "Number");
         this.#link = link;
         this.#duracion = duracion;
         this.#link = link;
@@ -141,6 +143,10 @@ export class Production {
             this.#synopsis
         }, imagen: ${this.image} `;
     }
+
+    get title() {
+        return this.#title;
+    }
 }
 
 export class Movie extends Production {
@@ -152,7 +158,7 @@ export class Movie extends Production {
         publication,
         synopsis = "",
         image = "",
-        resource = new Resource(0, 0),
+        resource = new Resource(0, "www.default.com"),
         locations = []
     ) {
         super(title, nationality, publication, synopsis, image);
@@ -261,6 +267,15 @@ export class User {
             this.#password
         }`;
     }
+    get username() {
+        return this.#username;
+    }
+    get email() {
+        return this.#email;
+    }
+    get password() {
+        return this.#password;
+    }
 }
 
 export class Coordinate {
@@ -281,5 +296,49 @@ export class Coordinate {
     }
     toString() {
         return `Latitude: ${this.#latitude} Longitud: ${this.#longitude}`;
+    }
+
+    get latitude() {
+        return this.#latitude;
+    }
+    set latitude(value) {
+        value = typeof value !== "undefined" ? Number(value).valueOf() : 0;
+        if (Number.isNaN(value) || value < -90 || value > 90)
+            throw new InvalidValueException("latitude", value);
+        this.#latitude = value;
+    }
+
+    get longitude() {
+        return this.#longitude;
+    }
+    set longitude(value) {
+        value = typeof value !== "undefined" ? Number(value).valueOf() : 0;
+        if (Number.isNaN(value) || value < -180 || value > 180)
+            throw new InvalidValueException("longitude", value);
+        this.#longitude = value;
+    }
+
+    getSexagesimalLatitude() {
+        let direction = this.latitude >= 0 ? "N" : "S";
+        let latitude = Math.abs(this.latitude);
+        let grades = Math.floor(latitude);
+        let tmpMinutes = (latitude - grades) * 60;
+        let minutes = Math.floor(tmpMinutes);
+        let tmpSeconds = (tmpMinutes - minutes) * 60;
+        let seconds = Math.round(tmpSeconds);
+
+        return grades + "°" + minutes + "'" + seconds + "''" + direction;
+    }
+
+    getSexagesimalLongitude() {
+        let direction = this.longitude >= 0 ? "E" : "W";
+        let longitude = Math.abs(this.longitude);
+        let grades = Math.floor(longitude);
+        let tmpMinutes = (longitude - grades) * 60;
+        let minutes = Math.floor(tmpMinutes);
+        let tmpSeconds = (tmpMinutes - minutes) * 60;
+        let seconds = Math.round(tmpSeconds);
+
+        return grades + "°" + minutes + "'" + seconds + "''" + direction;
     }
 }
