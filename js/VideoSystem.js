@@ -67,35 +67,72 @@ export let VideoSystem = (function () {
             //ACTORES Y DIRECTORES TAMBIÉN
             #categories = [];
             /*{
-							category;
-							productions=[];
-						}*/
+	category;
+	productions=[];
+}*/
             #actors = [];
             /*{
-							actor;
-							production=[]
-						}*/
+	actor;
+	production=[]
+}*/
             #directors = [];
             /*{
-							directors;
-							production=[]
-						}*/
+	directors;
+	production=[]
+}*/
             #defaultCategoryProductions;
             #getPosCategory(category) {
                 return this.#categories.findIndex(
-                    (cat) => cat.category.name == category.name
+                    (cat) =>
+                        cat.category.name.localeCompare(category, "en", {
+                            sensitivity: "base",
+                        }) == 0
+                );
+            }
+            #getPosDirector(director) {
+                return this.#directors.findIndex(
+                    (direct) =>
+                        direct.director.name.localeCompare(
+                            director.name,
+                            "en",
+                            {
+                                sensitivity: "base",
+                            }
+                        ) == 0
+                );
+            }
+            #getPosActor(actor) {
+                return this.#actors.findIndex(
+                    (act) =>
+                        act.actor.name.localeCompare(actor.name, "en", {
+                            sensitivity: "base",
+                        }) == 0
                 );
             }
             #removeProductions(productions, delProductions) {
                 productions.forEach((prod, index) => {
-                    if (delProductions.some((p) => p.title == prod.title))
+                    //Si ese
+                    if (
+                        delProductions.some(
+                            (p) => p.title.localeCompare(prod.title),
+                            "en",
+                            {
+                                sensitivity: "base",
+                            }
+                        ) == 0
+                    ) {
                         //Si existe esa producción la eliminamos
                         productions.splice(index, 1);
+                    }
                 });
             }
             #addNewProductions(newProductions) {
                 let newProds = newProductions.filter((product) =>
-                    this.#productions.every((p) => p.title != product.title)
+                    this.#productions.every(
+                        (p) => p.title.localeCompare(product.title),
+                        "en",
+                        { sensitivity: "base" } == 0
+                    )
                 );
                 //Si no existen las producciones la añadimos
                 this.#productions.push(...newProds);
@@ -140,7 +177,8 @@ export let VideoSystem = (function () {
             addCategory(category) {
                 if (!(category instanceof Category))
                     throw new InvalidValueException("category", "Category");
-                if (this.#getPosCategory(category) != -1) {
+
+                if (this.#getPosCategory(category.name) != -1) {
                     throw new DataAlreadyExistsException("category");
                 }
                 //añadimos un objeto con las claves
@@ -150,17 +188,17 @@ export let VideoSystem = (function () {
                     category: category,
                     productions: [],
                 });
-                console.log(this.#categories[0]);
+
                 return this.#categories.length;
             }
             removeCategory(category) {
                 if (!(category instanceof Category))
                     throw new InvalidValueException("category", Category);
                 //No se puede eliminar la cateogria por defecto
-                if (category.name == this.#categories[0].name)
+                if (category.name == this.#categories[0].category.name)
                     throw new CannotDeleteDefaultValueException();
 
-                let pos = this.#getPosCategory(category);
+                let pos = this.#getPosCategory(category.name);
 
                 if (pos == -1) {
                     throw new DataNotFoundException(category);
@@ -168,14 +206,13 @@ export let VideoSystem = (function () {
                 //Obtenemos las producciones que no disponemos actualemente en la lista de por defecto
                 let prodsDefault = this.#categories[pos].productions.filter(
                     (a) =>
-                        this.#defaultCategoryProductions.some(
-                            //!creo que esto seria every para que todas las producciones sean distinto nombre, mirar después
+                        this.#defaultCategoryProductions.every(
                             (b) => a.name != b.name
                         )
                 );
                 //Si la longitud del array es mayor a 0 añadimos las películas a defaultCategoryProductions
                 if (prodsDefault.length)
-                    this.#defaultCategoryProductions.push(prodsDefault);
+                    this.#defaultCategoryProductions.push(...prodsDefault);
 
                 this.#categories.splice(pos, 1);
                 return this.#categories.length;
@@ -183,6 +220,8 @@ export let VideoSystem = (function () {
 
             //Factoria de Category
             getCategory(name, description = "") {
+                if (name === "undefined" || name === "")
+                    throw new EmptyValueException("name");
                 let position = this.#getPosCategory(name);
                 let category;
                 position == -1
@@ -209,12 +248,24 @@ export let VideoSystem = (function () {
                     throw new InvalidValueException("user", "User");
                 if (!user) throw new EmptyValueException("user");
                 if (
-                    this.#users.findIndex((u) => u.username == user.username) !=
-                    -1
+                    //Comparamos teniendo en cuenta mayúsculas y tildes
+                    this.#users.findIndex(
+                        (u) =>
+                            u.username.localeCompare(user.username, "es", {
+                                sensitivity: "base",
+                            }) == 0
+                    ) != -1
                 )
-                    throw new DataAlreadyExistsException(user.username);
-                if (this.#users.findIndex((u) => u.email == user.email) != -1)
-                    throw new DataAlreadyExistsException(user.email);
+                    throw new DataAlreadyExistsException("username");
+                if (
+                    this.#users.findIndex(
+                        (u) =>
+                            u.email.localeCompare(user.email, "es", {
+                                sensitivity: "base",
+                            }) == 0
+                    ) != -1
+                )
+                    throw new DataAlreadyExistsException("email");
 
                 this.#users.push(user);
                 return this.#users.length;
@@ -224,7 +275,9 @@ export let VideoSystem = (function () {
                 if (!(user instanceof User))
                     throw new InvalidValueException("user", "User");
                 if (!user) throw new EmptyValueException("user");
-                pos = this.#users.findIndex((u) => u.name == user.name);
+                let pos = this.#users.findIndex(
+                    (u) => u.username == user.username
+                );
                 if (pos == -1) {
                     throw new DataNotFoundException("user");
                 }
@@ -233,7 +286,14 @@ export let VideoSystem = (function () {
             }
             //Factoria de user
             getUser(username, email, password) {
-                let position = this.#getPosCategory(name);
+                if (username === "undefined" || username === "")
+                    throw new EmptyValueException("username");
+                let position = this.#users.findIndex(
+                    (u) =>
+                        username.localeCompare(u.username, "es", {
+                            sensitivity: "base",
+                        }) == 0
+                );
                 let user;
                 position == -1
                     ? (user = new User(username, email, password)) //si no existe el usuario lo creamos
@@ -259,15 +319,14 @@ export let VideoSystem = (function () {
                 if (!(production instanceof Production))
                     throw new InvalidValueException("production", "Production");
                 if (!production) throw new EmptyValueException("production");
+                let pos = this.#productions.findIndex(
+                    (product) => product.title == production.title
+                );
+                if (pos != -1) {
+                    throw new DataAlreadyExistsException("production");
+                }
 
-                if (
-                    this.#productions.findIndex(
-                        (product) => product.title == production.title
-                    ) != -1
-                )
-                    throw new DataAlreadyExistsException(production.title);
-
-                this.#productions.push(pos);
+                this.#productions.push(production);
                 return this.#productions.length;
             }
             //elimina una producción
@@ -276,7 +335,7 @@ export let VideoSystem = (function () {
                     throw new InvalidValueException("production", "Production");
                 if (!production) throw new EmptyValueException("production");
                 let pos = this.#productions.findIndex(
-                    (production) => production.title == production.title
+                    (prod) => prod.title == production.title
                 );
                 if (pos == -1) {
                     throw new DataNotFoundException("production");
@@ -295,9 +354,15 @@ export let VideoSystem = (function () {
                 locations = [],
                 seasons
             ) {
-                let position = this.#productions.findIndex(
-                    (production) => production.title == production.title
-                );
+                if (title === "undefined" || title === "")
+                    throw new EmptyValueException("name");
+                let position = this.#productions.findIndex((production) => {
+                    return (
+                        title.localeCompare(production.title, "en", {
+                            sensitivity: "base",
+                        }) == 0
+                    );
+                });
                 let production;
                 if (position == -1) {
                     //creamos una copia del array pasado por el usuario para evitar que pueda mentener su referencia
@@ -327,9 +392,15 @@ export let VideoSystem = (function () {
                 resource = new Resource(0, "www.default.com"),
                 locations = []
             ) {
-                let position = this.#productions.findIndex(
-                    (production) => production.title == production.title
-                );
+                if (title === "undefined" || title === "")
+                    throw new EmptyValueException("name");
+                let position = this.#productions.findIndex((production) => {
+                    return (
+                        title.localeCompare(production.title, "en", {
+                            sensitivity: "base",
+                        }) == 0
+                    );
+                });
                 let production;
                 if (position == -1) {
                     //creamos una copia del array pasado por el usuario para evitar que pueda mentener su referencia
@@ -356,7 +427,7 @@ export let VideoSystem = (function () {
                 return {
                     *[Symbol.iterator]() {
                         for (let actor of array) {
-                            yield actor;
+                            yield actor.actor;
                         }
                     },
                 };
@@ -364,26 +435,27 @@ export let VideoSystem = (function () {
             //añade un nuevo actor
             addActor(actor) {
                 if (!(actor instanceof Person))
-                    throw new InvalidValueException("actor", "actor");
+                    throw new InvalidValueException("actor", "Person");
                 if (!actor) throw new EmptyValueException("actor");
 
                 if (
                     this.#actors.findIndex(
-                        (act) => act.actors.name == actor.name
+                        (act) => act.actor.name == actor.name
                     ) != -1
                 )
-                    throw new DataAlreadyExistsException(actor.name);
+                    throw new DataAlreadyExistsException("actor");
 
                 this.#actors.push({ actor: actor, productions: [] });
                 return this.#actors.length;
             }
             removeActor(actor) {
-                if (!(actor instanceof actor))
-                    throw new InvalidValueException("actor", "Actor");
+                if (!(actor instanceof Person))
+                    throw new InvalidValueException("actor", "Peron");
                 if (!actor) throw new EmptyValueException("actor");
                 let pos = this.#actors.findIndex(
                     (act) => act.actor.name == actor.name
                 );
+                //Si no existe lanza un error
                 if (pos == -1) {
                     throw new DataNotFoundException("actor");
                 }
@@ -392,19 +464,29 @@ export let VideoSystem = (function () {
             }
             //Factoria de Actores
             getActor(name, lastname1, lastname2 = "", born, picture = "") {
+                if (name === "undefined" || name === "")
+                    throw new EmptyValueException("name");
                 let position = this.#actors.findIndex(
-                    (actor) => actor.name == actor.name
+                    (act) =>
+                        name.localeCompare(act.actor.name, "es", {
+                            sensitivity: "base",
+                        }) == 0
                 );
+
                 let actor;
-                position == -1
-                    ? (actor = new Person(
-                          name,
-                          lastname1,
-                          (lastname2 = ""),
-                          born,
-                          (picture = "")
-                      )) //si no existe la producción
-                    : (actor = this.#actors[position]); //si existe lo recuperamos de la lista de categorias
+                if (position == -1) {
+                    actor = new Person(
+                        name,
+                        lastname1,
+                        lastname2,
+                        born,
+                        picture
+                    );
+                } else {
+                    //si no existe la producción
+                    actor = this.#actors[position].actor;
+                }
+                //si existe lo recuperamos de la lista de categorias
 
                 return actor;
             }
@@ -417,7 +499,7 @@ export let VideoSystem = (function () {
                 return {
                     *[Symbol.iterator]() {
                         for (let director of array) {
-                            yield director;
+                            yield director.director;
                         }
                     },
                 };
@@ -428,19 +510,15 @@ export let VideoSystem = (function () {
                     throw new InvalidValueException("director", "Director");
                 if (!director) throw new EmptyValueException("director");
 
-                if (
-                    this.#directors.findIndex(
-                        (direct) => direct.director.name == director.name
-                    ) != -1
-                )
-                    throw new DataAlreadyExistsException(director.name);
+                if (this.#getPosDirector(director) != -1)
+                    throw new DataAlreadyExistsException("director");
 
                 this.#directors.push({ director: director, productions: [] });
                 return this.#directors.length;
             }
             removeDirector(directors) {
-                if (!(directors instanceof directors))
-                    throw new InvalidValueException("directors", "directors");
+                if (!(directors instanceof Person))
+                    throw new InvalidValueException("directors", "Person");
                 if (!directors) throw new EmptyValueException("directors");
                 let pos = this.#directors.findIndex(
                     (direct) => direct.director.name == directors.name
@@ -453,19 +531,25 @@ export let VideoSystem = (function () {
             }
             //Factoria de Directores
             getDirector(name, lastname1, lastname2 = "", born, picture = "") {
+                if (name === "undefined" || name === "")
+                    throw new EmptyValueException("name");
                 let position = this.#directors.findIndex(
-                    (director) => director.name == director.name
+                    (direct) =>
+                        name.localeCompare(direct.director.name, "es", {
+                            sensitivity: "base",
+                        }) == 0
                 );
+
                 let director;
                 position == -1
                     ? (director = new Person(
                           name,
                           lastname1,
-                          (lastname2 = ""),
+                          lastname2,
                           born,
-                          (picture = "")
+                          picture
                       )) //si no existe la producción
-                    : (director = this.#directors[position]); //si existe lo recuperamos de la lista de categorias
+                    : (director = this.#directors[position].director); //si existe lo recuperamos de la lista de categorias
 
                 return director;
             }
@@ -481,10 +565,10 @@ export let VideoSystem = (function () {
                     throw new InvalidValueException("production", "Production");
 
                 //Si no existe la categoria la creamos
-                let posCategory = this.#getPosCategory(category);
+                let posCategory = this.#getPosCategory(category.name);
                 if (posCategory == -1) {
                     this.addCategory(category);
-                    posCategory = this.#getPosCategory(category);
+                    posCategory = this.#getPosCategory(category.name);
                 }
                 //Filtramos la lista y la dejamos solo con las producciones necesarias
                 let prods = productions.filter((product) =>
@@ -503,16 +587,15 @@ export let VideoSystem = (function () {
             deassignCategory(category, ...productions) {
                 if (!(category instanceof Category))
                     throw new InvalidValueException("category", "Category");
-                console.log(productions);
                 if (
                     !productions.every(
                         (production) => production instanceof Production
-                    )
+                    ) || productions.length==0
                 )
                     throw new InvalidValueException("production", "Production");
 
                 //Obtenemos la posición de la categoria
-                let posCategory = this.#getPosCategory(category);
+                let posCategory = this.#getPosCategory(category.name);
                 if (posCategory != -1) {
                     this.#removeProductions(
                         this.#categories[posCategory].productions,
@@ -536,10 +619,10 @@ export let VideoSystem = (function () {
                     throw new InvalidValueException("production", "Production");
 
                 //Si no existe el director lo creamos
-                let posDirector = this.#getPosCategory(director);
+                let posDirector = this.#getPosDirector(director);
                 if (posDirector == -1) {
-                    this.addCategory(director);
-                    posDirector = this.#getPosCategory(director);
+                    this.addDirector(director);
+                    posDirector = this.#getPosDirector(director);
                 }
                 //Filtramos la lista y la dejamos solo con las producciones necesarias
                 let prods = productions.filter((product) =>
@@ -554,6 +637,130 @@ export let VideoSystem = (function () {
 
                 return this.#directors[posDirector].productions.length;
             }
+            deassignDirector(director, ...productions) {
+                if (!(director instanceof Person))
+                    throw new InvalidValueException("director", "Person");
+                if (
+                    !productions.every(
+                        (production) => production instanceof Production
+                    ) || productions.length == 0
+                )
+                    throw new InvalidValueException("production", "Production");
+
+                //Obtenemos la posición de la categoria
+                let posDirector = this.#getPosDirector(director);
+                if (posDirector != -1) {
+                    this.#removeProductions(
+                        this.#directors[posDirector].productions,
+                        productions
+                    );
+
+                    return this.#directors[posDirector].productions.length;
+                }
+                //Si el director no existe retorna undefined
+            }
+            //////////////////////////////////////////////////
+            assignActor(actor, ...productions) {
+                if (!(actor instanceof Person))
+                    throw new InvalidValueException("actor", "Person");
+
+                if (
+                    !productions.every(
+                        (production) => production instanceof Production
+                    ) || productions.length==0
+                )
+                    throw new InvalidValueException("production", "Production");
+
+                //Si no existe el actor lo creamos
+                let posActor = this.#getPosActor(actor);
+                if (posActor == -1) {
+                    this.addActor(actor);
+                    posActor = this.#getPosActor(actor);
+                }
+                //Filtramos la lista y la dejamos solo con las producciones necesarias
+                let prods = productions.filter((product) =>
+                    this.#actors[posActor].productions.every(
+                        (p) => p.title != product.title
+                    )
+                );
+                //Si no existen las producciones la añadimos
+
+                this.#actors[posActor].productions.push(...prods);
+                this.#addNewProductions(prods);
+
+                return this.#actors[posActor].productions.length;
+            }
+            deassignActor(actor, ...productions) {
+                if (!(actor instanceof Person))
+                    throw new InvalidValueException("actor", "Person");
+                if (
+                    !productions.every(
+                        (production) => production instanceof Production
+                    ) || productions.length ==0
+                )
+                    throw new InvalidValueException("production", "Production");
+
+                //Obtenemos la posición de la categoria
+                let posActor = this.#getPosActor(actor);
+                if (posActor != -1) {
+                    this.#removeProductions(
+                        this.#actors[posActor].productions,
+                        productions
+                    );
+                    return this.#actors[posActor].productions.length;
+                }
+            }
+
+            *getCast(production) {
+                if (!(production instanceof Production))
+                    throw new InvalidValueException("production", "Production");
+
+                let array = this.#actors.filter(function (prod) {
+                    return (prod.productions.some((p) => p.title == production.title))
+                });
+
+                for (let actor of array) {
+                    yield actor.actor;
+                }
+            }
+
+            *getProductionDirector(director) {
+                if (!(director instanceof Person))
+                    throw new InvalidValueException("director", "Person");
+                // referencia para habilitar el closure en el objeto
+
+                let array =
+                    this.#directors[this.#getPosDirector(director)].productions;
+
+                for (let production of array) {
+                    yield production;
+                }
+            }
+            *getProductionActor(actor) {
+                if (!(actor instanceof Person))
+                    throw new InvalidValueException("actor", "Person");
+                // referencia para habilitar el closure en el objeto
+
+                let array = this.#actors[this.#getPosActor(actor)].productions;
+
+                for (let production of array) {
+                    yield production;
+                }
+            }
+            *getProductionCategory(category) {
+                if (!(category instanceof Category))
+                    throw new InvalidValueException("category", "Category");
+                // referencia para habilitar el closure en el objeto
+
+                let array =
+                    this.#categories[this.#getPosCategory(category.name)]
+                        .productions;
+                for (let production of array) {
+                    yield production;
+                }
+            }
+
+            //!getCast para hacerlo coger una pelicula y filtrar el array de actores comprobando que la pelicula se encuentra en las producciones de ese array
         }
         let instance = new VideoSystem(name); //Devolvemos el objeto ImageManager para que sea una instancia única.
         Object.freeze(instance);
@@ -570,5 +777,3 @@ export let VideoSystem = (function () {
         },
     };
 })();
-
-//!Cuando haga lo del array opcional tengo que tener cuidado con la referencia de la memoria
