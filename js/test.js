@@ -12,7 +12,8 @@ function testVideoStreaming(){
 
 	console.info("Creamos el objeto Streaming")
 	let vs = VideoSystem.getInstance("Streaming");
-
+	let vs2 = VideoSystem.getInstance("d");
+	console.log("comprobamos que vs y vs2 sean el mismo objeto: " + (vs==vs2))
 	console.log(`El nombre de la app es: ${vs.name}`)
 	console.log(`El nuevo nombre de la app es: ${vs.name="VideoStreaming"}`)
 	console.warn("*****************TESTEO DE CATEGORIES***********")
@@ -188,6 +189,15 @@ function testVideoStreaming(){
 	for (let prod of vs.getProductionActor(vs.getActor("Manuel"))) {
 		console.log(prod.toString());
 	}
+	console.log("Si intentamos eliminar a Manuel la que se avecina otra vez no hace nada, catidad de producciones " + vs.deassignActor(vs.getActor("Manuel"),vs.getSerie("La que se avecina")))
+
+	try{
+		console.log("Si tratamos de usar AssignActor sin ninguna producción")
+		vs.assignActor(vs.getActor("Manuel"))
+	}catch(error){
+		console.error(error)
+	}
+
 	console.info("Obtenemos el casting de La que se avecina");
 	for (let actor of vs.getCast(vs.getSerie("La que se avecina"))) {
 		console.log(actor.toString());
@@ -207,6 +217,23 @@ function testVideoStreaming(){
 
 	console.log("Mostramos las producciones en las que ha sido directora Marta")
 	for (let prod of vs.getProductionDirector(vs.getDirector("Marta"))) {
+		console.log(prod.toString());
+	}
+
+
+	console.warn("Si eliminamos El gato con botas con removeProduction lo vamos a eliminar también en categorias actores y directores")
+
+	console.log("Cantidad de producciones :" + vs.removeProduction(vs.getMovie("El gato con botas")));
+	console.log("Marta ya no dispone de El gato con botas")
+	for (let prod of vs.getProductionDirector(vs.getDirector("Marta"))) {
+		console.log(prod.toString());
+	}
+	console.log("No se encuentra en la categoria de aventura")
+	for (let prod of vs.getProductionCategory(vs.getCategory("Aventura"))) {
+		console.log(prod.toString());
+	}
+	console.log("La actriz maria ya no dispone de el gato con botas")
+	for (let prod of vs.getProductionActor(vs.getActor("Maria"))) {
 		console.log(prod.toString());
 	}
 

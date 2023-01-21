@@ -16,6 +16,7 @@ export class Person {
 	#picture;
 	constructor(name, lastname1, lastname2 = "", born, picture = "") {
 		if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
+		//Verificamos que todos los valores sean validos
 		if (name === "undefined" || name === "")
 			throw new EmptyValueException("name");
 		if (lastname1 === "undefined" || lastname1 === "")
@@ -53,6 +54,7 @@ export class Category {
 	#description;
 	constructor(name, description = "") {
 		if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
+		//validamos todos los valores
 		if (name === "undefined" || name === "")
 			throw new EmptyValueException("name");
 		if (typeof name != "string")
@@ -75,6 +77,7 @@ export class Resource {
 	#link;
 	constructor(duracion, link) {
 		if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
+		//validaciones
 		if (duracion === "undefined" || duracion === "")
 			throw new EmptyValueException("duracion");
 
@@ -116,7 +119,7 @@ export class Production {
 	) {
 		if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
 		if (new.target == Production)
-			throw new AbstractClassException("Production"); //Comprobamos si la clase no sea instancianda directamente
+			throw new AbstractClassException("Production"); //Comprobamos si la clase no sea instanciada directamente
 		if (typeof title != "string")
 			throw new InvalidValueException("title", "String");
 		if (typeof nationality != "string")
@@ -145,6 +148,7 @@ export class Production {
 	}
 }
 
+//movie hereda de Production
 export class Movie extends Production {
 	#resource;
 	#locations;
@@ -180,6 +184,8 @@ export class Movie extends Production {
 		); //mirar después el join
 	}
 }
+
+//Serie hereda de Production
 
 export class Serie extends Production {
 	#resource;
@@ -272,7 +278,7 @@ export class User {
 		return this.#password;
 	}
 }
-
+//Coordenadas
 export class Coordinate {
 	#latitude;
 	#longitude;
