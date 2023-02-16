@@ -1,0 +1,141 @@
+class VideoSystemView{
+	constructor(){
+    this.categories = $('#navbarSupportedContent ul li');
+		this.main = $('main');
+
+	}
+
+	showCategoriesInNav (categories) {
+
+		let ul = $(`<ul class="dropdown-menu"></ul>`);
+
+		for (let category of categories){
+			ul.append(`<li><a data-category="${category.name}" class="dropdown-item" href="#">${category.name}</a><li>`);
+		}
+		this.categories.append(ul);
+	}
+
+	showProductionInLoad(productions){
+
+		function limitSypnosis(text){
+			//cramos un array a partir del texto
+			let array = text.split(" ");
+
+			if(array.length > 40){
+				//obtenemos los 40  primeros caracteres y añadimos ...
+				text = array.slice(0, 40).join(" ") + "...";
+			}
+			return text
+		}
+
+		let active = true;
+
+		let carousel = $(`<div id="carouselExampleCaptions" class="carousel slide ms-5 me-5 mx-auto " data-bs-ride="carousel">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+				aria-current="true" aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+				aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+				aria-label="Slide 3"></button>
+		</div>
+		<div class="carousel-inner mt-4 rounded-4 prueba">
+
+		</div>
+		`);
+
+		for (let production of productions){
+			carousel.children().eq(1).append(`
+
+			<div class="carousel-item ${active ? "active": ""} ">
+
+			<img src="${production.image}"  data-category="${production.title}" class="d-block w-100 bg-image-carousel" alt="${production.title}">
+			<img src="${production.image}" data-category="${production.title}" class="position-absolute image-carousel" alt="${production.title}">
+
+			<div class="carousel-caption d-none d-md-block text-carrusel ">
+				<h5>${production.title}</h5>
+				<p class = "px-4">${limitSypnosis(production.synopsis)}</p>
+			</div>
+			`);
+			active = false;
+		}
+
+		carousel.append(`
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+		data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+		data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	</button>
+</div>`);
+
+		this.main.append(carousel);
+
+	}
+
+	showCategoriesInMain(categories){
+		this.main.empty();
+		let categoriesMain = $(`<div class="container rounded-5 bg-dark mx-a mt-4 py-2 shadow-aside">
+		<aside class="carousel-aside">
+		</aside>
+	</div>
+	`);
+
+	for (let category of categories){
+		categoriesMain.children().append(`
+
+		<div class="item-aside p-2 link" href='#product-list'  data-category="${category.name}">
+		<div>
+			<img src="./img/icons/${category.name}.png" alt="${category.name}" class="image-aside">
+			<h3 class="d-none d-lg-block">${category.name}</h3>
+		</div>
+	</div>
+		`);
+	}
+	this.main.append(categoriesMain);
+	}
+
+
+	//Enlacamos a las categorias un evento
+	bindProductionsCategoryList(handler){
+		$('.link').click(function(event){
+			handler(this.dataset.category);
+		});
+	}
+
+	bindInit(handler){
+		$('#logo').click((event) => {
+			handler();
+		});
+	}
+
+
+
+	//Lista de elementos, plantilla
+	listProductions(productions,title){
+		this.main.empty();
+		let container = $(`
+		<section class="container-fluid mx-auto " >
+			<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4">
+			</div>
+		</section>
+		`)
+		let production = productions.next();
+		while (!production.done){
+			let div = $(`
+			<section class="col prueba2 mx-auto rounded-4 mt-3">
+			<figure>
+				<img src="${production.value.image}" alt="${production.value.title}" class="rounded-4 ">
+			</figure>
+			`);
+			container.children().first().append(div);
+			production = productions.next();
+		}
+		container.prepend(`<h1>${title}</h1>`);
+		this.main.append(container);
+	}
+}
+
+export default VideoSystemView;
