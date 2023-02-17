@@ -114,11 +114,16 @@ export let VideoSystem = (function () {
 			 * @returns El índice de la posición del actor
 			 */
 			#getPosActor(actor) {
+
 				return this.#actors.findIndex(
-					(act) =>
-						act.actor.name.localeCompare(actor.name, "en", {
-							sensitivity: "base",
-						}) == 0
+
+					(act) =>{
+						return (
+							act.actor.name.localeCompare(actor.name, "en", {sensitivity: "base",}) == 0 &&
+							act.actor.lastname1.localeCompare(actor.lastname1,"en",{sensitivity:"base"})==0
+						)
+					}
+
 				);
 			}
 
@@ -491,7 +496,7 @@ export let VideoSystem = (function () {
 					throw new InvalidValueException("actor", "Person");
 				if (!actor) throw new EmptyValueException("actor");
 
-				if (this.#actors.findIndex((act) => act.actor.name == actor.name) != -1)
+				if (this.#actors.findIndex((act) =>{return act.actor.name == actor.name && act.actor.lastname1 == actor.lastname1}) != -1)
 					throw new DataAlreadyExistsException("actor");
 
 				this.#actors.push({ actor: actor, productions: [] });
@@ -784,6 +789,18 @@ export let VideoSystem = (function () {
 					yield actor.actor;
 				}
 			}
+			*getCastDirector(production) {
+				if (!(production instanceof Production))
+					throw new InvalidValueException("production", "Production");
+				//Obtenemos los directores que han dirigido la película
+				for (let director of this.#directors.filter(function (prod) {
+					return prod.productions.some(
+						(p) => p.title == production.title
+					);
+				})) {
+					yield director.director;
+				}
+			}
 
 			*getProductionDirector(director) {
 				if (!(director instanceof Person))
@@ -818,6 +835,19 @@ export let VideoSystem = (function () {
 					yield production;
 				}
 			}
+			*getCategoryProduction(production) {
+				if (!(production instanceof Production))
+					throw new InvalidValueException("production", "Production");
+				// referencia para habilitar el closure en el objeto
+				let categories = this.#categories;
+				for (const category of categories) {
+					if(category.productions.includes(production)){
+						yield category.category
+					}
+
+				}
+			}
+
 
 			//Permite obtener 3 producciones aleatorias
 			*randomProductions() {

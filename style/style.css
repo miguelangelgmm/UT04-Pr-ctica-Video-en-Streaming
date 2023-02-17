@@ -10904,6 +10904,9 @@ textarea.form-control-lg {
     bottom: 0;
     margin: auto;
   }
+  .frame-production {
+    height: 400px;
+  }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {
   .bg-image-carousel {
@@ -10926,6 +10929,9 @@ textarea.form-control-lg {
     backdrop-filter: blur(5px);
     border: 1.5px solid rgba(209, 213, 219, 0.3);
     border-radius: 1rem;
+  }
+  .frame-production {
+    height: 400px;
   }
 }
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -10950,6 +10956,9 @@ textarea.form-control-lg {
     border: 1.5px solid rgba(209, 213, 219, 0.3);
     border-radius: 1rem;
   }
+  .frame-production {
+    height: 500px;
+  }
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .bg-image-carousel {
@@ -10973,6 +10982,9 @@ textarea.form-control-lg {
     border: 1.5px solid rgba(209, 213, 219, 0.3);
     border-radius: 1rem;
   }
+  .frame-production {
+    height: 650px;
+  }
 }
 @media (min-width: 1200px) and (max-width: 1399.98px) {
   .bg-image-carousel {
@@ -10995,6 +11007,9 @@ textarea.form-control-lg {
     backdrop-filter: blur(5px);
     border: 1.5px solid rgba(209, 213, 219, 0.3);
     border-radius: 1rem;
+  }
+  .frame-production {
+    height: 650px;
   }
 }
 @media (min-width: 1400px) {
@@ -11020,7 +11035,15 @@ textarea.form-control-lg {
     border: 1.5px solid rgba(209, 213, 219, 0.3);
     border-radius: 1rem;
   }
+  .frame-production {
+    height: 800px;
+  }
 }
+.frame-production {
+  margin: 0px;
+  padding: 0px;
+}
+
 .shadow-aside {
   box-shadow: 0px 0px 20px #fff;
 }
@@ -11040,4 +11063,12 @@ textarea.form-control-lg {
 #logo {
   cursor: pointer;
   display: inline;
+}
+
+.img-production-synosis {
+  max-width: 500px;
+}
+
+.image-carousel:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

@@ -33,7 +33,9 @@ $dark : #132a55b6;
 		bottom: 0;
 		margin: auto;
 	}
-
+	.frame-production{
+		height: 400px;
+	}
 }
 @include media-breakpoint-only(sm){
 	.bg-image-carousel{
@@ -57,8 +59,11 @@ $dark : #132a55b6;
 		backdrop-filter: blur(5px);
 		border: 1.5px solid rgba(209, 213, 219, 0.3);
 		border-radius: $border-radius-xl;
-
 	}
+	.frame-production{
+		height: 400px;
+	}
+
 }
 @include media-breakpoint-only(md){
 	.bg-image-carousel{
@@ -81,8 +86,11 @@ $dark : #132a55b6;
 		backdrop-filter: blur(5px);
 		border: 1.5px solid rgba(209, 213, 219, 0.3);
 		border-radius: $border-radius-xl;
-
 	}
+	.frame-production{
+		height: 500px;
+	}
+
 }
 @include media-breakpoint-only(lg){
 	.bg-image-carousel{
@@ -105,7 +113,9 @@ $dark : #132a55b6;
 		backdrop-filter: blur(5px);
 		border: 1.5px solid rgba(209, 213, 219, 0.3);
 		border-radius: $border-radius-xl;
-
+	}
+	.frame-production{
+		height: 650px;
 	}
 }
 @include media-breakpoint-only(xl){
@@ -129,7 +139,9 @@ $dark : #132a55b6;
 		backdrop-filter: blur(5px);
 		border: 1.5px solid rgba(209, 213, 219, 0.3);
 		border-radius: $border-radius-xl;
-
+	}
+	.frame-production{
+		height: 650px;
 	}
 }
 @include media-breakpoint-only(xxl){
@@ -155,8 +167,14 @@ $dark : #132a55b6;
 		border: 1.5px solid rgba(209, 213, 219, 0.3);
 		border-radius: $border-radius-xl;
 	}
+	.frame-production{
+		height: 800px;
+	}
 }
-
+.frame-production{
+	margin: 0px;
+	padding: 0px;
+}
 
 .shadow-aside{
 	box-shadow:  0px 0px  20px $white;
@@ -179,3 +197,9 @@ $dark : #132a55b6;
 	display:inline;
 }
 
+.img-production-synosis{
+	max-width: 500px;
+}
+.image-carousel:hover{
+	cursor: pointer;
+}

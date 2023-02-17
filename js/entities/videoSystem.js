@@ -51,7 +51,12 @@ export class Person {
 	get lastname1() {
 		return this.#lastname1;
 	}
-
+	get picture(){
+		return this.#picture;
+	}
+	get lastname2(){
+		return this.#lastname2;
+	}
 }
 export class Category {
 	#name;
@@ -105,6 +110,12 @@ export class Resource {
 
 	toString() {
 		return `Duración: ${this.#duracion}, Link: ${this.#link}`;
+	}
+	get link(){
+		return this.#link;
+	}
+	get duration(){
+		return this.#duracion;
 	}
 }
 
@@ -200,6 +211,9 @@ export class Movie extends Production {
 		); //mirar después el join
 	}
 
+	get resource(){
+		return this.#resource;
+	}
 
 }
 
@@ -248,6 +262,8 @@ export class Serie extends Production {
 			`Temporadas: ${this.#season}`
 		); //mirar después el join
 	}
+
+
 }
 
 export class User {
