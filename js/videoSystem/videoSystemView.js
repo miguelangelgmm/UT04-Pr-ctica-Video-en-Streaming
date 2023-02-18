@@ -144,7 +144,7 @@ class VideoSystemView {
 
 		<div class="item-aside p-2 link" href='#product-list'  data-category="${category.name}">
 		<div>
-			<img src="./img/icons/${category.name}.png" alt="${category.name}" class="image-aside" >
+			<img src="img/icons/${category.name}.png" alt="${category.name}" class="image-aside" >
 			<h3 class="d-none d-lg-block">${category.name}</h3>
 		</div>
 	</div>
