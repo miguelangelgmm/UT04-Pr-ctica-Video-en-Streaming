@@ -14,7 +14,7 @@ def resize_images(directory, size):
 if __name__ == '__main__':
     width = 270
     height = 360
-    directory = r"./img/Directors"
+    directory = r"./img/Actors"
     size = (width, height)
     resize_images(directory, size)
 

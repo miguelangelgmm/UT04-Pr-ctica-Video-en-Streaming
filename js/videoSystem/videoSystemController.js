@@ -20,6 +20,9 @@ class VideoSystemController {
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("Fantasía"), this.#videoSystem.getMovie("Los vengadores: End Game", "ESP", new Date(2019, 10, 12), "Después de los eventos devastadores de 'Avengers: Infinity War', el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar deshacer sus acciones y restaurar el orden en el universo de una vez por todas, sin importar cuáles son las consecuencias... Cuarta y última entrega de la saga \"Vengadores\"", "../img/Productions/avengers_endgame.jpg", new Resource(181, "https://www.youtube.com/embed/TcMBFSGVi1c"), [new Coordinate(40, 40)]));
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("Fantasía"), this.#videoSystem.getMovie("The Super Mario Bros", "ESP", new Date(2023, 3, 12), "Película de animación basada en la franquicia de videojuegos Super Mario Bros. de Nintendo. Está producida por Shigeru Miyamoto, creador de la licencia, y la producirá y animará Illumination Entertainment ", "../img/Productions/the_super_mario_bros_movie.jpg", new Resource(181, "https://www.youtube.com/embed/_1f2RLdxQfA"), [new Coordinate(40, 40)]));
 
+		/**Producciones en general */
+		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getMovie("Uncharted", "ESP", new Date(2022, 1, 1), "Basada en una de las series de videojuegos más vendidas y aclamadas por la crítica de todos los tiempos, \"Uncharted\" presenta a un joven, astuto y carismático, Nathan Drake (Tom Holland) en su primera aventura como cazatesoros con su ingenioso compañero Victor “Sully” Sullivan (Mark Wahlberg). En una aventura de acción que se extiende por todo el mundo, ambos se embarcan en una peligrosa búsqueda de “el mayor tesoro nunca antes encontrado” al tiempo que rastrean las claves que les podrían conducir al hermano de Nathan, perdido hace ya mucho tiempo", "../img/Productions/uncharted.jpg", new Resource(143, "https://www.youtube.com/embed/Sn5sRX6jaxk"), [new Coordinate(40, 40)]));
+
 		/**Productions para Acción */
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("Acción"), this.#videoSystem.getMovie("Uncharted", "ESP", new Date(2022, 1, 1), "Basada en una de las series de videojuegos más vendidas y aclamadas por la crítica de todos los tiempos, \"Uncharted\" presenta a un joven, astuto y carismático, Nathan Drake (Tom Holland) en su primera aventura como cazatesoros con su ingenioso compañero Victor “Sully” Sullivan (Mark Wahlberg). En una aventura de acción que se extiende por todo el mundo, ambos se embarcan en una peligrosa búsqueda de “el mayor tesoro nunca antes encontrado” al tiempo que rastrean las claves que les podrían conducir al hermano de Nathan, perdido hace ya mucho tiempo", "../img/Productions/uncharted.jpg", new Resource(143, "https://www.youtube.com/embed/Sn5sRX6jaxk"), [new Coordinate(40, 40)]));
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("Acción"), this.#videoSystem.getMovie("Bullet Train", "ESP", new Date(2022, 11, 12), "Cinco asesinos a sueldo se encuentran a bordo de un tren bala que viaja de Tokio a Morioka con unas pocas paradas intermedias. Descubren que sus misiones no son ajenas entre sí. La pregunta es quién saldrá vivo del tren y qué les espera en la estación final.", "../img/Productions/bullet_train.jpg", new Resource(124, "https://www.youtube.com/embed/0IOsk2Vlc4o"), [new Coordinate(40, 40)]));
@@ -51,6 +54,7 @@ class VideoSystemController {
 		this.#videoSystem.assignDirector(this.#videoSystem.getDirector("John", "Francis", "Daley", new Date(1985, 20, 4), "../img/Directors/JohnFrancisDaley.webp"), this.#videoSystem.getMovie("Noche de juegos"));
 		this.#videoSystem.assignDirector(this.#videoSystem.getDirector("Jonathan", "Goldstein", "", new Date(1968, 12, 5), "../img/Directors/JonathanGoldstein.jpg"), this.#videoSystem.getMovie("Noche de juegos"));
 		this.#videoSystem.assignDirector(this.#videoSystem.getDirector("Todd", "Phillips", "", new Date(1970, 20, 11), "../img/Directors/ToddPhillips.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"));
+		this.#videoSystem.assignDirector(this.#videoSystem.getDirector("Todd", "Phillips", "", new Date(1970, 20, 11), "../img/Directors/ToddPhillips.jpg"), this.#videoSystem.getMovie("Supersalidos"));
 
 		/**Actores */
 
@@ -128,13 +132,11 @@ class VideoSystemController {
 
 		/**Matrix Resurrections*/
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keanu", "Reeves"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jessica", "Henwick", "", new Date(1992, 30, 10), "../img/Actors/JessicaHenwick.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Carrie", "Anne", "Moss", new Date(1967, 21, 10), "../img/Actors/Carrie-AnneMoss.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Priyanka", "Chopra", "", new Date(1982, 18, 6), "../img/Actors/PriyankaChopra.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Groff", "", new Date(1985, 26, 2), "../img/Actors/JonathanGroff.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Groff", "", new Date(1985, 26, 2), "../img/Actors/JonathanGroff.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Eréndira", "Ibarra", "", new Date(1985, 25, 10), "../img/Actors/EréndiraIbarra.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lambert", "Wilson", "", new Date(1958, 3, 9), "../img/Actors/LambertWilson.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jessica", "Henwick", "", new Date(1992, 30, 10), "../img/Actors/JessicaHenwick.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Priyanka", "Chopra", "", new Date(1982, 18, 6), "../img/Actors/PriyankaChopra.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Groff", "", new Date(1985, 26, 2), "../img/Actors/JonathanGroff.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Eréndira", "Ibarra", "", new Date(1985, 25, 10), "../img/Actors/EréndiraIbarra.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lambert", "Wilson", "", new Date(1958, 3, 9), "../img/Actors/LambertWilson.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
 
 		/**El día del Sí*/
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jenna", "Ortega", "", new Date(2002, 27, 10), "../img/Actors/JennaOrtega.jpg"),this.#videoSystem.getMovie("El día del Sí"))
@@ -182,6 +184,7 @@ class VideoSystemController {
 
 		this.onLoad();
 		this.#videoSystemView.bindInit(this.handleInit);
+		this.#videoSystemView.bindActorPersonList(this.handleActors);
 
 	}
 
@@ -205,6 +208,7 @@ class VideoSystemController {
 
 	onAddCategoryNav = () => {
 		this.#videoSystemView.showCategoriesInNav(this.#videoSystem.categories);
+		this.#videoSystemView.bindProductionsNavCategoryList(this.handleProductsCategoryList)
 	}
 
 	onAddRandomProductionLoad = () =>{
@@ -230,7 +234,17 @@ class VideoSystemController {
 		let actors = this.#videoSystem.getCast(production);
 		let directors = this.#videoSystem.getCastDirector(production)
 		this.#videoSystemView.showProduction(production,categories,directors,actors);
+		this.#videoSystemView.bindProductionCategoryList(this.handleProductsCategoryList);
+	}
 
+	handleActors = () => {
+		this.onActorList();
+	}
+	onActorList = ()=>{
+		this.#videoSystemView.showListPersons(this.#videoSystem.actors)
+	//	this.#videoSystemView.bindActorPersonList()
+
+		//this.#videoSystemView.showListPersons(this.#videoSystem.actors)
 	}
 
 }
