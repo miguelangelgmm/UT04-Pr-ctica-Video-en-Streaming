@@ -50,7 +50,7 @@ class VideoSystemView {
 		let ul = $(`<ul class="dropdown-menu"></ul>`);
 
 		for (let category of categories) {
-			ul.append(`<li><a data-category="${category.name}" class="dropdown-item" href="#">${category.name}</a><li>`);
+			ul.append(`<li><a data-category="${category.name}" class="dropdown-item" >${category.name}</a><li>`);
 		}
 		this.categories.append(ul);
 	}
