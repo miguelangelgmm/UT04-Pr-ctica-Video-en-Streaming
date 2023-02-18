@@ -11092,4 +11092,8 @@ textarea.form-control-lg {
 .link h4:hover, .link .h4:hover {
   cursor: pointer;
   background-color: #00eeff !important;
+}
+
+#actors, #directors {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

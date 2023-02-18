@@ -57,6 +57,9 @@ export class Person {
 	get lastname2(){
 		return this.#lastname2;
 	}
+	get born(){
+		return this.#born;
+	}
 }
 export class Category {
 	#name;

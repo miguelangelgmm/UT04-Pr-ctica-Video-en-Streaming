@@ -1,11 +1,11 @@
-class VideoSystemView{
-	constructor(){
-    this.categories = $('#navbarSupportedContent ul li');
+class VideoSystemView {
+	constructor() {
+		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
 
 	}
 
-	#showPersons(persons,elem=""){
+	#showPersons(persons, elem = "") {
 
 		let container = $(`
 		<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4 ${elem}">
@@ -14,42 +14,70 @@ class VideoSystemView{
 		for (const person of persons) {
 			container.append(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
-			<figure>
-				<img src="${person.picture}" alt="" class="rounded-4 position-relative">
-				<figcaption>${person.name +" " +person.lastname1 +" " + person.lastname2}</figcaption>
+			<figure data-name='${person.name + "||" + person.lastname1}' class="person">
+				<img src="${person.picture}" alt="" class="rounded-4 position-relative ">
+				<figcaption>${person.name + " " + person.lastname1 + " " + person.lastname2}</figcaption>
 			</figure>
 		</section>
 			`)
 		}
 		return container;
 	}
+	#showProductions(productions) {
+		let section = $(`
 
-	showCategoriesInNav (categories) {
+		<section class="container-fluid mx-auto " >
+
+		<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4 bg-blue-glass">
+
+			</div>
+	</section>
+	`);
+		for (const production of productions) {
+			let div = $(`
+		<section class="col prueba2 mx-auto rounded-4 mt-3">
+			<figure class="production-person" >
+				<img src="${production.image}" alt="" class="rounded-4 image-prod" data-title="${production.title}">
+			</figure>
+		</section>`)
+			section.children().append(div)
+		}
+		return section;
+	}
+
+	showCategoriesInNav(categories) {
 
 		let ul = $(`<ul class="dropdown-menu"></ul>`);
 
-		for (let category of categories){
+		for (let category of categories) {
 			ul.append(`<li><a data-category="${category.name}" class="dropdown-item" href="#">${category.name}</a><li>`);
 		}
 		this.categories.append(ul);
 	}
 
-	bindProductionsCarousel(handler){
-		$('.image-carousel').click(function(event){
+	bindProductionsCarousel(handler) {
+		$('.image-carousel').click(function (event) {
 			handler(this.dataset.title);
 		});
 	}
-	bindProductionsNavCategoryList(handler){
-		$('.dropdown-item').click(function(event){
-			handler(this.dataset.category);
-		});	}
-	showProductionInLoad(productions){
+	bindProductions(handler) {
+		$('.image-prod').click(function (event) {
+			handler(this.dataset.title);
+		});
+	}
 
-		function limitSypnosis(text){
+	bindProductionsNavCategoryList(handler) {
+		$('.dropdown-item').click(function (event) {
+			handler(this.dataset.category);
+		});
+	}
+	showProductionInLoad(productions) {
+
+		function limitSypnosis(text) {
 			//cramos un array a partir del texto
 			let array = text.split(" ");
 
-			if(array.length > 40){
+			if (array.length > 40) {
 				//obtenemos los 40  primeros caracteres y añadimos ...
 				text = array.slice(0, 40).join(" ") + "...";
 			}
@@ -72,10 +100,10 @@ class VideoSystemView{
 		</div>
 		`);
 
-		for (let production of productions){
+		for (let production of productions) {
 			carousel.children().eq(1).append(`
 
-			<div class="carousel-item ${active ? "active": ""} ">
+			<div class="carousel-item ${active ? "active" : ""} ">
 
 			<img src="${production.image}"  data-category="${production.title}" class="d-block w-100 bg-image-carousel" alt="${production.title}">
 			<img src="${production.image}" data-category="${production.title}" class="position-absolute image-carousel" alt="${production.title}" data-title="${production.title}" >
@@ -103,7 +131,7 @@ class VideoSystemView{
 
 	}
 
-	showCategoriesInMain(categories){
+	showCategoriesInMain(categories) {
 		this.main.empty();
 		let categoriesMain = $(`<div class="container rounded-5 bg-dark mx-a mt-4 py-2 shadow-aside">
 		<aside class="carousel-aside">
@@ -111,8 +139,8 @@ class VideoSystemView{
 	</div>
 	`);
 
-	for (let category of categories){
-		categoriesMain.children().append(`
+		for (let category of categories) {
+			categoriesMain.children().append(`
 
 		<div class="item-aside p-2 link" href='#product-list'  data-category="${category.name}">
 		<div>
@@ -121,27 +149,27 @@ class VideoSystemView{
 		</div>
 	</div>
 		`);
-	}
-	this.main.append(categoriesMain);
+		}
+		this.main.append(categoriesMain);
 	}
 
 
 	//Enlacamos a las categorias un evento
-	bindProductionsCategoryList(handler){
-		$('.link').click(function(event){
+	bindProductionsCategoryList(handler) {
+		$('.link').click(function (event) {
 			handler(this.dataset.category);
 		});
 	}
 
-	bindProductionCategoryList(handler){
-		document.querySelectorAll('div.link h4').forEach(function(h4){
-			h4.addEventListener('click',(function(event){
+	bindProductionCategoryList(handler) {
+		document.querySelectorAll('div.link h4').forEach(function (h4) {
+			h4.addEventListener('click', (function (event) {
 				handler(this.dataset.category);
 			}))
 		})
 	}
 
-	bindInit(handler){
+	bindInit(handler) {
 		$('#logo').click((event) => {
 			handler();
 		});
@@ -151,7 +179,7 @@ class VideoSystemView{
 
 
 	//Lista de elementos
-	listProductions(productions,title){
+	listProductions(productions, title) {
 		this.main.empty();
 		let container = $(`
 		<section class="container-fluid mx-auto " id="show-productions">
@@ -160,7 +188,7 @@ class VideoSystemView{
 		</section>
 		`)
 		let production = productions.next();
-		while (!production.done){
+		while (!production.done) {
 			let div = $(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
 			<figure>
@@ -175,13 +203,13 @@ class VideoSystemView{
 	}
 
 
-	bindProductionToProduction(handler){
-		$('#show-productions').find('img').click(function(event){
+	bindProductionToProduction(handler) {
+		$('#show-productions').find('img').click(function (event) {
 			handler(this.dataset.title);
 		});
 	}
 
-	showProduction(production,categories,directors,actors){
+	showProduction(production, categories, directors, actors) {
 		this.main.empty();
 
 		let container = $(`
@@ -240,7 +268,7 @@ class VideoSystemView{
 		</section>
 		`)
 		directorsFilm.append(
-			this.#showPersons(directors,"bg-blue-glass")
+			this.#showPersons(directors, "bg-blue-glass")
 		);
 		container.last().children().append(directorsFilm);
 
@@ -250,46 +278,88 @@ class VideoSystemView{
 		</section>
 		`)
 		actorsFilm.append(
-		this.#showPersons(actors,"bg-blue-glass")
+			this.#showPersons(actors, "bg-blue-glass")
 		);
 		container.last().children().append(actorsFilm);
 
 		this.main.append(container);
 	}
 
-	bindActorPersonList(handler){
-		$('#actors').click(function(event){
+	bindActorPersonList(handler) {
+		$('#actors').click(function (event) {
+			handler();
+		});
+	}
+	bindDirectorPersonList(handler) {
+		$('#directors').click(function (event) {
 			handler();
 		});
 	}
 
-
-	showListPersons(persons){
+	showListPersons(persons) {
 		this.main.empty();
-		/*
 		let container = $(`
-		<section class="container-fluid mx-auto " id="show-productions">
+		<section class="container-fluid mx-auto " >
 			<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4">
 			</div>
 		</section>
 		`)
 		let person = persons.next();
-		while (!person.done){
-
+		//en los datos de la persona voy a usar || para separar nombre y apellido
+		while (!person.done) {
 			let div = $(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
-				<figure>
-					<img src="${person.value.picture}" alt="" class="rounded-4 position-relative">
-					<figcaption>${person.value.name +" " +person.value.lastname1 +" " + person.value.lastname2}</figcaption>
-				</figure>
+			<figure data-name='${person.value.name + "||" + person.value.lastname1}' class="person">
+				<img src="${person.value.picture}" alt="" class="rounded-4">
+				<figcaption>${person.value.name + " " + person.value.lastname1 + " " + person.value.lastname2}</figcaption>
+			</figure>
 			</section>
 			`);
-			container.children().first().append(div);
+			container.children().append(div);
 			person = persons.next();
 		}
-		*/
-		//container.prepend(`<h1>${title}</h1>`);
-	//	this.main.append(container);
+		this.main.append(container);
+	}
+
+	bindPersonData(handler) {
+		$('.person').click(function (event) {
+			handler(this.dataset.name);
+		});
+	}
+
+	personData(person, directedProductions, actedProductions) {
+		this.main.empty();
+		let container = $(`
+			<div class="container-fluid mt-5 bg-dark pb-5">
+				<div class="row  mx-auto">
+					<div class="col-lg-4 col-xs-5 mt-2">
+						<section class="col prueba2 mx-auto rounded-4 mt-3">
+							<figure class="lg-me-4 mx-auto text-center">
+								<img src="${person.picture}" alt="${person.name}" class="rounded-4 position-relative">
+							</figure>
+						</section>
+					</div>
+					<div class="col-8">
+						<div class="row">
+							<h1>${person.name +" " + person.lastname1+ " " + person.lastname2}</h1>
+						</div>
+						<div class="row mt-4">
+							<span>nacimiento:${person.born.toLocaleDateString()}  </span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		`);
+
+		if (directedProductions) {
+			container.append(this.#showProductions(directedProductions).prepend(`<h1>${"Producciones dirigidas"}</h1>`));
+		}
+		if (actedProductions) {
+			container.append(this.#showProductions(actedProductions).prepend(`<h1>${"Producciones como actor"}</h1>`));
+		}
+
+		this.main.append(container)
 	}
 
 

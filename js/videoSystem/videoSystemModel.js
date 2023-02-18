@@ -539,6 +539,30 @@ export let VideoSystem = (function () {
 
 				return actor;
 			}
+			//Comprueba si existe un actor
+			checkActor(name,lastname1){
+				return this.#actors.findIndex((act) => {
+					return (
+						name.localeCompare(act.actor.name, "es", { sensitivity: "base" }) ==
+							0 &&
+						lastname1.localeCompare(act.actor.lastname1, "es", {
+							sensitivity: "base",
+						}) == 0
+					);
+				}) != -1
+			}
+			//Comprueba si existe un director
+			checkDirector(name,lastname1){
+				return this.#directors.findIndex((director) => {
+					return (
+						name.localeCompare(director.director.name, "es", { sensitivity: "base" }) ==
+							0 &&
+						lastname1.localeCompare(director.director.lastname1, "es", {
+							sensitivity: "base",
+						}) == 0
+					);
+				}) != -1
+			}
 
 			//Directores
 			//	Devuelve un iterador que permite recorrer los directores del sistema
