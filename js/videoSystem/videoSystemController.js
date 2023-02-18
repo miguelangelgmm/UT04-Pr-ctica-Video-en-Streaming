@@ -184,7 +184,6 @@ class VideoSystemController {
 
 		this.onLoad();
 		this.#videoSystemView.bindInit(this.handleInit);
-		this.#videoSystemView.bindActorPersonList(this.handleActors);
 
 	}
 
@@ -194,12 +193,16 @@ class VideoSystemController {
 		this.onAddCategoryMain();
 		this.onAddRandomProductionLoad();
 		this.#videoSystemView.bindProductionsCarousel(this.handleCategoryListProduction)
+		this.#videoSystemView.bindActorPersonList(this.handleActors);
+		this.#videoSystemView.bindDirectorPersonList(this.handleDirector);
+
 	}
 	//Cuando vuelvo a home
 	onInit = () =>{
 		this.onAddCategoryMain();
 		this.onAddRandomProductionLoad();
-		this.#videoSystemView.bindProductionsCarousel(this.handleCategoryListProduction)
+	//	this.#videoSystemView.bindProductionsCarousel(this.handleCategoryListProduction)
+
 
 	}
 	handleInit = () => {
@@ -235,18 +238,51 @@ class VideoSystemController {
 		let directors = this.#videoSystem.getCastDirector(production)
 		this.#videoSystemView.showProduction(production,categories,directors,actors);
 		this.#videoSystemView.bindProductionCategoryList(this.handleProductsCategoryList);
+		this.#videoSystemView.bindPersonData(this.handlePersonData)
+
 	}
 
 	handleActors = () => {
 		this.onActorList();
 	}
-	onActorList = ()=>{
-		this.#videoSystemView.showListPersons(this.#videoSystem.actors)
-	//	this.#videoSystemView.bindActorPersonList()
 
-		//this.#videoSystemView.showListPersons(this.#videoSystem.actors)
+	handleDirector = () => {
+		this.onDirectorList();
 	}
 
+
+	onActorList = ()=>{
+		let iterator = this.#videoSystem.actors[Symbol.iterator]();
+		this.#videoSystemView.showListPersons(iterator)
+		this.#videoSystemView.bindPersonData(this.handlePersonData)
+
+	}
+	onDirectorList = ()=>{
+		let iterator = this.#videoSystem.director[Symbol.iterator]();
+		this.#videoSystemView.showListPersons(iterator)
+		this.#videoSystemView.bindPersonData(this.handlePersonData)
+	}
+
+	handlePersonData = (name) => {
+		let fullName = name.split("||")
+		let person;
+		let acted;
+		let directed;
+		if(this.#videoSystem.checkActor(fullName[0],fullName[1])){
+			person = this.#videoSystem.getActor(fullName[0],fullName[1]);
+			acted = this.#videoSystem.getProductionActor(person)
+
+		}
+		if(this.#videoSystem.checkDirector(fullName[0],fullName[1])){
+			person = this.#videoSystem.getDirector(fullName[0],fullName[1]);
+			directed = this.#videoSystem.getProductionDirector(person)
+
+		}
+		this.#videoSystemView.personData(person,directed,acted)
+		this.#videoSystemView.bindProductions(this.handleCategoryListProduction);
+
+
+	}
 }
 
 export default VideoSystemController;
