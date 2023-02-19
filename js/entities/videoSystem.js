@@ -266,6 +266,14 @@ export class Serie extends Production {
 		); //mirar después el join
 	}
 
+	get season(){
+		return this.season;
+	}
+	*getResource(){
+		for (const reso of this.#resource) {
+			yield reso;
+		}
+	}
 
 }
 

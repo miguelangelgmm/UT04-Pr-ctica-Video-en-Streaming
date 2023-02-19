@@ -35,7 +35,7 @@ class VideoSystemController {
 
 		/**Producciones por general */
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getMovie("Uncharted", "ESP", new Date(2022, 1, 1), "Basada en una de las series de videojuegos más vendidas y aclamadas por la crítica de todos los tiempos, \"Uncharted\" presenta a un joven, astuto y carismático, Nathan Drake (Tom Holland) en su primera aventura como cazatesoros con su ingenioso compañero Victor “Sully” Sullivan (Mark Wahlberg). En una aventura de acción que se extiende por todo el mundo, ambos se embarcan en una peligrosa búsqueda de “el mayor tesoro nunca antes encontrado” al tiempo que rastrean las claves que les podrían conducir al hermano de Nathan, perdido hace ya mucho tiempo", "img/Productions/uncharted.jpg", new Resource(143, "https://www.youtube.com/embed/Sn5sRX6jaxk"), [new Coordinate(40, 40)]));
-		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getSerie("Marvel Studios: leyendas", "ESP", new Date(2017, 12, 3), "La serie muestra personajes individuales en cada episodio, destacando algunos de sus momentos icónicos en el Universo Cinematográfico de Marvel (MCU).", "img/Productions/leyendas.jpg", [new Resource(114, "https://www.youtube.com/embed/b8ht6ObDlyQ")], [new Coordinate(40, 40)]));
+		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getSerie("Marvel Studios: leyendas", "ESP", new Date(2017, 12, 3), "La serie muestra personajes individuales en cada episodio, destacando algunos de sus momentos icónicos en el Universo Cinematográfico de Marvel (MCU).", "img/Productions/leyendas.jpg", [new Resource(114, "https://www.youtube.com/embed/aKL3gZYO5tg"),new Resource(100, "https://www.youtube.com/embed/jfZk3i46QG4")], [new Coordinate(40, 40)]));
 
 		/**Directores */
 		/**Asignamos Directores Fantasia*/
@@ -99,6 +99,17 @@ class VideoSystemController {
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Tom", "Holland", "", new Date(1996, 1, 5), "img/Actors/TomHolland.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
 
+		/**Serie leyenda */
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Robert", "Downey", "Jr", new Date(1965, 4, 3), "img/Actors/RobertDowneyJr.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Evans", "", new Date(1981, 13, 4), "img/Actors/ChrisEvans.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Scarlett", "Johansson", "", new Date(1984, 22, 10), "img/Actors/ScarlettJohansson.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Hemsworth", "", new Date(1983, 11, 10), "img/Actors/ChrisHemsworth.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Ruffalo", "", new Date(1967, 22, 10), "img/Actors/MarkRuffalo.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jeremy", "Renner", "", new Date(1971, 1, 7), "img/Actors/JeremyRenner.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brie", "Larson", "", new Date(1989, 1, 9), "img/Actors/BrieLarson.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Paul", "Rudd", "", new Date(1969, 6, 4), "img/Actors/PaulRudd.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Donald", "Cheadle", "", new Date(1964, 29, 10), "img/Actors/DonaldCheadles.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Elizabeth", "Olsen", "", new Date(1989, 16, 1), "img/Actors/ElizabethOlsen.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
 		/**The Super Mario Bros */
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
 		this.#videoSystem.assignActor(this.#videoSystem.getActor("Charles", "Martinet", "", new Date(1955,17, 10), "img/Actors/CharlesMartinet.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))

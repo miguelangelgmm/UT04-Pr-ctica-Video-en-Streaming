@@ -11092,4 +11092,8 @@ textarea.form-control-lg {
 
 #actors, #directors, .person, .image-production {
   cursor: pointer;
+}
+
+.bg-transparent {
+  background-color: rgba(255, 255, 255, 0) !important;
 }/*# sourceMappingURL=style.css.map */

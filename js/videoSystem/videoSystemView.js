@@ -4,9 +4,8 @@ class VideoSystemView {
 		this.main = $('main');
 
 	}
-
+	//funcion que retorna un div que contiene una lista de personas
 	#showPersons(persons) {
-
 		let container = $(`
 		<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4 bg-blue-glass">
 		</div>
@@ -23,6 +22,7 @@ class VideoSystemView {
 		}
 		return container;
 	}
+	//funcion que retorna un div con una lista de producciones
 	#showProductions(productions) {
 		let section = $(`
 
@@ -43,6 +43,58 @@ class VideoSystemView {
 			section.children().append(div)
 		}
 		return section;
+	}
+
+	//muestra un iframe que corresponde a una película
+	#showFrameFilm(production) {
+		let container = $(`
+			<div class="container-fluid  bg-dark p-0 rounded-5"  >
+				<div class="container-fluid p-0" >
+					<iframe src="${production.resource.link}"
+					title="${production.title}"
+					frameborder="0"
+					allowfullscreen
+					class="container-fluid frame-production rounded-5 shadow-white"></iframe>
+				</div>
+			</div>
+		`)
+		return container;
+	}
+	//muestra un iframe que corresponde a una serie
+	#showFrameSerie(production) {
+
+		let active = "active";
+		let resources = production.getResource();
+
+		let container = $(`
+	<div id="carouselExampleAutoplaying" class="carousel slide  bg-transparent p-0 rounded-5 shadow-white" data-bs-ride="carousel">
+		<div class="carousel-inner bg-transparent">
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		</button>
+	</div>
+`);
+
+		for (const product of resources) {
+			let div = $(`
+		<div class="carousel-item ${active}  bg-transparent p-0 rounded-5 ">
+			<iframe src="${product.link}"
+			title="${production.title}"
+			frameborder="0"
+			allowfullscreen
+			class="container-fluid frame-production bg-transparent rounded-5 "></iframe>
+		</div>
+	`);
+
+			container.find('.carousel-inner').append(div);
+			active = "";
+		}
+
+		return container;
 	}
 
 	showCategoriesInNav(categories) {
@@ -239,22 +291,7 @@ class VideoSystemView {
 		container.prepend(`<h1>${title}</h1>`);
 		this.main.append(container);
 	}
-	#showFrameFilm(production){
-		let container = $(`
-		<section class="container-fluid mx-auto mt-5 rounded-5">
-		<div class="container-fluid  bg-dark p-0 rounded-5"  >
-			<div class="container-fluid p-0" >
-				<iframe src="${production.resource.link}"
-				title="${production.title}"
-				frameborder="0"
-				allowfullscreen
-				class="container-fluid frame-production rounded-5 shadow-white"></iframe>
-			</div>
-		</div>
-	</section>
-	`)
-	return container;
-	}
+
 
 	//Permite mostrar los datos de una producción
 	showProduction(production, categories, directors, actors) {
@@ -265,15 +302,7 @@ class VideoSystemView {
 		<!-- Producción -->
 
 	<section class="container-fluid mx-auto mt-5 rounded-5">
-		<div class="container-fluid  bg-dark p-0 rounded-5"  >
-			<div class="container-fluid p-0" >
-				<iframe src="${production.resource.link}"
-				title="${production.title}"
-				frameborder="0"
-				allowfullscreen
-				class="container-fluid frame-production rounded-5 shadow-white"></iframe>
-			</div>
-		</div>
+
 	</section>
 
 	<!--Información-->
@@ -304,6 +333,13 @@ class VideoSystemView {
 
 		</div>
 		`);
+
+		//si no tiene la propiedad resource es una serie
+		if (production.resource != undefined) {
+			container.children().prepend(this.#showFrameFilm(production))
+		} else {
+			container.children().prepend(this.#showFrameSerie(production))
+		}
 		//mostramos las categorias a las que pertenece esa pelicula
 		let categoriesFilm = container.find("#category-film");
 		for (const category of categories) {
