@@ -5,17 +5,17 @@ class VideoSystemView {
 
 	}
 
-	#showPersons(persons, elem = "") {
+	#showPersons(persons) {
 
 		let container = $(`
-		<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4 ${elem}">
+		<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4 bg-blue-glass">
 		</div>
 		`);
 		for (const person of persons) {
 			container.append(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
-			<figure data-name='${person.name + "||" + person.lastname1}' class="person">
-				<img src="${person.picture}" alt="" class="rounded-4 position-relative ">
+			<figure >
+				<img src="${person.picture}" alt="" class="rounded-4 position-relative person" data-name='${person.name + "||" + person.lastname1}' >
 				<figcaption>${person.name + " " + person.lastname1 + " " + person.lastname2}</figcaption>
 			</figure>
 		</section>
@@ -37,7 +37,7 @@ class VideoSystemView {
 			let div = $(`
 		<section class="col prueba2 mx-auto rounded-4 mt-3">
 			<figure class="production-person" >
-				<img src="${production.image}" alt="" class="rounded-4 image-prod" data-title="${production.title}">
+				<img src="${production.image}" alt="" class="rounded-4 image-production" data-title="${production.title}">
 			</figure>
 		</section>`)
 			section.children().append(div)
@@ -55,22 +55,84 @@ class VideoSystemView {
 		this.categories.append(ul);
 	}
 
-	bindProductionsCarousel(handler) {
-		$('.image-carousel').click(function (event) {
-			handler(this.dataset.title);
-		});
-	}
+
+	/**
+ * Enlaza un controlador de clicks a cada una de las imágenes de producción.
+ * Al hacer el click la función le va a permitir ver la ficha de esa producción
+ * @param handler - La función a llamar cuando el usuario hace click, pasandole el título de la película como parámetro
+ */
 	bindProductions(handler) {
-		$('.image-prod').click(function (event) {
+		$('.image-production').click(function (event) {
 			handler(this.dataset.title);
 		});
 	}
 
+	/**
+	 *
+	 * Vincula un controlador de clicks a cada uno de los elementos desplegables
+	 * del navegador en este caso a los desplegables de categoria
+	 * @param handler - La función que sera cargada al hacer click,pasandole como argumento la categoria
+	 */
 	bindProductionsNavCategoryList(handler) {
 		$('.dropdown-item').click(function (event) {
 			handler(this.dataset.category);
 		});
 	}
+
+	/**
+	 * Vincula un evento de clicks a cada una de las categorias, va a cargar las listas de peliculas
+	 * que tengan esa categoria
+	 * @param handler - La función a ejecutar cada vez que hacemos click, pasandole como argumento la categoria
+	 */
+	bindProductionsCategoryList(handler) {
+		document.querySelectorAll('.list-category').forEach(function (h4) {
+			h4.addEventListener('click', (function (event) {
+				handler(this.dataset.category);
+			}))
+		})
+	}
+
+	/**
+	 * Enlaza el logo de la web con un evento que se va a ejecutar cuando volvamos a home
+	 * @param handler - La función que es lanzada al hacer click.
+	 */
+	bindInit(handler) {
+		$('#logo').click((event) => {
+			handler();
+		});
+	}
+
+	/**
+	 * Enlaza el enlace de los actores del navegador con un evento que va a permitir listar los actores
+	 * @param handler - La función que va a ser llamada al hacer click.
+	 */
+	bindActorPersonList(handler) {
+		$('#actors').click(function (event) {
+			handler();
+		});
+	}
+
+	/**
+	 * Enlaza el enlace de los directores del navegador con un evento que va a permitir listar los directores
+	 * @param handler - The function to be called when the button is clicked.
+	 */
+	bindDirectorPersonList(handler) {
+		$('#directors').click(function (event) {
+			handler();
+		});
+	}
+	/**
+	 * Vincula un evento de click a los elementos que tengan la clase person, el evento va a permitir
+	 * lanzar los datos de la persona que ha sido clickeada
+	 * @param handler
+	 */
+	bindShowPerson(handler) {
+		$('.person').click(function (event) {
+			handler(this.dataset.name);
+		});
+	}
+
+	//Función que va a mostrar el carusel en el momento que entramos a la página o vamos a inicio
 	showProductionInLoad(productions) {
 
 		function limitSypnosis(text) {
@@ -83,7 +145,7 @@ class VideoSystemView {
 			}
 			return text
 		}
-
+		//un elemento de carousel por defecto tiene que estar activo
 		let active = true;
 
 		let carousel = $(`<div id="carouselExampleCaptions" class="carousel slide ms-5 me-5 mx-auto " data-bs-ride="carousel">
@@ -99,14 +161,14 @@ class VideoSystemView {
 
 		</div>
 		`);
-
+		//agregamos una producción al carousel
 		for (let production of productions) {
 			carousel.children().eq(1).append(`
 
 			<div class="carousel-item ${active ? "active" : ""} ">
 
 			<img src="${production.image}"  data-category="${production.title}" class="d-block w-100 bg-image-carousel" alt="${production.title}">
-			<img src="${production.image}" data-category="${production.title}" class="position-absolute image-carousel" alt="${production.title}" data-title="${production.title}" >
+			<img src="${production.image}" data-category="${production.title}" class="position-absolute image-production image-carousel" alt="${production.title}" data-title="${production.title}" >
 
 			<div class="carousel-caption d-none d-md-block text-carrusel ">
 				<h5>${production.title}</h5>
@@ -128,9 +190,9 @@ class VideoSystemView {
 </div>`);
 
 		this.main.append(carousel);
-
 	}
 
+	//muestra las categorias en el elemento desplegable del nav
 	showCategoriesInMain(categories) {
 		this.main.empty();
 		let categoriesMain = $(`<div class="container rounded-5 bg-dark mx-a mt-4 py-2 shadow-aside">
@@ -138,11 +200,11 @@ class VideoSystemView {
 		</aside>
 	</div>
 	`);
-
+		//obtenemos todas las categorias disponibles
 		for (let category of categories) {
 			categoriesMain.children().append(`
 
-		<div class="item-aside p-2 link" href='#product-list'  data-category="${category.name}">
+		<div class="item-aside p-2 list-category" href='#product-list'  data-category="${category.name}">
 		<div>
 			<img src="img/icons/${category.name}.png" alt="${category.name}" class="image-aside" >
 			<h3 class="d-none d-lg-block">${category.name}</h3>
@@ -153,46 +215,22 @@ class VideoSystemView {
 		this.main.append(categoriesMain);
 	}
 
-
-	//Enlacamos a las categorias un evento
-	bindProductionsCategoryList(handler) {
-		$('.link').click(function (event) {
-			handler(this.dataset.category);
-		});
-	}
-
-	bindProductionCategoryList(handler) {
-		document.querySelectorAll('div.link h4').forEach(function (h4) {
-			h4.addEventListener('click', (function (event) {
-				handler(this.dataset.category);
-			}))
-		})
-	}
-
-	bindInit(handler) {
-		$('#logo').click((event) => {
-			handler();
-		});
-	}
-
-
-
-
-	//Lista de elementos
+	//Lista las producciones que pertenecen a una categoría
 	listProductions(productions, title) {
 		this.main.empty();
 		let container = $(`
-		<section class="container-fluid mx-auto " id="show-productions">
+		<section class="container-fluid mx-auto " >
 			<div class="row row-cols-4 mx-auto ms-2 me-2 mt-4 bg-dark p-2 rounded-4">
 			</div>
 		</section>
 		`)
+		//agregamos todas producciones
 		let production = productions.next();
 		while (!production.done) {
 			let div = $(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
 			<figure>
-				<img src="${production.value.image}" alt="${production.value.title}" class="rounded-4 image-cat" data-title="${production.value.title}">
+				<img src="${production.value.image}" alt="${production.value.title}" class="rounded-4 image-cat image-production" data-title="${production.value.title}">
 			</figure>
 			`);
 			container.children().first().append(div);
@@ -203,15 +241,11 @@ class VideoSystemView {
 	}
 
 
-	bindProductionToProduction(handler) {
-		$('#show-productions').find('img').click(function (event) {
-			handler(this.dataset.title);
-		});
-	}
-
+	//Permite mostrar los datos de una producción
 	showProduction(production, categories, directors, actors) {
+		//vaciamos el main
 		this.main.empty();
-
+		//Primero mostramos los datos de la producción
 		let container = $(`
 		<!-- Producción -->
 	<section class="container-fluid mx-auto mt-5 rounded-5">
@@ -253,49 +287,42 @@ class VideoSystemView {
 
 		</div>
 		`);
+		//mostramos las categorias a las que pertenece esa pelicula
 		let categoriesFilm = container.find("#category-film");
 		for (const category of categories) {
 			categoriesFilm.append(`
-			<div class="link">
-				<h4 class="d-inline bg-danger rounded-4 p-2 "  data-category="${category.name}"> ${category.name} </h4>
+			<div class="d-inline">
+				<h4 class="d-inline bg-danger rounded-4 p-2 list-category"  data-category="${category.name}"> ${category.name} </h4>
 			</div>
 			`)
 		}
-
+		//mostramos los directores de la película
 		let directorsFilm = $(`
 		<section class="container-fluid mx-auto mt-2 " >
 		<h1>Directores</h1>
 		</section>
 		`)
+		//llamamos a la función que permite obtener todas las personas
 		directorsFilm.append(
-			this.#showPersons(directors, "bg-blue-glass")
+			this.#showPersons(directors)
 		);
 		container.last().children().append(directorsFilm);
-
+		//mostramos los actorse de la película
 		let actorsFilm = $(`
 		<section class="container-fluid mx-auto mt-2 " >
 		<h1>Actores</h1>
 		</section>
 		`)
 		actorsFilm.append(
-			this.#showPersons(actors, "bg-blue-glass")
+			//llamamos a la función que permite obtener todas las personas
+			this.#showPersons(actors)
 		);
 		container.last().children().append(actorsFilm);
 
 		this.main.append(container);
 	}
 
-	bindActorPersonList(handler) {
-		$('#actors').click(function (event) {
-			handler();
-		});
-	}
-	bindDirectorPersonList(handler) {
-		$('#directors').click(function (event) {
-			handler();
-		});
-	}
-
+	//Permite mostrar una lista de personas sin importar si son actores o directores
 	showListPersons(persons) {
 		this.main.empty();
 		let container = $(`
@@ -309,8 +336,8 @@ class VideoSystemView {
 		while (!person.done) {
 			let div = $(`
 			<section class="col item-list mx-auto rounded-4 mt-3">
-			<figure data-name='${person.value.name + "||" + person.value.lastname1}' class="person">
-				<img src="${person.value.picture}" alt="" class="rounded-4">
+			<figure>
+				<img src="${person.value.picture}" alt="" class="rounded-4 person" data-name='${person.value.name + "||" + person.value.lastname1}'>
 				<figcaption>${person.value.name + " " + person.value.lastname1 + " " + person.value.lastname2}</figcaption>
 			</figure>
 			</section>
@@ -321,13 +348,10 @@ class VideoSystemView {
 		this.main.append(container);
 	}
 
-	bindPersonData(handler) {
-		$('.person').click(function (event) {
-			handler(this.dataset.name);
-		});
-	}
 
-	personData(person, directedProductions, actedProductions) {
+	//muestra la información de una persona, además va a mostrar las produciones que ha dirigido y las peliculas donde ha actuado
+	//si no ha a actuado o no ha dirigido una pelicula no mostrara ese campo
+	showPerson(person, directedProductions, actedProductions) {
 		this.main.empty();
 		let container = $(`
 			<div class="container-fluid mt-5 bg-dark pb-5">
@@ -341,7 +365,7 @@ class VideoSystemView {
 					</div>
 					<div class="col-8">
 						<div class="row">
-							<h1>${person.name +" " + person.lastname1+ " " + person.lastname2}</h1>
+							<h1>${person.name + " " + person.lastname1 + " " + person.lastname2}</h1>
 						</div>
 						<div class="row mt-4">
 							<span>nacimiento:${person.born.toLocaleDateString()}  </span>
@@ -351,19 +375,17 @@ class VideoSystemView {
 
 			</div>
 		`);
-
+		//comprobamos si ha dirigido producciones
 		if (directedProductions) {
 			container.append(this.#showProductions(directedProductions).prepend(`<h1>${"Producciones dirigidas"}</h1>`));
 		}
+		//comprobamos si ha actuado en producciones
 		if (actedProductions) {
 			container.append(this.#showProductions(actedProductions).prepend(`<h1>${"Producciones como actor"}</h1>`));
 		}
 
 		this.main.append(container)
 	}
-
-
-
 }
 
 export default VideoSystemView;

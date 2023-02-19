@@ -11081,19 +11081,15 @@ textarea.form-control-lg {
   box-shadow: 0px 0px 4px #fff;
 }
 
-.link {
-  display: inline;
-}
-
-.link h4, .link .h4 {
+.category-film div h4, .category-film div .h4 {
   transition: background-color 0.2s;
 }
 
-.link h4:hover, .link .h4:hover {
+#category-film div h4:hover, #category-film div .h4:hover {
   cursor: pointer;
   background-color: #00eeff !important;
 }
 
-#actors, #directors {
+#actors, #directors, .person, .image-production {
   cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

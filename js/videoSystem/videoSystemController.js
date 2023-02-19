@@ -176,6 +176,7 @@ class VideoSystemController {
 		this.#videoSystem = model;
 		this.#videoSystemView = view;
 
+		//Cargamos todos los objetos
 		this.#loadVideoSystemObjects();
 
 		//Obtengo 3 producciones aleatorias para mostrarlas al cargar, las voy a guardar en un array para mantener las mismas al usuario
@@ -183,53 +184,79 @@ class VideoSystemController {
 		this.#randomProductions = [...model.randomProductions()];
 
 		this.onLoad();
-		this.#videoSystemView.bindInit(this.handleInit);
 
 	}
 
 	/**Contenido que se al entrar la web */
 	onLoad = () => {
+		//cargamos los elementos del navegador
 		this.onAddCategoryNav();
+		//cargamos las categorias en el main
 		this.onAddCategoryMain();
+		//cargamos las producciones aleatorias
 		this.onAddRandomProductionLoad();
-		this.#videoSystemView.bindProductionsCarousel(this.handleCategoryListProduction)
+
+		//vinculamos las funciones a la vista
+		//Si pulsamos en las categorias mostrara la lista que corresponda a esa categoria
+		this.#videoSystemView.bindProductions(this.handleCategoryListProduction)
+		//viculamos la lista de actores, directores y  botón de inicio, estos elementos solo se van a vincular la primera vez
 		this.#videoSystemView.bindActorPersonList(this.handleActors);
 		this.#videoSystemView.bindDirectorPersonList(this.handleDirector);
+		this.#videoSystemView.bindInit(this.handleInit);
 
 	}
 	//Cuando vuelvo a home
 	onInit = () =>{
+		//cargamos la categoria en el main y vinculamos su evento
 		this.onAddCategoryMain();
+		//añadimos las produciones aleatorias
 		this.onAddRandomProductionLoad();
-	//	this.#videoSystemView.bindProductionsCarousel(this.handleCategoryListProduction)
-
+		//this.#videoSystemView.bindProductions(this.handleCategoryListProduction) Esta solo es necesario si decido volver a crear las producciones aleatorias al darle a inicio
 
 	}
+	//controlador de la  función de inicio
 	handleInit = () => {
 		this.onInit();
 	}
-
+	//va a mostrar la lista de categorias en el navegador y vincular el evento para listar las películas de cada categoria
 	onAddCategoryNav = () => {
 		this.#videoSystemView.showCategoriesInNav(this.#videoSystem.categories);
 		this.#videoSystemView.bindProductionsNavCategoryList(this.handleProductsCategoryList)
 	}
-
+	//muestra 3 producciones aleatorias
 	onAddRandomProductionLoad = () =>{
 		//puedo generar otras 3 peliculas aleatorias o mantenerlas
 		this.#videoSystemView.showProductionInLoad(this.#randomProductions);
 	}
+	//va a mostrar la lista de categorias en el main y vincular el evento para listar las películas de cada categoria
 	onAddCategoryMain = () =>{
 		this.#videoSystemView.showCategoriesInMain(this.#videoSystem.categories);
 		this.#videoSystemView.bindProductionsCategoryList(this.handleProductsCategoryList);
 	}
 
 
+		/*
+		función que se ejecuta cuando el usuario hace click en una categoría en la lista de categorías.
+		La función toma como parámetro el título de la categoría.
+		Obtenemos la categoría que tiene ese título
+		Listamos las películas
+		Asignamos el evento correspondiente para ver los datos de cada película
+	*/
 	handleProductsCategoryList = (title) => {
 		let category = this.#videoSystem.getCategory(title);
 		this.#videoSystemView.listProductions(this.#videoSystem.getProductionCategory(category),title);
-		this.#videoSystemView.bindProductionToProduction(this.handleCategoryListProduction)
+		this.#videoSystemView.bindProductions(this.handleCategoryListProduction)
 	}
-
+		/*
+		función que se ejecuta cuando el usuario hace click en en una producción.
+		tomamos como parámetro el nombre de la película.
+		Obtenemos la producción que tiene ese título
+		Obtenemos las categorias que tienen esa película
+		Obtenemos el casting de actores
+		Obtenemos los directores de la película
+		Mostamos la película con sus actores y sus directores
+		Asignamos el evento correspondiente para ver los datos de las categorias y las personas
+	*/
 	handleCategoryListProduction = (title) => {
 
 		let production = this.#videoSystem.getMovie(title);
@@ -237,51 +264,57 @@ class VideoSystemController {
 		let actors = this.#videoSystem.getCast(production);
 		let directors = this.#videoSystem.getCastDirector(production)
 		this.#videoSystemView.showProduction(production,categories,directors,actors);
-		this.#videoSystemView.bindProductionCategoryList(this.handleProductsCategoryList);
-		this.#videoSystemView.bindPersonData(this.handlePersonData)
+		this.#videoSystemView.bindProductionsCategoryList(this.handleProductsCategoryList);
+		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
 
 	}
-
+	/**Función que se ejecuta cuando pulsamos en actores, en este caso llamamos a la función onActorList--> on hace referencia a onLoad */
 	handleActors = () => {
 		this.onActorList();
 	}
-
+	/**Función que se ejecuta cuando pulsamos en directores, en este caso llamamos a la función onDirectorList--> on hace referencia a onLoad */
 	handleDirector = () => {
 		this.onDirectorList();
 	}
 
-
+	/*función que va a listar todos los actores y les va a asignar un evento para mostrar sus datos */
 	onActorList = ()=>{
 		let iterator = this.#videoSystem.actors[Symbol.iterator]();
 		this.#videoSystemView.showListPersons(iterator)
-		this.#videoSystemView.bindPersonData(this.handlePersonData)
-
+		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
 	}
+	/*función que va a listar todos los directores y les va a asignar un evento para mostrar sus datos */
 	onDirectorList = ()=>{
 		let iterator = this.#videoSystem.director[Symbol.iterator]();
 		this.#videoSystemView.showListPersons(iterator)
-		this.#videoSystemView.bindPersonData(this.handlePersonData)
+		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
 	}
-
-	handlePersonData = (name) => {
+	/**
+	 * función que se ejecuta para mostrar los datos de una persona y toma como parámetro name
+	 */
+	handleShowPerson = (name) => {
+		//el name esta compuesto por nombre y apellido
 		let fullName = name.split("||")
 		let person;
 		let acted;
 		let directed;
+		//comprobamos si esta persona es un actor
 		if(this.#videoSystem.checkActor(fullName[0],fullName[1])){
+			//si es un actor le asignamos la la variable person con getActor y obtenemos sus produciones donde ha actuado
 			person = this.#videoSystem.getActor(fullName[0],fullName[1]);
 			acted = this.#videoSystem.getProductionActor(person)
-
 		}
+		//comprobamos si es un director
 		if(this.#videoSystem.checkDirector(fullName[0],fullName[1])){
+			//si es un director le asignamos la la variable person con getActor y obtenemos sus produciones donde ha actuado
 			person = this.#videoSystem.getDirector(fullName[0],fullName[1]);
 			directed = this.#videoSystem.getProductionDirector(person)
 
 		}
-		this.#videoSystemView.personData(person,directed,acted)
+		//mostramos las producciones
+		this.#videoSystemView.showPerson(person,directed,acted)
+		//enlazamos los eventos de las producciones
 		this.#videoSystemView.bindProductions(this.handleCategoryListProduction);
-
-
 	}
 }
 
