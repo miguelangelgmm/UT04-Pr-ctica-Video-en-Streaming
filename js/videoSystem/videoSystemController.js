@@ -228,7 +228,7 @@ class VideoSystemController {
 		this.onAddCategoryMain();
 		//añadimos las produciones aleatorias
 		this.onAddRandomProductionLoad();
-		//this.#videoSystemView.bindProductions(this.handleCategoryListProduction) Esta solo es necesario si decido volver a crear las producciones aleatorias al darle a inicio
+		this.#videoSystemView.bindProductions(this.handleCategoryListProduction)
 
 	}
 	//controlador de la  función de inicio
