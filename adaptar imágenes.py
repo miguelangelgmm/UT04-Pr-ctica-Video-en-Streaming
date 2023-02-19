@@ -12,9 +12,9 @@ def resize_images(directory, size):
             print(f"No funciona:  {filename}")
 
 if __name__ == '__main__':
-    width = 270
-    height = 360
-    directory = r"./img/Actors"
+    width = 300
+    height = 450
+    directory = r"./img/Productions"
     size = (width, height)
     resize_images(directory, size)
 

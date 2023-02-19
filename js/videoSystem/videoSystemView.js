@@ -239,7 +239,22 @@ class VideoSystemView {
 		container.prepend(`<h1>${title}</h1>`);
 		this.main.append(container);
 	}
-
+	#showFrameFilm(production){
+		let container = $(`
+		<section class="container-fluid mx-auto mt-5 rounded-5">
+		<div class="container-fluid  bg-dark p-0 rounded-5"  >
+			<div class="container-fluid p-0" >
+				<iframe src="${production.resource.link}"
+				title="${production.title}"
+				frameborder="0"
+				allowfullscreen
+				class="container-fluid frame-production rounded-5 shadow-white"></iframe>
+			</div>
+		</div>
+	</section>
+	`)
+	return container;
+	}
 
 	//Permite mostrar los datos de una producción
 	showProduction(production, categories, directors, actors) {
@@ -248,6 +263,7 @@ class VideoSystemView {
 		//Primero mostramos los datos de la producción
 		let container = $(`
 		<!-- Producción -->
+
 	<section class="container-fluid mx-auto mt-5 rounded-5">
 		<div class="container-fluid  bg-dark p-0 rounded-5"  >
 			<div class="container-fluid p-0" >
@@ -259,6 +275,7 @@ class VideoSystemView {
 			</div>
 		</div>
 	</section>
+
 	<!--Información-->
 		<div class="container-fluid mt-5 bg-dark pb-4" >
 			<div class="row  mx-auto">
