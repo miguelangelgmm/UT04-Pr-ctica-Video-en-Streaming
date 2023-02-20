@@ -11096,4 +11096,19 @@ textarea.form-control-lg {
 
 .bg-transparent {
   background-color: rgba(255, 255, 255, 0) !important;
+}
+
+.item-list {
+  border: 1px solid rgba(255, 255, 255, 0);
+  transition: border 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.item-list:hover {
+  border: 1px solid white;
+  box-shadow: 0px 0px 10px 5px black;
+  transform: scale(1.03);
+}
+
+.image-cat {
+  margin-top: 1rem;
 }/*# sourceMappingURL=style.css.map */

@@ -12,9 +12,9 @@ class VideoSystemView {
 		`);
 		for (const person of persons) {
 			container.append(`
-			<section class="col item-list mx-auto rounded-4 mt-3">
+			<section class="col item-list mx-auto rounded-4 my-3">
 			<figure >
-				<img src="${person.picture}" alt="" class="rounded-4 position-relative person" data-name='${person.name + "||" + person.lastname1}' >
+				<img src="${person.picture}" alt="" class="rounded-4 position-relative person mt-3" data-name='${person.name + "||" + person.lastname1}' >
 				<figcaption>${person.name + " " + person.lastname1 + " " + person.lastname2}</figcaption>
 			</figure>
 		</section>
@@ -35,9 +35,9 @@ class VideoSystemView {
 	`);
 		for (const production of productions) {
 			let div = $(`
-		<section class="col prueba2 mx-auto rounded-4 mt-3">
+		<section class="col prueba2 mx-auto rounded-4 my-3 item-list">
 			<figure class="production-person" >
-				<img src="${production.image}" alt="" class="rounded-4 image-production" data-title="${production.title}">
+				<img src="${production.image}" alt="" class="rounded-4 image-production mt-3" data-title="${production.title}">
 			</figure>
 		</section>`)
 			section.children().append(div)
@@ -280,7 +280,7 @@ class VideoSystemView {
 		let production = productions.next();
 		while (!production.done) {
 			let div = $(`
-			<section class="col item-list mx-auto rounded-4 mt-3">
+			<section class="col item-list mx-auto rounded-4 my-3">
 			<figure>
 				<img src="${production.value.image}" alt="${production.value.title}" class="rounded-4 image-cat image-production" data-title="${production.value.title}">
 			</figure>
@@ -388,9 +388,9 @@ class VideoSystemView {
 		//en los datos de la persona voy a usar || para separar nombre y apellido
 		while (!person.done) {
 			let div = $(`
-			<section class="col item-list mx-auto rounded-4 mt-3">
+			<section class="col item-list mx-auto rounded-4 my-3 item-list">
 			<figure>
-				<img src="${person.value.picture}" alt="" class="rounded-4 person" data-name='${person.value.name + "||" + person.value.lastname1}'>
+				<img src="${person.value.picture}" alt="" class="rounded-4 person mt-3" data-name='${person.value.name + "||" + person.value.lastname1}'>
 				<figcaption>${person.value.name + " " + person.value.lastname1 + " " + person.value.lastname2}</figcaption>
 			</figure>
 			</section>
