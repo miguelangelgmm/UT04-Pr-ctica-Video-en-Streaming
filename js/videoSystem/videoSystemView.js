@@ -1,4 +1,12 @@
 class VideoSystemView {
+
+	#excecuteHandler(handler, handlerArguments, scrollElement, data, url, event){
+		handler(...handlerArguments);
+		$(scrollElement).get(0).scrollIntoView();
+		history.pushState(data, null, url);
+		event.preventDefault();
+	}
+
 	constructor() {
 		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
@@ -558,11 +566,16 @@ class VideoSystemView {
 	}
 
 
+	/**
+	 * Enlaza el enlace de cerrar ventnas con un evento que va a permitir cerrar las ventanas
+	 * @param handler - La función que va a ser llamada al hacer click.
+	 */
 	bindCloseWindows(handler) {
 		$('#close-Windows').click((event) => {
 			handler();
 		});
 	}
+
 
 }
 
