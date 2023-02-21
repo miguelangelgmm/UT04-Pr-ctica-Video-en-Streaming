@@ -11111,4 +11111,8 @@ textarea.form-control-lg {
 
 .image-cat {
   margin-top: 1rem;
+}
+
+#close-Windows:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

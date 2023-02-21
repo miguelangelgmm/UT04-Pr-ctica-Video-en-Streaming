@@ -2,6 +2,7 @@ class VideoSystemView {
 	constructor() {
 		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
+		this.newWindows = new Map();
 
 	}
 	//funcion que retorna un div que contiene una lista de personas
@@ -328,6 +329,9 @@ class VideoSystemView {
 							${production.synopsis}
 							</span>
 						</div>
+						<div class="row">
+						<button id="b-open" data-title="${production.title}" class="btn btn-primary text-uppercase mr-2 px-4">Abrir en nueva ventana</button>
+						</div>
 					</div>
 			</div>
 
@@ -335,7 +339,7 @@ class VideoSystemView {
 		`);
 
 		//si no tiene la propiedad resource es una serie
-		if (production.resource != undefined) {
+		if ("resource" in production) {
 			container.children().prepend(this.#showFrameFilm(production))
 		} else {
 			container.children().prepend(this.#showFrameSerie(production))
@@ -439,6 +443,127 @@ class VideoSystemView {
 
 		this.main.append(container)
 	}
+
+	//----------Nueva ventana
+
+	bindShowProductionInNewWindow(handler) {
+		$('#b-open').click((event) => {
+			//creamos la ventana nueva si no ha sido creada aun para esa producción
+			if(!this.newWindows.has(event.target.dataset.title)){
+			let width = 800;
+			let height = 600;
+			this.newWindows.set(event.target.dataset.title,( window.open("newWindow.html", `${event.target.dataset.title}`, `width=${width}, height=${height}, top=${screen.height / 2 - height / 2}, left=${screen.width / 2 - width / 2}, titlebar=yes, toolbar=no, menubar=no, location=no`)))
+			this.newWindows.get(event.target.dataset.title).addEventListener('DOMContentLoaded', () => {
+				handler(event.target.dataset.title)
+			});
+		}else{
+			//damos el foco a la ventana
+			this.newWindows.get(event.target.dataset.title).focus();
+		}
+
+		});
+	}
+
+	showProductionInNewWindow(production, categories,actors,directors) {
+		let newWindow = this.newWindows.get(production.title)
+		//asignamos titulo a la ventana
+		newWindow.document.title = production.title
+		let main = newWindow.document.querySelector("main");
+		let header = newWindow.document.querySelector("header");
+
+		let heiderContainer = document.createRange().createContextualFragment(`
+			<h1 class="bg-dark py-3 mb-5">
+				${production.title}
+			</h1>
+		`)
+		let container = document.createRange().createContextualFragment(`
+		<!-- Producción -->
+
+	<section class="container-fluid mx-auto mt-5 rounded-5">
+
+	</section>
+
+	<!--Información-->
+		<div class="container-fluid mt-5 bg-dark pb-4" >
+			<div class="row  mx-auto">
+				<div class="col-lg-4 col-xs-5 mt-2">
+					<figure class="lg-me-4 mx-auto text-center img-production-synosis">
+						<img src="${production.image}" alt="" class="w-75 mx-auto rounded-4 ">
+					</figure>
+				</div>
+				<div class="col-8">
+						<div class="row mb-2">
+							<h1>${production.title}</h1>
+						</div>
+						<div class="row mt-2 d-inline" id = "category-film">
+
+						</div>
+						<div class="row mt-4">
+							<span>${production.publication.toLocaleDateString()} </span>
+						</div>
+						<div class="row">
+							<span>
+							${production.synopsis}
+							</span>
+						</div>
+					</div>
+			</div>
+		</div>
+		`);
+
+		//si no tiene la propiedad resource es una serie
+		if ("resource" in production) {
+			$(container).prepend(this.#showFrameFilm(production))
+		} else {
+			$(container).prepend(this.#showFrameSerie(production))
+		}
+
+		//mostramos las categorias a las que pertenece esa pelicula
+		let categoriesFilm = container.querySelector("#category-film");
+		for (const category of categories) {
+			categoriesFilm.appendChild(document.createRange().createContextualFragment(`
+			<div class="d-inline">
+				<h4 class="d-inline bg-danger rounded-4 p-2 list-category"  data-category="${category.name}"> ${category.name} </h4>
+			</div>
+			`))
+		}
+
+		//mostramos los directores de la película
+		let directorsFilm = $(`
+		<section class="container-fluid mx-auto mt-2 " >
+		<h1>Directores</h1>
+		</section>
+		`)
+		//llamamos a la función que permite obtener todas las personas
+		directorsFilm.append(
+			this.#showPersons(directors)
+		);
+		//añadimos al ultimo hijo de container
+		$(container).children().last().append(directorsFilm);
+		//mostramos los actorse de la película
+		let actorsFilm = $(`
+		<section class="container-fluid mx-auto mt-2 " >
+		<h1>Actores</h1>
+		</section>
+		`)
+		actorsFilm.append(
+			//llamamos a la función que permite obtener todas las personas
+			this.#showPersons(actors)
+		);
+				//añadimos al ultimo hijo de container
+		$(container).children().last().append(actorsFilm);
+
+		header.appendChild(heiderContainer);
+		main.appendChild(container)
+	}
+
+
+	bindCloseWindows(handler) {
+		$('#close-Windows').click((event) => {
+			handler();
+		});
+	}
+
 }
 
 export default VideoSystemView;

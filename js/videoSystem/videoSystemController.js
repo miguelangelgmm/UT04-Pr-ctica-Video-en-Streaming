@@ -220,6 +220,8 @@ class VideoSystemController {
 		this.#videoSystemView.bindActorPersonList(this.handleActors);
 		this.#videoSystemView.bindDirectorPersonList(this.handleDirector);
 		this.#videoSystemView.bindInit(this.handleInit);
+		//vinculamos cerrar todas las ventnas
+		this.#videoSystemView.bindCloseWindows(this.handleCloseAllNewWindows)
 
 	}
 	//Cuando vuelvo a home
@@ -283,6 +285,7 @@ class VideoSystemController {
 		this.#videoSystemView.showProduction(production,categories,directors,actors);
 		this.#videoSystemView.bindProductionsCategoryList(this.handleProductsCategoryList);
 		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
+		this.#videoSystemView.bindShowProductionInNewWindow(this.handleShowProductionNewWindow)
 
 	}
 	/**Función que se ejecuta cuando pulsamos en actores, en este caso llamamos a la función onActorList--> on hace referencia a onLoad */
@@ -333,6 +336,31 @@ class VideoSystemController {
 		//enlazamos los eventos de las producciones
 		this.#videoSystemView.bindProductions(this.handleCategoryListProduction);
 	}
+
+	handleShowProductionNewWindow = (title) =>{
+		let production = this.#videoSystem.getMovie(title);
+		let categories = this.#videoSystem.getCategoryProduction(production)
+		let actors = this.#videoSystem.getCast(production);
+		let directors = this.#videoSystem.getCastDirector(production)
+		this.#videoSystemView.showProductionInNewWindow(production,categories,actors,directors);
+	}
+
+
+/*método que cierra todas las ventanas que han sido abiertas y limpian el mapa de ventanas */
+	handleCloseAllNewWindows = () =>{
+
+		for (const window of this.#videoSystemView.newWindows.values()) {
+			//cerramos las ventanas
+			window.close()
+			/* Si quiero cerrar pasado un tiempo
+			setTimeout(function() {
+				window.close()
+			}, 400);
+		*/
+		}
+		this.#videoSystemView.newWindows.clear()
+	}
+
 }
 
 export default VideoSystemController;
