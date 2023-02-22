@@ -1,8 +1,9 @@
 class VideoSystemView {
 
-	#excecuteHandler(handler, handlerArguments, scrollElement, data, url, event){
-		handler(...handlerArguments);
-		$(scrollElement).get(0).scrollIntoView();
+	#excecuteHandler(handler, handlerArguments, data, url, event){
+		handler(...handlerArguments);//le pasamos a la función handler los argumentos, contennido de this.dataset.
+		//data,title,url
+		//permite asignar un nuevo estado al historial de navegación, va a permitir volver atras o adelante sin recargar toda la página
 		history.pushState(data, null, url);
 		event.preventDefault();
 	}
@@ -123,8 +124,18 @@ class VideoSystemView {
  * @param handler - La función a llamar cuando el usuario hace click, pasandole el título de la película como parámetro
  */
 	bindProductions(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+
 		$('.image-production').click(function (event) {
-			handler(this.dataset.title);
+			let production = this.dataset.title;
+			//hander función a ejecutar, [pruduction] parámetros a ejecutar en la función handler, object->datos para el history,valor de la url y event
+			excecuteHandler(
+				handler, [production],
+				{action: 'production', production: production},// la # permite especificar secciones
+				`#Production-${production.replaceAll(" ","-")}`, event
+			);
+		//	handler(this.dataset.title);
 		});
 	}
 
@@ -135,8 +146,16 @@ class VideoSystemView {
 	 * @param handler - La función que sera cargada al hacer click,pasandole como argumento la categoria
 	 */
 	bindProductionsNavCategoryList(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
 		$('.dropdown-item').click(function (event) {
-			handler(this.dataset.category);
+			let category = this.dataset.category;
+			excecuteHandler(
+				handler, [category],
+				{action: 'productionCategoryList', category: category},
+				`#Category-List-${category}`, event
+			);
+		//	handler(this.dataset.category);
 		});
 	}
 
@@ -146,9 +165,18 @@ class VideoSystemView {
 	 * @param handler - La función a ejecutar cada vez que hacemos click, pasandole como argumento la categoria
 	 */
 	bindProductionsCategoryList(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+
 		document.querySelectorAll('.list-category').forEach(function (h4) {
 			h4.addEventListener('click', (function (event) {
-				handler(this.dataset.category);
+				let category = this.dataset.category;
+				excecuteHandler(
+					handler, [category],
+					{action: 'productionCategoryList', category: category},
+					`#Category-List-${category}`, event
+				);
+			//	handler(this.dataset.category);
 			}))
 		})
 	}
@@ -158,8 +186,10 @@ class VideoSystemView {
 	 * @param handler - La función que es lanzada al hacer click.
 	 */
 	bindInit(handler) {
+		let excecuteHandler = this.#excecuteHandler;
+
 		$('#logo').click((event) => {
-			handler();
+			excecuteHandler(handler,[],{action:"init"},"#",event)
 		});
 	}
 
@@ -168,8 +198,12 @@ class VideoSystemView {
 	 * @param handler - La función que va a ser llamada al hacer click.
 	 */
 	bindActorPersonList(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+
 		$('#actors').click(function (event) {
-			handler();
+			excecuteHandler(handler,[],{action:"actorPersonList"},"#actors",event)
+		//	handler();
 		});
 	}
 
@@ -178,8 +212,11 @@ class VideoSystemView {
 	 * @param handler - The function to be called when the button is clicked.
 	 */
 	bindDirectorPersonList(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
 		$('#directors').click(function (event) {
-			handler();
+			excecuteHandler(handler,[],{action:"directorPersonList"},"#directors",event)
+		//	handler();
 		});
 	}
 	/**
@@ -188,8 +225,16 @@ class VideoSystemView {
 	 * @param handler
 	 */
 	bindShowPerson(handler) {
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
 		$('.person').click(function (event) {
-			handler(this.dataset.name);
+			let name = this.dataset.name;
+			excecuteHandler(
+				handler, [name],
+				{action: 'showPerson', name: name},
+				`#Person-${name.replaceAll("||","-")}`, event
+			);
+			//handler(this.dataset.name);
 		});
 	}
 
