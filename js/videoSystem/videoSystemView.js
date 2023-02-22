@@ -502,14 +502,15 @@ class VideoSystemView {
 	bindShowProductionInNewWindow(handler) {
 		$('#b-open').click((event) => {
 			//creamos la ventana nueva si no ha sido creada aun para esa producción
-			if(!this.newWindows.has(event.target.dataset.title)){
+			if(!this.newWindows.has(event.target.dataset.title) || this.newWindows.get(event.target.dataset.title).closed){
 			let width = 800;
 			let height = 600;
 			this.newWindows.set(event.target.dataset.title,( window.open("newWindow.html", `${event.target.dataset.title}`, `width=${width}, height=${height}, top=${screen.height / 2 - height / 2}, left=${screen.width / 2 - width / 2}, titlebar=yes, toolbar=no, menubar=no, location=no`)))
 			this.newWindows.get(event.target.dataset.title).addEventListener('DOMContentLoaded', () => {
 				handler(event.target.dataset.title)
 			});
-		}else{
+		}
+		else{
 			//damos el foco a la ventana
 			this.newWindows.get(event.target.dataset.title).focus();
 		}
