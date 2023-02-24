@@ -1,15 +1,8 @@
 
 .carousel-aside {
 	display: flex;
-	flex-wrap: nowrap;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	scrollbar-width: none;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	user-select: none;
-	white-space: nowrap; /* Evita saltos de línea */
-
+	overflow: auto;
+	white-space: nowrap;
 }
 
 .item-aside {
@@ -17,14 +10,30 @@
 	margin: 0 20px;
 	width: 18%;
 	scroll-snap-align: center;
-	-webkit-user-drag: none; /* Deshabilita la capacidad de arrastrar las imágenes en navegadores WebKit */
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 	border-radius: $border-radius-xl;
 	text-align: center;
 }
+* {
+	scrollbar-width: thin;
+	scrollbar-color: $primary $secondary;
+}
+
+
+*::-webkit-scrollbar {
+	width: 12px;
+
+}
+
+  *::-webkit-scrollbar-track {
+	background: $secondary;
+}
+
+  *::-webkit-scrollbar-thumb {
+	background-color: $primary;
+	border-radius: 20px;
+	border: 3px solid $secondary;
+}
+
 .item-aside img {
 	pointer-events: none;
 	width: 100%;
@@ -42,17 +51,8 @@
 	}
 }
 
-/* Eventos de ratón */
-.carousel-aside:active {
-	cursor: grabbing; /* Cambia el cursor al hacer clic */
-	cursor: -webkit-grabbing;
-}
+
 
 .item-aside:hover {
 	cursor: pointer;
-}
-
-.carousel-aside:active .item-aside {
-	cursor: grabbing;
-	cursor: -webkit-grabbing;
 }

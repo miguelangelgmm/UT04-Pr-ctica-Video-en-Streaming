@@ -10829,16 +10829,8 @@ textarea.form-control-lg {
 }
 .carousel-aside {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  white-space: nowrap; /* Evita saltos de línea */
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .item-aside {
@@ -10846,12 +10838,27 @@ textarea.form-control-lg {
   margin: 0 20px;
   width: 18%;
   scroll-snap-align: center;
-  -webkit-user-drag: none; /* Deshabilita la capacidad de arrastrar las imágenes en navegadores WebKit */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
   border-radius: 1rem;
   text-align: center;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00eeff #1a3d7d;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #1a3d7d;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #00eeff;
+  border-radius: 20px;
+  border: 3px solid #1a3d7d;
 }
 
 .item-aside img {
@@ -10870,19 +10877,8 @@ textarea.form-control-lg {
     width: 50%;
   }
 }
-/* Eventos de ratón */
-.carousel-aside:active {
-  cursor: grabbing; /* Cambia el cursor al hacer clic */
-  cursor: -webkit-grabbing;
-}
-
 .item-aside:hover {
   cursor: pointer;
-}
-
-.carousel-aside:active .item-aside {
-  cursor: grabbing;
-  cursor: -webkit-grabbing;
 }
 
 .shadow-white {
@@ -11038,6 +11034,9 @@ textarea.form-control-lg {
   .frame-production {
     height: 800px;
   }
+  main {
+    min-height: 80vh;
+  }
 }
 .frame-production {
   margin: 0px;
@@ -11053,11 +11052,6 @@ textarea.form-control-lg {
   padding: 0;
   min-width: 260px;
   text-align: center;
-}
-
-.item-list img {
-  width: 90%;
-  filter: drop-shadow(0px 0px 5px #4444dd);
 }
 
 #logo {
@@ -11115,4 +11109,9 @@ textarea.form-control-lg {
 
 #close-Windows:hover {
   cursor: pointer;
+}
+
+.bg-background {
+  background-color: #1a3d7d;
+  background-image: radial-gradient(at 64% 18%, #226377 0px, transparent 50%), radial-gradient(at 32% 81%, #5e53f3 0px, transparent 50%);
 }/*# sourceMappingURL=style.css.map */

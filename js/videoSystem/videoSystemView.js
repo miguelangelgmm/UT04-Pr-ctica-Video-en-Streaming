@@ -22,8 +22,8 @@ class VideoSystemView {
 		`);
 		for (const person of persons) {
 			container.append(`
-			<section class="col item-list mx-auto rounded-4 my-3">
-			<figure >
+			<section  class="col item-list mx-auto rounded-4 my-3 w-auto">
+			<figure class="mx-3">
 				<img src="${person.picture}" alt="" class="rounded-4 position-relative person mt-3" data-name='${person.name + "||" + person.lastname1}' >
 				<figcaption>${person.name + " " + person.lastname1 + " " + person.lastname2}</figcaption>
 			</figure>
@@ -45,8 +45,8 @@ class VideoSystemView {
 	`);
 		for (const production of productions) {
 			let div = $(`
-		<section class="col prueba2 mx-auto rounded-4 my-3 item-list">
-			<figure class="production-person" >
+		<section class="col item-list mx-auto rounded-4 my-3 w-auto">
+			<figure class="production-person mx-3" >
 				<img src="${production.image}" alt="" class="rounded-4 image-production mt-3" data-title="${production.title}">
 			</figure>
 		</section>`)
@@ -334,8 +334,8 @@ class VideoSystemView {
 		let production = productions.next();
 		while (!production.done) {
 			let div = $(`
-			<section class="col item-list mx-auto rounded-4 my-3">
-			<figure>
+			<section class="col item-list mx-auto rounded-4 my-3 w-auto">
+			<figure class="mx-3">
 				<img src="${production.value.image}" alt="${production.value.title}" class="rounded-4 image-cat image-production" data-title="${production.value.title}">
 			</figure>
 			`);
@@ -360,7 +360,7 @@ class VideoSystemView {
 	</section>
 
 	<!--Información-->
-		<div class="container-fluid mt-5 bg-dark pb-4" >
+		<div class="container-fluid mt-5  pb-4" >
 			<div class="row  mx-auto">
 				<div class="col-lg-4 col-xs-5 mt-2">
 					<figure class="lg-me-4 mx-auto text-center img-production-synosis">
@@ -445,8 +445,8 @@ class VideoSystemView {
 		//en los datos de la persona voy a usar || para separar nombre y apellido
 		while (!person.done) {
 			let div = $(`
-			<section class="col item-list mx-auto rounded-4 my-3 item-list">
-			<figure>
+			<section  class="col item-list mx-auto rounded-4 my-3 w-auto">
+			<figure class="mx-3">
 				<img src="${person.value.picture}" alt="" class="rounded-4 person mt-3" data-name='${person.value.name + "||" + person.value.lastname1}'>
 				<figcaption>${person.value.name + " " + person.value.lastname1 + " " + person.value.lastname2}</figcaption>
 			</figure>
@@ -464,7 +464,7 @@ class VideoSystemView {
 	showPerson(person, directedProductions, actedProductions) {
 		this.main.empty();
 		let container = $(`
-			<div class="container-fluid mt-5 bg-dark pb-5">
+			<div class="container-fluid mt-5 pb-5">
 				<div class="row  mx-auto">
 					<div class="col-lg-4 col-xs-5 mt-2">
 						<section class="col prueba2 mx-auto rounded-4 mt-3">
@@ -538,7 +538,7 @@ class VideoSystemView {
 	</section>
 
 	<!--Información-->
-		<div class="container-fluid mt-5 bg-dark pb-4" >
+		<div class="container-fluid mt-5  pb-4" >
 			<div class="row  mx-auto">
 				<div class="col-lg-4 col-xs-5 mt-2">
 					<figure class="lg-me-4 mx-auto text-center img-production-synosis">
