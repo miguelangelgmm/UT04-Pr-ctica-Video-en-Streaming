@@ -12,7 +12,13 @@ class VideoSystemView {
 		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
 		this.newWindows = new Map();
-
+		//actualizar formulario de eliminar persona
+		this.lastName1Input;
+		this.lastName2Input;
+		this.bornInput;
+		this.URLPictureInput;
+		this.datalistOptions;
+		this.imgRemove;
 	}
 	//funcion que retorna un div que contiene una lista de personas
 	#showPersons(persons) {
@@ -108,11 +114,12 @@ class VideoSystemView {
 	}
 
 	showCategoriesInNav(categories) {
+		this.categories.find("div").empty()//vaciamos las categorias actuales
 
 		let ul = $(`<ul class="dropdown-menu"></ul>`);
 
 		for (let category of categories) {
-			ul.append(`<li><a data-category="${category.name}" class="dropdown-item" >${category.name}</a><li>`);
+			ul.append(`<li><a data-category="${category.name}" class="dropdown-item list-nav-category" >${category.name}</a><li>`);
 		}
 		this.categories.append(ul);
 	}
@@ -148,7 +155,7 @@ class VideoSystemView {
 	bindProductionsNavCategoryList(handler) {
 		//guardamos la referencia
 		let excecuteHandler = this.#excecuteHandler;
-		$('.dropdown-item').click(function (event) {
+		$('.list-nav-category').click(function (event) {
 			let category = this.dataset.category;
 			excecuteHandler(
 				handler, [category],
@@ -620,6 +627,246 @@ class VideoSystemView {
 		$('#close-Windows').click((event) => {
 			handler();
 		});
+	}
+
+
+	//---->Fomulario /
+
+	showAdminNav() {
+		let navbar= $("#navbarSupportedContent");
+		let container = $(`
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		<li class="nav-item dropdown ">
+		<a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" >
+			Administración
+		</a>
+		<ul class="dropdown-menu">
+			<li><a id="newProduction" class="dropdown-item show-form"">Nueva producción</a></li>
+			<li><a id="delProduction" class="dropdown-item show-form">Eliminar producción</a></li>
+			<li><a id="assignPerson" class="dropdown-item show-form">Asignar Persona</a></li>
+			<li><a id="manageCategory" class="dropdown-item show-form">Gestionar categorias</a></li>
+			<li><a id="newPerson" class="dropdown-item show-form">Nueva persona</a></li>
+			<li><a id="delPerson" class="dropdown-item show-form">Eliminar Persona</a></li>
+		</ul>
+	</li>
+	</ul>
+		`);
+
+		navbar.append(container)
+	}
+
+	bindAdminMenu(handlerNewProduction, handlerRemoveProduction, handlerAssignPerson, handlerManageCategory,handlerNewPerson,handlerRemoveCategory){
+		$('#newProduction').click((event) => {
+			this.#excecuteHandler(handlerNewProduction, [], {action: 'newProduction'}, '#new-Production', event);
+		});
+		$('#delProduction').click((event) => {
+			this.#excecuteHandler(handlerRemoveProduction, [], {action: 'delProduction'}, '#remove-production', event);
+		});
+		$('#assignPerson').click((event) => {
+			this.#excecuteHandler(handlerAssignPerson, [], {action: 'assignPerson'}, '#assign-person', event);
+		});
+		$('#manageCategory').click((event) => {
+			this.#excecuteHandler(handlerManageCategory, [], {action: 'manageCategory'}, '#manage-category', event);
+		});
+		$('#newPerson').click((event) => {
+			this.#excecuteHandler(handlerNewPerson, [], {action: 'newPerson'}, '#new-person', event);
+		});
+		$('#delPerson').click((event) => {
+			this.#excecuteHandler(handlerRemoveCategory, [], {action: 'delPerson'}, '#remove-category', event);
+		});
+	}
+
+	showFormNewPerson(){
+		this.main.empty();
+		let container = $(`
+		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4">
+		<form>
+		<div class="row">
+			<h1>Agregar una persona</h1>
+		</div>
+		<div class="row g-4">
+			<div class="col-lg-4">
+				<img src="img/defaultPerson.png"
+					alt="img prueba" class="w-100">
+			</div>
+			<div class="col-lg-8">
+				<div class="row g-4">
+					<div class="col-lg-6">
+						<div class=" form-floating color-bg-input">
+							<input type="text" class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0" id="namePerson" placeholder="Nombre*" name="name">
+							<div class="invalid-feedback">El nombre es obligatorio.</div>
+							<div class="valid-feedback">Correcto.</div>
+							<label for="namePerson" class="text-primary">Nombre*</label>
+						</div>
+					</div>
+				<div class="col-lg-6">
+					<div class=" form-floating color-bg-input">
+						<input type="text"
+							class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+							id="lastNamePerson1" placeholder="Primer Apellido*" name="lastName1">
+							<div class="invalid-feedback">El apellido es obligatorio.</div>
+							<div class="valid-feedback">Correcto.</div>
+						<label for="lastNamePerson1" class="text-primary">Primer apellido*</label>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class=" form-floating color-bg-input">
+						<input type="text"
+							class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+							id="lastNamePerson2" placeholder="Segundo Apellido" name="lastName2">
+							<div class="invalid-feedback">El apellido el formato del apellido es erroneo.</div>
+							<div class="valid-feedback">Correcto.</div>
+						<label for="lastNamePerson2" class="text-primary">Segundo apellido</label>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class=" form-floating color-bg-input">
+						<input type="date"
+							class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+							id="bornPerson" placeholder="Fecha Nacimiento" name="born">
+							<div class="invalid-feedback">La fecha no es valida.</div>
+							<div class="valid-feedback">Correcto.</div>
+						<label for="bornPerson" class="text-primary">Fecha Nacimiento</label>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class=" form-floating color-bg-input">
+						<input type="text"
+							class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+							id="URLPicturePerson" placeholder="Primer Apellido" name="picturePerson">
+							<div class="invalid-feedback">La url no es valida.</div>
+							<div class="valid-feedback">Correcto.</div>
+						<label for="URLPicturePerson" class="text-primary">URL de la imágen</label>
+					</div>
+				</div>
+				<div class="col-lg-8  mx-auto">
+					<button class="btn btn-primary m-1 w-100 mx-auto " type="submit">Enviar</button>
+				</div>
+				</div>
+			</div>
+		</div>
+			</form>
+	</section>
+		`)
+
+		this.main.append(container)
+	}
+
+
+	showFormRemovePerson(actors,directors){
+		this.main.empty();
+		let actorsView = [...actors];
+		let directorsView = [...directors];
+
+		let container = $(`
+
+		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4">
+			<form>
+			<div class="row">
+				<h1>Eliminar una persona</h1>
+			</div>
+			<div class="row g-4">
+				<div class="col-lg-4">
+					<img src="img/defaultPerson.png"
+						alt="img prueba" class="w-100" id ="imgRemove" >
+				</div>
+				<div class="col-lg-8">
+					<div class="row g-4">
+						<div class="col-lg-6">
+							<div class="color-bg-input form-floating">
+								<input class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0" list="datalistOptions" id="exampleDataList" placeholder="Nombre">
+								<datalist id="datalistOptions" >
+								</datalist>
+								<label for="exampleDataList" class="text-primary">Nombre</label>
+							</div>
+						</div>
+					<div class="col-lg-6">
+						<div class=" form-floating">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="lastNamePerson1" placeholder="Primer Apellido" name="lastName1" readonly value="Solo Lectura">
+							<label for="lastNamePerson1" class="text-primary">Primer apellido</label>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class=" form-floating">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="lastNamePerson2" placeholder="Segundo Apellido" name="lastName2" value="Solo Lectura" readonly>
+							<label for="lastNamePerson2" class="text-primary">Segundo apellido</label>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class=" form-floating">
+							<input type="date"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="bornPerson" placeholder="Fecha Nacimiento" name="born" readonly value="000-00-00">
+							<label for="bornPerson" class="text-primary">Fecha Nacimiento</label>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class=" form-floating">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="URLPicturePerson" placeholder="Primer Apellido" name="picturePerson" value="Solo Lectura" readonly>
+							<label for="URLPicturePerson" class="text-primary">URL de la imágen</label>
+						</div>
+					</div>
+					<div class="col-lg-8  mx-auto">
+						<button class="btn btn-primary m-1 w-100 mx-auto bg-danger" type="submit" name="remove">Eliminar</button>
+					</div>
+					</div>
+				</div>
+			</div>
+				</form>
+		</section>
+		`)
+		const datalist = container.find('#datalistOptions');
+
+		actorsView.forEach(person => {
+			datalist.append(`<option value='${person.name + `,` + person.lastname1 + "(actor)"}'>`)
+		});
+		directorsView.forEach(person => {
+			datalist.append(`<option value='${person.name + "," + person.lastname1 + "(director)"}'">`)
+		});
+		// Agregar evento input al input del datalist
+
+		this.main.append(container)
+		this.datalistOptions = document.querySelector("input[list='datalistOptions']");
+		this.lastName1Input = document.getElementById("lastNamePerson1")
+		this.lastName2Input = document.getElementById("lastNamePerson2")
+		this.bornInput = document.getElementById('bornPerson');
+		this.URLPictureInput = document.getElementById('URLPicturePerson');
+		this.imgRemove = document.getElementById("imgRemove");
+	}
+
+	bindUpdateShowRemovePerson(handler) {
+
+		this.datalistOptions.addEventListener("input", (event) => {
+			handler(event.target.value)
+		});
+	}
+
+	updateRemovePeson(person){
+		this.lastName1Input.value = person.lastname1;
+		this.lastName2Input.value = person.lastname2 || " ";
+		//necesito el formato año-mes-dia // 2023-02-02
+		let date = [person.born.getFullYear(),person.born.getMonth(),person.born.getDate()]
+		date[1] = date[1]>9?date[1]:`0${date[1]}`
+		date[2] = date[2]>9?date[1]:`0${date[2]}`
+		this.bornInput.value =`${date[0]}-${date[1]}-${date[2]}`;
+		this.URLPictureInput.value = person.picture;
+		this.imgRemove.src=person.picture;
+	}
+	updateDefaultRemovePeson(){
+		if(this.URLPictureInput != "Solo lectura"){//evito actualizaciones innecesarias
+		this.lastName1Input.value = "Solo lectura";
+		this.lastName2Input.value = "Solo lectura";
+
+		this.bornInput.value =``;
+		this.URLPictureInput.value = "Solo lectura";
+		this.imgRemove.src="img/defaultPerson.png";
+		}
 	}
 
 

@@ -223,6 +223,17 @@ class VideoSystemController {
 		//vinculamos cerrar todas las ventnas
 		this.#videoSystemView.bindCloseWindows(this.handleCloseAllNewWindows)
 
+		//mostramos el formulario de gestión
+		this.#videoSystemView.showAdminNav();
+		//vinculamos sus eventos correspondientes
+		this.#videoSystemView.bindAdminMenu(
+			this.handlerNewProduction,
+			this.handlerRemoveProduction,
+			this.handlerAssignPerson,
+			this.handlerManageCategory,
+			this.handlerNewPerson,
+			this.handleRemovePerson
+		);
 	}
 	//Cuando vuelvo a home
 	onInit = () =>{
@@ -360,6 +371,56 @@ class VideoSystemController {
 		}
 		this.#videoSystemView.newWindows.clear()
 	}
+
+//----Formulario
+
+handlerNewProduction  = () =>{
+	console.log("handlerNewProduction")
+}
+handlerRemoveProduction = () =>{
+	console.log("handlerRemoveProduction")
+}
+handlerAssignPerson = () =>{
+	console.log("handlerAssignPerson")
+}
+handlerManageCategory = () =>{
+	console.log("handlerManageCategory")
+}
+handlerNewPerson = () =>{
+	this.#videoSystemView.showFormNewPerson();
+}
+handleRemovePerson = () =>{
+
+	let actors = this.#videoSystem.actors;
+	let directors = this.#videoSystem.director
+	this.#videoSystemView.showFormRemovePerson(actors,directors);
+	this.#videoSystemView.bindUpdateShowRemovePerson(this.handleUpdateRemovePerson)
+
+}
+
+handleUpdateRemovePerson = (name) =>{
+	if(name.includes("(actor)")){
+		name =name.replaceAll("(actor)","")
+		let names = name.split(",");
+		let firstName = names[0];
+		let lastName = names.slice(1).join(" ");
+		if(this.#videoSystem.checkActor(firstName,lastName)){
+			this.#videoSystemView.updateRemovePeson(this.#videoSystem.getActor(firstName,lastName));
+		}
+	}
+	else if(name.includes("(director)")){
+		name =name.replaceAll("(director)","")
+		let names = name.split(",");
+		let firstName = names[0];
+		let lastName = names.slice(1).join(" ");
+		if(this.#videoSystem.checkDirector(firstName,lastName)){
+			this.#videoSystemView.updateRemovePeson(this.#videoSystem.getDirector(firstName,lastName));
+		}
+	}
+	else{
+		this.#videoSystemView.updateDefaultRemovePeson()
+	}
+}
 
 }
 

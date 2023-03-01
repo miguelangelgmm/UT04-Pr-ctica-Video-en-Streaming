@@ -9,7 +9,15 @@ const historyActions = {
 	actorPersonList: () => VideoSystemApp.handleActors(),
 	directorPersonList: () => VideoSystemApp.handleDirector(),
 	showPerson: (event) =>	VideoSystemApp.handleShowPerson(event.state.name),
-	production: (event) => VideoSystemApp.handleCategoryListProduction(event.state.production)
+	production: (event) => VideoSystemApp.handleCategoryListProduction(event.state.production),
+	newProduction:() =>VideoSystemApp.handlerNewProduction(),
+	delProduction:() =>VideoSystemApp.handlerRemoveProduction(),
+	assignPerson:() =>VideoSystemApp.handlerAssignPerson(),
+	manageCategory:() =>VideoSystemApp.handlerManageCategory(),
+	newPerson:() =>VideoSystemApp.handlerNewPerson(),
+	delPerson:() =>VideoSystemApp.handleRemovePerson(),
+
+
 }
 
 //ejecutamos una acción cada vez que pulsemos las flechas

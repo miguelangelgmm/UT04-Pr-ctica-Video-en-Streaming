@@ -3,6 +3,13 @@
 @import "../node_modules/bootstrap/scss/variables";
 */
 
+$input-bg: #00eeff00;
+$input-border-radius:none;
+$input-color:white;
+$input-focus-box-shadow:none;
+$form-select-indicator:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#00eeff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+
+
 $secondary: #1a3d7d;
 $primary: #00eeff;
 $dark : #132a55b6;
@@ -253,3 +260,35 @@ $myblack :#1f1f1f;
 }
 
 
+//Edición formulario
+
+
+.bg-form{
+
+	background: $secondary;
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(9.9px);
+	-webkit-backdrop-filter: blur(9.9px);
+	border: 1px solid rgba(68, 0, 250, 0.3);
+}
+
+.color-bg-input{
+	background-color: #1a3d7d41;
+	border-radius: 0.5rem;
+	padding-bottom: 10px;
+	color:white;
+	input{
+		width: 90%;
+		margin-left: 5%;
+	}
+	label{
+		width: 90%;
+		margin-left: 5%;
+	}
+}
+
+select, option  {
+	background-color: $secondary;
+	color: #fbfbfe;
+}
