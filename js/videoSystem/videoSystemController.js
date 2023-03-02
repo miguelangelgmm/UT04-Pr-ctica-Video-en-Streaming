@@ -406,12 +406,12 @@ class VideoSystemController {
 			else {
 				this.#videoSystem.addDirector(this.#videoSystem.getDirector(name, lastname1, lastname2, new Date(Date.parse(date)), img))
 			}
-			done=true
+			done = true
 		} catch (e) {
 			//si no se ha podido crear el actor ponemos done a false, en el modal mostraremos un mensaje de error
-			done=false;
+			done = false;
 		}
-		this.#videoSystemView.showFormNewPersonModal(done,name,lastname1,type)
+		this.#videoSystemView.showFormNewPersonModal(done, name, lastname1, type)
 	}
 
 	handleRemovePerson = () => {
@@ -420,6 +420,33 @@ class VideoSystemController {
 		let directors = this.#videoSystem.director
 		this.#videoSystemView.showFormRemovePerson(actors, directors);
 		this.#videoSystemView.bindUpdateShowRemovePerson(this.handleUpdateRemovePerson)
+		this.#videoSystemView.bindFormRemovePerson(this.handledelRemovePerson)
+	}
+	handledelRemovePerson = (name) => {
+		name = name.trim();
+		let done;
+		let firstname = "";
+		let lastName= "";
+		try {
+			if (name.includes("(actor)")) {
+				name = name.replaceAll("(actor)", "")
+				let names = name.split(",");
+				firstname = names[0];
+				lastName = names.slice(1).join(" ");
+				this.#videoSystem.removeActor(this.#videoSystem.getActor(firstname, lastName));
+			} else {
+				name = name.replaceAll("(director)", "")
+				let names = name.split(",");
+				firstname = names[0];
+				lastName = names.slice(1).join(" ");
+				this.#videoSystem.removeDirector(this.#videoSystem.getDirector(firstname, lastName));
+			}
+			done=true;
+		} catch (e) {
+			done=false;
+		}
+
+		this.#videoSystemView.showFormRemovePersonModal(done, firstname, lastName)
 
 	}
 

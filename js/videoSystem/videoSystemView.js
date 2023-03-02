@@ -1,4 +1,4 @@
-import { showFeedBack, defaultCheckElement, newPersonValidation } from './validation.js';
+import {newPersonValidation,removePersonValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -855,12 +855,10 @@ class VideoSystemView {
 				if(done){
 					document.formNewPerson.reset();
 				}
+				console.log("prueba1")
 				document.formNewPerson.nameNewPerson.focus();
 				myModalElem.remove();
 			});
-
-
-
 	}
 
 	showFormRemovePerson(actors, directors) {
@@ -871,7 +869,7 @@ class VideoSystemView {
 		let container = $(`
 
 		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4">
-			<form>
+		<form name="formRemovePerson" role="form" novalidate>
 			<div class="row">
 				<h1>Eliminar una persona</h1>
 			</div>
@@ -884,10 +882,11 @@ class VideoSystemView {
 					<div class="row g-4">
 						<div class="col-lg-6">
 							<div class="color-bg-input form-floating">
-								<input class="form-control  border  border-info border-3 border-top-0 border-start-0 border-end-0" list="datalistOptions" id="exampleDataList" placeholder="Nombre">
+								<input class="form-control  border  border-info border-3 border-top-0 border-start-0 border-end-0" list="datalistOptions" id="exampleDataList" placeholder="Nombre" name="delPerson" required>
 								<datalist id="datalistOptions" >
 								</datalist>
 								<label for="exampleDataList" class="text-primary">Nombre</label>
+								<div class="invalid-feedback ps-4">Este campo es obligatorio.</div>
 							</div>
 						</div>
 					<div class="col-lg-6">
@@ -923,7 +922,7 @@ class VideoSystemView {
 						</div>
 					</div>
 					<div class="col-lg-8  mx-auto">
-						<button class="btn btn-primary m-1 w-100 mx-auto bg-danger border-danger" type="submit" name="remove">Eliminar</button>
+						<button class="btn btn-primary m-1 w-100 mx-auto bg-danger border-danger" type="submit"  id="delButton">Eliminar</button>
 					</div>
 					</div>
 				</div>
@@ -981,6 +980,71 @@ class VideoSystemView {
 		}
 	}
 
+	bindFormRemovePerson(handler) {
+		$('#delButton').click((event) => {
+			removePersonValidation(handler);
+		});
+	}
+	showFormRemovePersonModal(done,name="",lastname=""){
+		let modal = (done) ? $(`
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+					<div class="modal-content  bg-success">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Persona eliminada</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Se ha eliminado la persona de nombre ${name} ${lastname}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`) :
+		`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+		<div class="modal-content  bg-danger">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">Error al eliminar </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>La persona que estas tratando de eliminar no se encuntra disponible </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>`;
+
+	//añadimos el modal al body
+	this.body.append(modal);
+	//creamos el modal
+	let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+	myModal.show()
+	//obtenemos el modal del documento
+	let myModalElem = document.getElementById('staticBackdrop');
+
+	//al modal le asignamos el evento para ocultar el modal
+	myModalElem.querySelector('button').addEventListener('click', () => {
+		myModal.hide();
+	});
+
+	//si se ha ocultado el modal lanzara el evento
+	//hidden.bs.modal entonces vamos a reseteamos el formulario, hacemos focus en la primera entrada, eliminamos el modal
+
+	myModalElem.addEventListener('hidden.bs.modal',()=>{
+		if(done){
+			this.updateDefaultRemovePeson()
+			document.formRemovePerson.reset();
+		}
+		document.formRemovePerson.delPerson.focus();
+		myModalElem.remove();
+	});
+
+	}
 
 	showFormManagerCategory(categories) {
 		this.main.empty();

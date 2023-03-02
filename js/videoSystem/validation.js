@@ -27,8 +27,6 @@ function newPersonValidation(handler) {
 		let isValid = true;
 		let firstInvalidElement = null;
 
-		//esto seria para campos no obligatorios ponerlos a true, siempre como correctos
-
 
 		//La imagen es opcional
 		if (!this.picturePerson.checkValidity()) {
@@ -79,11 +77,8 @@ function newPersonValidation(handler) {
 			handler(this.nameNewPerson.value,this.lastName1.value,this.lastName2.value,this.born.value,this.selectType.value,this.picturePerson.value)
 			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
 		}
-
-
 		event.preventDefault();
 		event.stopPropagation();
-
 
 	});
 
@@ -100,10 +95,89 @@ function newPersonValidation(handler) {
 	$(form.lastName1).change(defaultCheckElement);
 	$(form.lastName2).change(defaultCheckElement);
 
+}
 
-	// $(form.ncTitle).change(defaultCheckElement);
-	// $(form.ncUrl).change(defaultCheckElement);
+/*
+
+function removePersonValidation(handler) {
+	let form = document.forms.formRemovePerson;
+	$(form).attr('novalidate', true);
+
+	$(form).submit(function (event) {
+		let isValid = true;
+		let firstInvalidElement = null;
+
+		console.log("estpu en valización")
+		//Solo quiero mostrar si el usuario ha dejado el campo vacio
+		this.delPerson.value = this.delPerson.value.trim();
+		if (!this.delPerson.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.delPerson), false);
+			firstInvalidElement = this.delPerson;
+		} else {
+			//showFeedBack($(this.delPerson), true);
+		}
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+
+			handler(this.delPerson.value)
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+
+}
+*/
+function removePersonValidation(handler) {
+	let form = document.forms.formRemovePerson;
+	$(form).attr('novalidate', true);
+
+	$(form).off('submit'); // Desvincular el evento submit existente si existe
+	$(form).submit(function (event) {
+		let isValid = true;
+		let firstInvalidElement = null;
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+			handler(this.delPerson.value)
+			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
+	});
+
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+	//cada vez que hay un cambio mostramos si es correcto
+	$(form.picturePerson).change(defaultCheckElement);
+	$(form.nameNewPerson).change(defaultCheckElement);
+	$(form.lastName1).change(defaultCheckElement);
+	$(form.lastName2).change(defaultCheckElement);
+
 }
 
 
-export { showFeedBack, defaultCheckElement, newPersonValidation };
+
+
+
+export { newPersonValidation ,removePersonValidation};
