@@ -4,7 +4,7 @@
 @import "../node_modules/bootstrap/scss/variables";
 */
 * {
-  color: white;
+  color: #fbfbfe;
 }
 
 /*!
@@ -11141,6 +11141,10 @@ textarea.form-control-lg {
 }
 
 select, option {
-  background-color: #1a3d7d;
-  color: #fbfbfe;
+  color: black;
+}
+
+.person, .person-max {
+  width: 270px;
+  height: 360px;
 }/*# sourceMappingURL=style.css.map */

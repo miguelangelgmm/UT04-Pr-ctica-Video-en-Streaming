@@ -35,7 +35,7 @@ class VideoSystemController {
 
 		/**Producciones por general */
 		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getMovie("Uncharted", "ESP", new Date(2022, 1, 1), "Basada en una de las series de videojuegos más vendidas y aclamadas por la crítica de todos los tiempos, \"Uncharted\" presenta a un joven, astuto y carismático, Nathan Drake (Tom Holland) en su primera aventura como cazatesoros con su ingenioso compañero Victor “Sully” Sullivan (Mark Wahlberg). En una aventura de acción que se extiende por todo el mundo, ambos se embarcan en una peligrosa búsqueda de “el mayor tesoro nunca antes encontrado” al tiempo que rastrean las claves que les podrían conducir al hermano de Nathan, perdido hace ya mucho tiempo", "img/Productions/uncharted.jpg", new Resource(143, "https://www.youtube.com/embed/Sn5sRX6jaxk"), [new Coordinate(40, 40)]));
-		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getSerie("Marvel Studios: leyendas", "ESP", new Date(2017, 12, 3), "La serie muestra personajes individuales en cada episodio, destacando algunos de sus momentos icónicos en el Universo Cinematográfico de Marvel (MCU).", "img/Productions/leyendas.jpg", [new Resource(114, "https://www.youtube.com/embed/aKL3gZYO5tg"),new Resource(100, "https://www.youtube.com/embed/jfZk3i46QG4")], [new Coordinate(40, 40)]));
+		this.#videoSystem.assignCategory(this.#videoSystem.getCategory("General"), this.#videoSystem.getSerie("Marvel Studios: leyendas", "ESP", new Date(2017, 12, 3), "La serie muestra personajes individuales en cada episodio, destacando algunos de sus momentos icónicos en el Universo Cinematográfico de Marvel (MCU).", "img/Productions/leyendas.jpg", [new Resource(114, "https://www.youtube.com/embed/aKL3gZYO5tg"), new Resource(100, "https://www.youtube.com/embed/jfZk3i46QG4")], [new Coordinate(40, 40)]));
 
 		/**Directores */
 		/**Asignamos Directores Fantasia*/
@@ -65,131 +65,131 @@ class VideoSystemController {
 		/**Actores */
 
 		/**Actores de El hombre de acero */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Henry", "Cavill", "", new Date(1983, 6, 5), "img/Actors/HenryCavill.webp"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Diane", "Lane", "", new Date(1965, 22, 0), "img/Actors/DianeLane.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Kevin", "Costner", "", new Date(1955, 18, 0), "img/Actors/KevinCostner.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Russell", "Crowe", "", new Date(1964, 7, 3), "img/Actors/RussellCrowe.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Shannon", "", new Date(1974, 7, 6), "img/Actors/MichaelShannon.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Laurence", "Fishburne", "", new Date(1961, 30, 6), "img/Actors/LaurenceFishburne.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antje", "Traue", "", new Date(1981, 18, 0), "img/Actors/AntjeTraue.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Christopher", "Meloni", "", new Date(1988, 15, 0), "img/Actors/ChristopherMeloni.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Richard", "Schiff", "", new Date(1955, 27, 5), "img/Actors/RichardSchiff.jpg"),this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Henry", "Cavill", "", new Date(1983, 6, 5), "img/Actors/HenryCavill.webp"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Diane", "Lane", "", new Date(1965, 22, 0), "img/Actors/DianeLane.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Kevin", "Costner", "", new Date(1955, 18, 0), "img/Actors/KevinCostner.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Russell", "Crowe", "", new Date(1964, 7, 3), "img/Actors/RussellCrowe.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Shannon", "", new Date(1974, 7, 6), "img/Actors/MichaelShannon.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Laurence", "Fishburne", "", new Date(1961, 30, 6), "img/Actors/LaurenceFishburne.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antje", "Traue", "", new Date(1981, 18, 0), "img/Actors/AntjeTraue.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Christopher", "Meloni", "", new Date(1988, 15, 0), "img/Actors/ChristopherMeloni.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Richard", "Schiff", "", new Date(1955, 27, 5), "img/Actors/RichardSchiff.jpg"), this.#videoSystem.getMovie("El hombre de acero"))
 
 
 		/**El gato con botas el último deseo */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antonio", "Banderas", "", new Date(1960, 10, 8), "img/Actors/AntonioBanderas.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Florence", "Pugh", "", new Date(1996, 3, 0), "img/Actors/FlorencePugh.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Harvey", "Guillén", "", new Date(1999, 3, 5), "img/Actors/HarveyGuillén.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Olivia", "Colman", "", new Date(1974, 30, 0), "img/Actors/OliviaColman.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("John", "Mulaney", "", new Date(1982, 30, 0), "img/Actors/JohnMulaney.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Samson", "Kayo", "", new Date(1992, 1, 0), "img/Actors/SamsonKayo.jpg"),this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antonio", "Banderas", "", new Date(1960, 10, 8), "img/Actors/AntonioBanderas.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Florence", "Pugh", "", new Date(1996, 3, 0), "img/Actors/FlorencePugh.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Harvey", "Guillén", "", new Date(1999, 3, 5), "img/Actors/HarveyGuillén.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Olivia", "Colman", "", new Date(1974, 30, 0), "img/Actors/OliviaColman.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("John", "Mulaney", "", new Date(1982, 30, 0), "img/Actors/JohnMulaney.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Samson", "Kayo", "", new Date(1992, 1, 0), "img/Actors/SamsonKayo.jpg"), this.#videoSystem.getMovie("El gato con botas: El último deseo"))
 
 		/**Los vengadores end game */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Robert", "Downey", "Jr", new Date(1965, 4, 3), "img/Actors/RobertDowneyJr.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Evans", "", new Date(1981, 13, 4), "img/Actors/ChrisEvans.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Scarlett", "Johansson", "", new Date(1984, 22, 10), "img/Actors/ScarlettJohansson.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Hemsworth", "", new Date(1983, 11, 10), "img/Actors/ChrisHemsworth.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Ruffalo", "", new Date(1967, 22, 10), "img/Actors/MarkRuffalo.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jeremy", "Renner", "", new Date(1971, 1, 7), "img/Actors/JeremyRenner.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brie", "Larson", "", new Date(1989, 1, 9), "img/Actors/BrieLarson.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Paul", "Rudd", "", new Date(1969, 6, 4), "img/Actors/PaulRudd.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Donald", "Cheadle", "", new Date(1964, 29, 10), "img/Actors/DonaldCheadles.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Elizabeth", "Olsen", "", new Date(1989, 16, 1), "img/Actors/ElizabethOlsen.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chadwick", "Boseman", "", new Date(2020, 20, 9), "img/Actors/ChadwickBoseman.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Tom", "Holland", "", new Date(1996, 1, 5), "img/Actors/TomHolland.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"),this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Robert", "Downey", "Jr", new Date(1965, 4, 3), "img/Actors/RobertDowneyJr.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Evans", "", new Date(1981, 13, 4), "img/Actors/ChrisEvans.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Scarlett", "Johansson", "", new Date(1984, 22, 10), "img/Actors/ScarlettJohansson.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Hemsworth", "", new Date(1983, 11, 10), "img/Actors/ChrisHemsworth.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Ruffalo", "", new Date(1967, 22, 10), "img/Actors/MarkRuffalo.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jeremy", "Renner", "", new Date(1971, 1, 7), "img/Actors/JeremyRenner.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brie", "Larson", "", new Date(1989, 1, 9), "img/Actors/BrieLarson.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Paul", "Rudd", "", new Date(1969, 6, 4), "img/Actors/PaulRudd.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Donald", "Cheadle", "", new Date(1964, 29, 10), "img/Actors/DonaldCheadles.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Elizabeth", "Olsen", "", new Date(1989, 16, 1), "img/Actors/ElizabethOlsen.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chadwick", "Boseman", "", new Date(2020, 20, 9), "img/Actors/ChadwickBoseman.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Tom", "Holland", "", new Date(1996, 1, 5), "img/Actors/TomHolland.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"), this.#videoSystem.getMovie("Los vengadores: End Game"))
 
 		/**Serie leyenda */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Robert", "Downey", "Jr", new Date(1965, 4, 3), "img/Actors/RobertDowneyJr.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Evans", "", new Date(1981, 13, 4), "img/Actors/ChrisEvans.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Scarlett", "Johansson", "", new Date(1984, 22, 10), "img/Actors/ScarlettJohansson.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Hemsworth", "", new Date(1983, 11, 10), "img/Actors/ChrisHemsworth.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Ruffalo", "", new Date(1967, 22, 10), "img/Actors/MarkRuffalo.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jeremy", "Renner", "", new Date(1971, 1, 7), "img/Actors/JeremyRenner.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brie", "Larson", "", new Date(1989, 1, 9), "img/Actors/BrieLarson.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Paul", "Rudd", "", new Date(1969, 6, 4), "img/Actors/PaulRudd.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Donald", "Cheadle", "", new Date(1964, 29, 10), "img/Actors/DonaldCheadles.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Elizabeth", "Olsen", "", new Date(1989, 16, 1), "img/Actors/ElizabethOlsen.jpg"),this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Robert", "Downey", "Jr", new Date(1965, 4, 3), "img/Actors/RobertDowneyJr.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Evans", "", new Date(1981, 13, 4), "img/Actors/ChrisEvans.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Scarlett", "Johansson", "", new Date(1984, 22, 10), "img/Actors/ScarlettJohansson.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Hemsworth", "", new Date(1983, 11, 10), "img/Actors/ChrisHemsworth.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Ruffalo", "", new Date(1967, 22, 10), "img/Actors/MarkRuffalo.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jeremy", "Renner", "", new Date(1971, 1, 7), "img/Actors/JeremyRenner.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brie", "Larson", "", new Date(1989, 1, 9), "img/Actors/BrieLarson.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Paul", "Rudd", "", new Date(1969, 6, 4), "img/Actors/PaulRudd.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Donald", "Cheadle", "", new Date(1964, 29, 10), "img/Actors/DonaldCheadles.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Elizabeth", "Olsen", "", new Date(1989, 16, 1), "img/Actors/ElizabethOlsen.jpg"), this.#videoSystem.getMovie("Marvel Studios: leyendas"))
 		/**The Super Mario Bros */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Charles", "Martinet", "", new Date(1955,17, 10), "img/Actors/CharlesMartinet.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Anya", "Taylor", "Joy", new Date(1996,16, 5), "img/Actors/AnyaTailorJoy.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Charlie", "Day", "", new Date(1976,9, 1), "img/Actors/CharlieDay.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jack", "Black", "", new Date(1969,2, 28), "img/Actors/JackBlack.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keegan", "Michael", "Key", new Date(1971,22, 2), "img/Actors/Keegan-MichaelKey.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Seth", "Rogen", "", new Date(1982,15, 5), "img/Actors/SethRogen.jpg"),this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Chris", "Pratt", "", new Date(1979, 21, 6), "img/Actors/ChrisPratt.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Charles", "Martinet", "", new Date(1955, 17, 10), "img/Actors/CharlesMartinet.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Anya", "Taylor", "Joy", new Date(1996, 16, 5), "img/Actors/AnyaTailorJoy.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Charlie", "Day", "", new Date(1976, 9, 1), "img/Actors/CharlieDay.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jack", "Black", "", new Date(1969, 2, 28), "img/Actors/JackBlack.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keegan", "Michael", "Key", new Date(1971, 22, 2), "img/Actors/Keegan-MichaelKey.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Seth", "Rogen", "", new Date(1982, 15, 5), "img/Actors/SethRogen.jpg"), this.#videoSystem.getMovie("The Super Mario Bros"))
 
 		/**Uncharted*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Tom", "Holland"),this.#videoSystem.getMovie("Uncharted"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antonio", "Banderas"),this.#videoSystem.getMovie("Uncharted"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sophia", "Ali","", new Date(1995,11, 7), "img/Actors/SophiaAli.jpg"),this.#videoSystem.getMovie("Uncharted"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Wahlberg","", new Date(1971,5, 5), "img/Actors/MarkWahlberg.jpg"),this.#videoSystem.getMovie("Uncharted"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Alana", "Boden","", new Date(1997,1, 1), "img/Actors/AlanaBoden.jpg"),this.#videoSystem.getMovie("Uncharted"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Manuel", "de Blas","", new Date(1941,12, 5), "img/Actors/ManueldeBlas.jpg"),this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Tom", "Holland"), this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Antonio", "Banderas"), this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sophia", "Ali", "", new Date(1995, 11, 7), "img/Actors/SophiaAli.jpg"), this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Mark", "Wahlberg", "", new Date(1971, 5, 5), "img/Actors/MarkWahlberg.jpg"), this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Alana", "Boden", "", new Date(1997, 1, 1), "img/Actors/AlanaBoden.jpg"), this.#videoSystem.getMovie("Uncharted"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Manuel", "de Blas", "", new Date(1941, 12, 5), "img/Actors/ManueldeBlas.jpg"), this.#videoSystem.getMovie("Uncharted"))
 
 		/**Bullet Train*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brad", "Pitt","", new Date(1963,18, 11), "img/Actors/BradPitt.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Aaron", "Taylor","Johnson", new Date(1990,13, 6), "img/Actors/AaronTaylor-Johnson.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Joey", "King","", new Date(1999,30, 6), "img/Actors/JoeyKing.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("David", "Leitch","", new Date(1975,16, 10), "img/Actors/DavidLeitch.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sandra", "Bullock","", new Date(1964,26, 5), "img/Actors/SandraBullock.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Shannon","", new Date(1974,7, 11), "img/Actors/MichaelShannon.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Logan", "Lerman","", new Date(1992,19, 0), "img/Actors/LoganLerman.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ryan", "Reynolds","", new Date(1976,23, 9), "img/Actors/RyanReynolds.jpg"),this.#videoSystem.getMovie("Bullet Train"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Masi", "Oka","", new Date(1974,27, 11), "img/Actors/MasiOka.jpg"),this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Brad", "Pitt", "", new Date(1963, 18, 11), "img/Actors/BradPitt.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Aaron", "Taylor", "Johnson", new Date(1990, 13, 6), "img/Actors/AaronTaylor-Johnson.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Joey", "King", "", new Date(1999, 30, 6), "img/Actors/JoeyKing.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("David", "Leitch", "", new Date(1975, 16, 10), "img/Actors/DavidLeitch.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sandra", "Bullock", "", new Date(1964, 26, 5), "img/Actors/SandraBullock.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Shannon", "", new Date(1974, 7, 11), "img/Actors/MichaelShannon.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Logan", "Lerman", "", new Date(1992, 19, 0), "img/Actors/LoganLerman.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ryan", "Reynolds", "", new Date(1976, 23, 9), "img/Actors/RyanReynolds.jpg"), this.#videoSystem.getMovie("Bullet Train"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Masi", "Oka", "", new Date(1974, 27, 11), "img/Actors/MasiOka.jpg"), this.#videoSystem.getMovie("Bullet Train"))
 
 		/** John Wick (Otro día para matar) */
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keanu", "Reeves","", new Date(1964,2, 10), "img/Actors/KeanuReeves.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ian", "McShane","", new Date(1964,2, 10), "img/Actors/IanMcShane.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Laurence", "Fishburne", "", new Date(1961, 30, 6), "img/Actors/LaurenceFishburne.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lance", "Reddick", "", new Date(1966, 31, 11), "img/Actors/LanceReddick.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bridget", "Moynahan", "", new Date(1971, 28, 4), "img/Actors/BridgetMoynahan.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Willem", "Dafoe", "", new Date(1955, 22, 6), "img/Actors/WillemDafoe.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Alfie", "Allen", "", new Date(1986, 12, 10), "img/Actors/AlfieAllen.jpg"),this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keanu", "Reeves", "", new Date(1964, 2, 10), "img/Actors/KeanuReeves.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ian", "McShane", "", new Date(1964, 2, 10), "img/Actors/IanMcShane.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Laurence", "Fishburne", "", new Date(1961, 30, 6), "img/Actors/LaurenceFishburne.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lance", "Reddick", "", new Date(1966, 31, 11), "img/Actors/LanceReddick.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bridget", "Moynahan", "", new Date(1971, 28, 4), "img/Actors/BridgetMoynahan.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Willem", "Dafoe", "", new Date(1955, 22, 6), "img/Actors/WillemDafoe.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Alfie", "Allen", "", new Date(1986, 12, 10), "img/Actors/AlfieAllen.jpg"), this.#videoSystem.getMovie("John Wick (Otro día para matar)"))
 
 		/**Matrix Resurrections*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keanu", "Reeves"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jessica", "Henwick", "", new Date(1992, 30, 10), "img/Actors/JessicaHenwick.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Priyanka", "Chopra", "", new Date(1982, 18, 6), "img/Actors/PriyankaChopra.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Groff", "", new Date(1985, 26, 2), "img/Actors/JonathanGroff.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Eréndira", "Ibarra", "", new Date(1985, 25, 10), "img/Actors/EréndiraIbarra.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lambert", "Wilson", "", new Date(1958, 3, 9), "img/Actors/LambertWilson.jpg"),this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Keanu", "Reeves"), this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jessica", "Henwick", "", new Date(1992, 30, 10), "img/Actors/JessicaHenwick.jpg"), this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Priyanka", "Chopra", "", new Date(1982, 18, 6), "img/Actors/PriyankaChopra.jpg"), this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Groff", "", new Date(1985, 26, 2), "img/Actors/JonathanGroff.jpg"), this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Eréndira", "Ibarra", "", new Date(1985, 25, 10), "img/Actors/EréndiraIbarra.jpg"), this.#videoSystem.getMovie("Matrix Resurrections"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lambert", "Wilson", "", new Date(1958, 3, 9), "img/Actors/LambertWilson.jpg"), this.#videoSystem.getMovie("Matrix Resurrections"))
 
 		/**El día del Sí*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jenna", "Ortega", "", new Date(2002, 27, 10), "img/Actors/JennaOrtega.jpg"),this.#videoSystem.getMovie("El día del Sí"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jennifer", "Garner", "", new Date(1972, 17, 4), "img/Actors/JenniferGarner.jpg"),this.#videoSystem.getMovie("El día del Sí"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Édgar", "Ramírez", "", new Date(1977, 25, 2), "img/Actors/ÉdgarRamírez.jpg"),this.#videoSystem.getMovie("El día del Sí"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Julian", "Lerner", "", new Date(2006, 5, 10), "img/Actors/JulianLerner.jpg"),this.#videoSystem.getMovie("El día del Sí"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jenna", "Ortega", "", new Date(2002, 27, 10), "img/Actors/JennaOrtega.jpg"), this.#videoSystem.getMovie("El día del Sí"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jennifer", "Garner", "", new Date(1972, 17, 4), "img/Actors/JenniferGarner.jpg"), this.#videoSystem.getMovie("El día del Sí"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Édgar", "Ramírez", "", new Date(1977, 25, 2), "img/Actors/ÉdgarRamírez.jpg"), this.#videoSystem.getMovie("El día del Sí"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Julian", "Lerner", "", new Date(2006, 5, 10), "img/Actors/JulianLerner.jpg"), this.#videoSystem.getMovie("El día del Sí"))
 
 		/**Noche de juegos*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jason", "Bateman", "", new Date(1969, 14, 0), "img/Actors/JasonBateman.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Rachel", "McAdams", "", new Date(1978, 17, 9), "img/Actors/RachelMcAdams.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("John", "Francis", "Daley", new Date(1985, 20, 5), "img/Actors/JohnFrancisDaley.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Goldstein", "", new Date(1969, 20, 5), "img/Actors/JonathanGoldstein.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jesse", "Plemons", "", new Date(1988, 2, 7), "img/Actors/JessePlemons.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sharon", "Horgan", "", new Date(1979, 13, 7), "img/Actors/SharonHorgan.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Kyle", "Chandler", "", new Date(1965, 17, 10), "img/Actors/KyleChandler.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lamorne", "Morris", "", new Date(1980, 14, 10), "img/Actors/LamorneMorris.jpg"),this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jason", "Bateman", "", new Date(1969, 14, 0), "img/Actors/JasonBateman.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Rachel", "McAdams", "", new Date(1978, 17, 9), "img/Actors/RachelMcAdams.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("John", "Francis", "Daley", new Date(1985, 20, 5), "img/Actors/JohnFrancisDaley.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonathan", "Goldstein", "", new Date(1969, 20, 5), "img/Actors/JonathanGoldstein.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jesse", "Plemons", "", new Date(1988, 2, 7), "img/Actors/JessePlemons.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Sharon", "Horgan", "", new Date(1979, 13, 7), "img/Actors/SharonHorgan.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Kyle", "Chandler", "", new Date(1965, 17, 10), "img/Actors/KyleChandler.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Lamorne", "Morris", "", new Date(1980, 14, 10), "img/Actors/LamorneMorris.jpg"), this.#videoSystem.getMovie("Noche de juegos"))
 
 		/**Resacón en Las Vegas*/
 
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bradley", "Cooper", "", new Date(1975, 5, 0), "img/Actors/BradleyCooper.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Zach", "Galifianakis", "", new Date(1969, 1, 9), "img/Actors/ZachGalifianakis.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ed", "Helms", "", new Date(1974, 24, 0), "img/Actors/EdHelms.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Todd", "Phillips", "", new Date(1970, 20, 11), "img/Actors/ToddPhillips.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Justin", "Bartha", "", new Date(1978, 21, 6), "img/Actors/JustinBartha.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ken", "Jeong", "", new Date(1969, 13, 6), "img/Actors/KenJeong.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Heather", "Graham", "", new Date(1970, 29, 0), "img/Actors/HeatherGraham.jpg"),this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bradley", "Cooper", "", new Date(1975, 5, 0), "img/Actors/BradleyCooper.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Zach", "Galifianakis", "", new Date(1969, 1, 9), "img/Actors/ZachGalifianakis.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ed", "Helms", "", new Date(1974, 24, 0), "img/Actors/EdHelms.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Todd", "Phillips", "", new Date(1970, 20, 11), "img/Actors/ToddPhillips.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Justin", "Bartha", "", new Date(1978, 21, 6), "img/Actors/JustinBartha.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Ken", "Jeong", "", new Date(1969, 13, 6), "img/Actors/KenJeong.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Heather", "Graham", "", new Date(1970, 29, 0), "img/Actors/HeatherGraham.jpg"), this.#videoSystem.getMovie("Resacón en Las Vegas"))
 
 		/**Supersalidos*/
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonah", "Hill", "", new Date(1983, 20, 11), "img/Actors/JonahHill.jpg"),this.#videoSystem.getMovie("Supersalidos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Seth", "Rogen", "", new Date(1982, 15, 5), "img/Actors/SethRogen.jpg"),this.#videoSystem.getMovie("Supersalidos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Cera", "", new Date(1988, 7, 5), "img/Actors/MichaelCera.jpg"),this.#videoSystem.getMovie("Supersalidos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Christopher", "Mintz", "Plasse", new Date(1989, 20, 4), "img/Actors/ChristopherMintz-Plasse.jpg"),this.#videoSystem.getMovie("Supersalidos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Emma", "Stone", "", new Date(1988, 6, 10), "img/Actors/EmmaStone.jpg"),this.#videoSystem.getMovie("Supersalidos"))
-		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bill", "Hader", "", new Date(1978, 7, 5), "img/Actors/BillHader.jpg"),this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Jonah", "Hill", "", new Date(1983, 20, 11), "img/Actors/JonahHill.jpg"), this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Seth", "Rogen", "", new Date(1982, 15, 5), "img/Actors/SethRogen.jpg"), this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Michael", "Cera", "", new Date(1988, 7, 5), "img/Actors/MichaelCera.jpg"), this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Christopher", "Mintz", "Plasse", new Date(1989, 20, 4), "img/Actors/ChristopherMintz-Plasse.jpg"), this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Emma", "Stone", "", new Date(1988, 6, 10), "img/Actors/EmmaStone.jpg"), this.#videoSystem.getMovie("Supersalidos"))
+		this.#videoSystem.assignActor(this.#videoSystem.getActor("Bill", "Hader", "", new Date(1978, 7, 5), "img/Actors/BillHader.jpg"), this.#videoSystem.getMovie("Supersalidos"))
 	}
-	constructor(model,view){
+	constructor(model, view) {
 		this.#videoSystem = model;
 		this.#videoSystemView = view;
 
@@ -236,7 +236,7 @@ class VideoSystemController {
 		);
 	}
 	//Cuando vuelvo a home
-	onInit = () =>{
+	onInit = () => {
 		//cargamos la categoria en el main y vinculamos su evento
 		this.onAddCategoryMain();
 		//añadimos las produciones aleatorias
@@ -254,46 +254,46 @@ class VideoSystemController {
 		this.#videoSystemView.bindProductionsNavCategoryList(this.handleProductsCategoryList)
 	}
 	//muestra 3 producciones aleatorias
-	onAddRandomProductionLoad = () =>{
+	onAddRandomProductionLoad = () => {
 		//puedo generar otras 3 peliculas aleatorias o mantenerlas
 		this.#videoSystemView.showProductionInLoad(this.#randomProductions);
 	}
 	//va a mostrar la lista de categorias en el main y vincular el evento para listar las películas de cada categoria
-	onAddCategoryMain = () =>{
+	onAddCategoryMain = () => {
 		this.#videoSystemView.showCategoriesInMain(this.#videoSystem.categories);
 		this.#videoSystemView.bindProductionsCategoryList(this.handleProductsCategoryList);
 	}
 
 
-		/*
-		función que se ejecuta cuando el usuario hace click en una categoría en la lista de categorías.
-		La función toma como parámetro el título de la categoría.
-		Obtenemos la categoría que tiene ese título
-		Listamos las películas
-		Asignamos el evento correspondiente para ver los datos de cada película
-	*/
+	/*
+	función que se ejecuta cuando el usuario hace click en una categoría en la lista de categorías.
+	La función toma como parámetro el título de la categoría.
+	Obtenemos la categoría que tiene ese título
+	Listamos las películas
+	Asignamos el evento correspondiente para ver los datos de cada película
+*/
 	handleProductsCategoryList = (title) => {
 		let category = this.#videoSystem.getCategory(title);
-		this.#videoSystemView.listProductions(this.#videoSystem.getProductionCategory(category),title);
+		this.#videoSystemView.listProductions(this.#videoSystem.getProductionCategory(category), title);
 		this.#videoSystemView.bindProductions(this.handleCategoryListProduction)
 	}
-		/*
-		función que se ejecuta cuando el usuario hace click en en una producción.
-		tomamos como parámetro el nombre de la película.
-		Obtenemos la producción que tiene ese título
-		Obtenemos las categorias que tienen esa película
-		Obtenemos el casting de actores
-		Obtenemos los directores de la película
-		Mostamos la película con sus actores y sus directores
-		Asignamos el evento correspondiente para ver los datos de las categorias y las personas
-	*/
+	/*
+	función que se ejecuta cuando el usuario hace click en en una producción.
+	tomamos como parámetro el nombre de la película.
+	Obtenemos la producción que tiene ese título
+	Obtenemos las categorias que tienen esa película
+	Obtenemos el casting de actores
+	Obtenemos los directores de la película
+	Mostamos la película con sus actores y sus directores
+	Asignamos el evento correspondiente para ver los datos de las categorias y las personas
+*/
 	handleCategoryListProduction = (title) => {
 
 		let production = this.#videoSystem.getMovie(title);
 		let categories = this.#videoSystem.getCategoryProduction(production)
 		let actors = this.#videoSystem.getCast(production);
 		let directors = this.#videoSystem.getCastDirector(production)
-		this.#videoSystemView.showProduction(production,categories,directors,actors);
+		this.#videoSystemView.showProduction(production, categories, directors, actors);
 		this.#videoSystemView.bindProductionsCategoryList(this.handleProductsCategoryList);
 		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
 		this.#videoSystemView.bindShowProductionInNewWindow(this.handleShowProductionNewWindow)
@@ -309,13 +309,13 @@ class VideoSystemController {
 	}
 
 	/*función que va a listar todos los actores y les va a asignar un evento para mostrar sus datos */
-	onActorList = ()=>{
+	onActorList = () => {
 		let iterator = this.#videoSystem.actors[Symbol.iterator]();
 		this.#videoSystemView.showListPersons(iterator)
 		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
 	}
 	/*función que va a listar todos los directores y les va a asignar un evento para mostrar sus datos */
-	onDirectorList = ()=>{
+	onDirectorList = () => {
 		let iterator = this.#videoSystem.director[Symbol.iterator]();
 		this.#videoSystemView.showListPersons(iterator)
 		this.#videoSystemView.bindShowPerson(this.handleShowPerson)
@@ -330,35 +330,35 @@ class VideoSystemController {
 		let acted;
 		let directed;
 		//comprobamos si esta persona es un actor
-		if(this.#videoSystem.checkActor(fullName[0],fullName[1])){
+		if (this.#videoSystem.checkActor(fullName[0], fullName[1])) {
 			//si es un actor le asignamos la la variable person con getActor y obtenemos sus produciones donde ha actuado
-			person = this.#videoSystem.getActor(fullName[0],fullName[1]);
+			person = this.#videoSystem.getActor(fullName[0], fullName[1]);
 			acted = this.#videoSystem.getProductionActor(person)
 		}
 		//comprobamos si es un director
-		if(this.#videoSystem.checkDirector(fullName[0],fullName[1])){
+		if (this.#videoSystem.checkDirector(fullName[0], fullName[1])) {
 			//si es un director le asignamos la la variable person con getActor y obtenemos sus produciones donde ha actuado
-			person = this.#videoSystem.getDirector(fullName[0],fullName[1]);
+			person = this.#videoSystem.getDirector(fullName[0], fullName[1]);
 			directed = this.#videoSystem.getProductionDirector(person)
 
 		}
 		//mostramos las producciones
-		this.#videoSystemView.showPerson(person,directed,acted)
+		this.#videoSystemView.showPerson(person, directed, acted)
 		//enlazamos los eventos de las producciones
 		this.#videoSystemView.bindProductions(this.handleCategoryListProduction);
 	}
 
-	handleShowProductionNewWindow = (title) =>{
+	handleShowProductionNewWindow = (title) => {
 		let production = this.#videoSystem.getMovie(title);
 		let categories = this.#videoSystem.getCategoryProduction(production)
 		let actors = this.#videoSystem.getCast(production);
 		let directors = this.#videoSystem.getCastDirector(production)
-		this.#videoSystemView.showProductionInNewWindow(production,categories,actors,directors);
+		this.#videoSystemView.showProductionInNewWindow(production, categories, actors, directors);
 	}
 
 
-/*método que cierra todas las ventanas que han sido abiertas y limpian el mapa de ventanas */
-	handleCloseAllNewWindows = () =>{
+	/*método que cierra todas las ventanas que han sido abiertas y limpian el mapa de ventanas */
+	handleCloseAllNewWindows = () => {
 
 		for (const window of this.#videoSystemView.newWindows.values()) {
 			//cerramos las ventanas
@@ -372,55 +372,89 @@ class VideoSystemController {
 		this.#videoSystemView.newWindows.clear()
 	}
 
-//----Formulario
+	//----Formulario
 
-handlerNewProduction  = () =>{
-	console.log("handlerNewProduction")
-}
-handlerRemoveProduction = () =>{
-	console.log("handlerRemoveProduction")
-}
-handlerAssignPerson = () =>{
-	console.log("handlerAssignPerson")
-}
-handlerManageCategory = () =>{
-	console.log("handlerManageCategory")
-}
-handlerNewPerson = () =>{
-	this.#videoSystemView.showFormNewPerson();
-}
-handleRemovePerson = () =>{
+	handlerNewProduction = () => {
+		console.log("handlerNewProduction")
+	}
+	handlerRemoveProduction = () => {
+		let productions = this.#videoSystem.productions;
+		this.#videoSystemView.showFormRemoveProduction(productions)
+		this.#videoSystemView.bindUpdateShowRemoveProduction(this.handleUpdateRemoveProduction)
 
-	let actors = this.#videoSystem.actors;
-	let directors = this.#videoSystem.director
-	this.#videoSystemView.showFormRemovePerson(actors,directors);
-	this.#videoSystemView.bindUpdateShowRemovePerson(this.handleUpdateRemovePerson)
 
-}
+	}
+	handlerAssignPerson = () => {
+		console.log("handlerAssignPerson")
+	}
+	handlerManageCategory = () => {
+		let categories = this.#videoSystem.categories;
+		this.#videoSystemView.showFormManagerCategory(categories);
+	}
+	handlerNewPerson = () => {
+		this.#videoSystemView.showFormNewPerson();
+		this.#videoSystemView.bindFormNewPerson(this.handleCreateNewPerson);
+	}
+	handleCreateNewPerson = (name, lastname1, lastname2, date, type, img) => {
 
-handleUpdateRemovePerson = (name) =>{
-	if(name.includes("(actor)")){
-		name =name.replaceAll("(actor)","")
-		let names = name.split(",");
-		let firstName = names[0];
-		let lastName = names.slice(1).join(" ");
-		if(this.#videoSystem.checkActor(firstName,lastName)){
-			this.#videoSystemView.updateRemovePeson(this.#videoSystem.getActor(firstName,lastName));
+		if(type=="Actor"){
+
+			this.#videoSystem.addActor(this.#videoSystem.getActor(name,lastname1,lastname2,new Date(Date.parse(date)),img))
+
+		}
+		else{
+			this.#videoSystem.addDirector(this.#videoSystem.getDirector(name,lastname1,lastname2,new Date(Date.parse(date)),img))
+
+		}
+
+	}
+
+	handleRemovePerson = () => {
+
+		let actors = this.#videoSystem.actors;
+		let directors = this.#videoSystem.director
+		this.#videoSystemView.showFormRemovePerson(actors, directors);
+		this.#videoSystemView.bindUpdateShowRemovePerson(this.handleUpdateRemovePerson)
+
+	}
+
+	handleUpdateRemovePerson = (name) => {
+		name = name.trim();
+		if (name.includes("(actor)")) {
+			name = name.replaceAll("(actor)", "")
+			let names = name.split(",");
+			let firstName = names[0];
+			let lastName = names.slice(1).join(" ");
+			if (this.#videoSystem.checkActor(firstName, lastName)) {
+				this.#videoSystemView.updateRemovePeson(this.#videoSystem.getActor(firstName, lastName));
+			}
+		}
+		else if (name.includes("(director)")) {
+			name = name.replaceAll("(director)", "")
+			let names = name.split(",");
+			let firstName = names[0];
+			let lastName = names.slice(1).join(" ");
+			if (this.#videoSystem.checkDirector(firstName, lastName)) {
+				this.#videoSystemView.updateRemovePeson(this.#videoSystem.getDirector(firstName, lastName));
+			}
+		}
+		else {
+			this.#videoSystemView.updateDefaultRemovePeson()
 		}
 	}
-	else if(name.includes("(director)")){
-		name =name.replaceAll("(director)","")
-		let names = name.split(",");
-		let firstName = names[0];
-		let lastName = names.slice(1).join(" ");
-		if(this.#videoSystem.checkDirector(firstName,lastName)){
-			this.#videoSystemView.updateRemovePeson(this.#videoSystem.getDirector(firstName,lastName));
+
+	handleUpdateRemoveProduction = (title) => {
+		title = title.trim();
+		try {
+			//si existe esa pelicula la mostramos
+			let production = this.#videoSystem.getMovie(title)
+			this.#videoSystemView.updateRemoveProduction(production)
+		} catch (e) {
+			//si no existe mostramos las caracteriscias por defecto
+			this.#videoSystemView.updateDefaultRemoveProduction()
 		}
+
 	}
-	else{
-		this.#videoSystemView.updateDefaultRemovePeson()
-	}
-}
 
 }
 

@@ -14,7 +14,7 @@ export class Person {
 	#lastname2;
 	#born;
 	#picture;
-	constructor(name, lastname1, lastname2 = "", born, picture = "") {
+	constructor(name, lastname1, lastname2 = "", born, picture = "img/defaultPerson.png") {
 		if (!new.target) throw new InvalidAccessConstructorException(); // Verificación operador new
 		//Verificamos que todos los valores sean validos
 		if (name === "undefined" || name === "")
@@ -36,7 +36,7 @@ export class Person {
 		this.#lastname1 = lastname1;
 		this.#lastname2 = lastname2;
 		this.#born = born;
-		this.#picture = picture;
+		this.#picture = picture || "img/defaultPerson.png";
 	}
 
 	toString() {

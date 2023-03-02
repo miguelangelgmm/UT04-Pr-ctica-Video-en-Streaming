@@ -16,7 +16,7 @@ $dark : #132a55b6;
 $blueShadow:#4444dd;
 $myblack :#1f1f1f;
 *{
-	color:white;
+	color:#fbfbfe;
 }
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../style/carouselAside.scss";
@@ -289,6 +289,12 @@ $myblack :#1f1f1f;
 }
 
 select, option  {
-	background-color: $secondary;
-	color: #fbfbfe;
+	//background-color: $secondary;
+	color: black;
 }
+
+.person,.person-max{
+	width: 270px;
+	height: 360px;
+}
+

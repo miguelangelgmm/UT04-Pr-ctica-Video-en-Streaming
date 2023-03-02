@@ -1,109 +1,109 @@
+function defaultCheckElement(event) {
+	this.value = this.value.trim();
+	if (!this.checkValidity()) {
+		showFeedBack($(this), false);
+	} else {
+		showFeedBack($(this), true);
+	}
+}
 
-function removePersonValidation(handler){
-	let form = document.forms.fNewProduct;
+function showFeedBack(input, valid, message) {
+	let validClass = (valid) ? 'is-valid' : 'is-invalid';
+	let div = (valid) ? input.nextAll("div.valid-feedback") : input.nextAll("div.invalid-feedback");
+	input.nextAll('div').removeClass('d-block');
+	div.removeClass('d-none').addClass('d-block');
+	input.removeClass('is-valid is-invalid').addClass(validClass);
+	if (message) {
+		div.empty();
+		div.append(message);
+	}
+}
+
+function newPersonValidation(handler) {
+	let form = document.forms.formNewPerson;
 	$(form).attr('novalidate', true);
 
-	$(form).submit(function(event){
+	$(form).submit(function (event) {
 		let isValid = true;
 		let firstInvalidElement = null;
 
-		this.npDescription.value = this.npDescription.value.trim();
-		showFeedBack($(this.npDescription), true);
+		//esto seria para campos no obligatorios ponerlos a true, siempre como correctos
 
-		if (!this.npCategories.checkValidity()){
+
+		//La imagen es opcional
+		if (!this.picturePerson.checkValidity()) {
 			isValid = false;
-			showFeedBack($(this.npCategories), false);
-			firstInvalidElement = this.npCategories;
+			showFeedBack($(this.picturePerson), false);
+			firstInvalidElement = this.picturePerson;
 		} else {
-			showFeedBack($(this.npCategories), true);
+			showFeedBack($(this.picturePerson), true);
 		}
 
-		if (!this.npUrl.checkValidity()){
+		//La fecha de nacimiento no puede ser superior a la de hoy
+		this.born.setAttribute("max", new Date().toISOString().split('T')[0]);
+
+		if (!this.born.checkValidity()) {
 			isValid = false;
-			showFeedBack($(this.npUrl), false);
-			firstInvalidElement = this.npUrl;
+			showFeedBack($(this.born), false);
+			firstInvalidElement = this.born;
 		} else {
-			showFeedBack($(this.npUrl), true);
+			showFeedBack($(this.born), true);
 		}
 
-		if (!this.npTax.checkValidity()){
+		//el segundo apellido es opcional
+		this.lastName2.value = this.lastName2.value.trim();
+		showFeedBack($(this.lastName2), true);
+
+		this.lastName1.value = this.lastName1.value.trim();
+		if (!this.lastName1.checkValidity()) {
 			isValid = false;
-			showFeedBack($(this.npTax), false);
-			firstInvalidElement = this.npTax;
+			showFeedBack($(this.lastName1), false);
+			firstInvalidElement = this.lastName1;
 		} else {
-			showFeedBack($(this.npTax), true);
+			showFeedBack($(this.lastName1), true);
 		}
 
-		if (!this.npPrice.checkValidity()){
+		this.nameNewPerson.value = this.nameNewPerson.value.trim();
+		if (!this.nameNewPerson.checkValidity()) {
 			isValid = false;
-			showFeedBack($(this.npPrice), false);
-			firstInvalidElement = this.npPrice;
+			showFeedBack($(this.nameNewPerson), false);
+			firstInvalidElement = this.nameNewPerson;
 		} else {
-			showFeedBack($(this.npPrice), true);
+			showFeedBack($(this.nameNewPerson), true);
 		}
+		showFeedBack($(this.selectType), true);
 
-		if (!this.npType[0].checkValidity()){
-			isValid = false;
-			let container = $('#cType');
-			let div = container.find('div.invalid-feedback');
-			container.last().find('div').removeClass('d-block');
-			div.removeClass('d-none').addClass('d-block');
-			$(this).find('input[type="radio"').parent().parent().next().removeClass('is-valid is-invalid').addClass('is-invalid');;
-			firstInvalidElement = this.npType[0];
-		} else {
-			let container = $('#cType');
-			let div = container.find('div.valid-feedback');
-			container.last().find('div').removeClass('d-block');
-			div.removeClass('d-none').addClass('d-block');
-			$(this).find('input[type="radio"]').parent().parent().next().removeClass('is-valid is-invalid');
-			$(this).find('input[type="radio"]:checked').parent().parent().next().addClass('is-valid');
-		}
-
-		if (!this.npModel.checkValidity()){
-			isValid = false;
-			showFeedBack($(this.npModel), false);
-			firstInvalidElement = this.npModel;
-		} else {
-			showFeedBack($(this.npModel), true);
-		}
-
-		if (!this.npBrand.checkValidity()){
-			isValid = false;
-			showFeedBack($(this.npBrand), false);
-			firstInvalidElement = this.npBrand;
-		} else {
-			showFeedBack($(this.npBrand), true);
-		}
-
-		if (!this.npSerial.checkValidity()){
-			isValid = false;
-			showFeedBack($(this.npSerial), false);
-			firstInvalidElement = this.npSerial;
-		} else {
-			showFeedBack($(this.npSerial), true);
-		}
-
-		if (!isValid){
+		if (!isValid) {
 			firstInvalidElement.focus();
 		} else {
-			let categories = [...this.npCategories.selectedOptions].map(function (option){
-				return option.value;
-			})
-			handler(this.npSerial.value, this.npBrand.value, this.npModel.value,
-				this.npType.value, this.npPrice.value, this.npTax.value, this.npUrl.value,
-				this.npDescription.value, categories);
+			handler(this.nameNewPerson.value,this.lastName1.value,this.lastName2.value,this.born.value,this.selectType.value,this.picturePerson.value)
+			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
 		}
+
+
 		event.preventDefault();
 		event.stopPropagation();
+
+
 	});
 
-	form.addEventListener('reset',(function(event){
+	form.addEventListener('reset', (function (event) {
 		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
 		feedDivs.removeClass('d-block').addClass('d-none');
-		let inputs = $(this).find('input, textarea, select, label');
+		let inputs = $(this).find('input');
 		inputs.removeClass('is-valid is-invalid');
 	}));
 
-	$(form.ncTitle).change(defaultCheckElement);
-	$(form.ncUrl).change(defaultCheckElement);
+	//cada vez que hay un cambio mostramos si es correcto
+	$(form.picturePerson).change(defaultCheckElement);
+	$(form.nameNewPerson).change(defaultCheckElement);
+	$(form.lastName1).change(defaultCheckElement);
+	$(form.lastName2).change(defaultCheckElement);
+
+
+	// $(form.ncTitle).change(defaultCheckElement);
+	// $(form.ncUrl).change(defaultCheckElement);
 }
+
+
+export { showFeedBack, defaultCheckElement, newPersonValidation };
