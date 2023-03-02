@@ -397,16 +397,21 @@ class VideoSystemController {
 	}
 	handleCreateNewPerson = (name, lastname1, lastname2, date, type, img) => {
 
-		if(type=="Actor"){
-
-			this.#videoSystem.addActor(this.#videoSystem.getActor(name,lastname1,lastname2,new Date(Date.parse(date)),img))
-
+		let done;
+		//intentamos crear el actor o el director
+		try {
+			if (type == "Actor") {
+				this.#videoSystem.addActor(this.#videoSystem.getActor(name, lastname1, lastname2, new Date(Date.parse(date)), img))
+			}
+			else {
+				this.#videoSystem.addDirector(this.#videoSystem.getDirector(name, lastname1, lastname2, new Date(Date.parse(date)), img))
+			}
+			done=true
+		} catch (e) {
+			//si no se ha podido crear el actor ponemos done a false, en el modal mostraremos un mensaje de error
+			done=false;
 		}
-		else{
-			this.#videoSystem.addDirector(this.#videoSystem.getDirector(name,lastname1,lastname2,new Date(Date.parse(date)),img))
-
-		}
-
+		this.#videoSystemView.showFormNewPersonModal(done,name,lastname1,type)
 	}
 
 	handleRemovePerson = () => {

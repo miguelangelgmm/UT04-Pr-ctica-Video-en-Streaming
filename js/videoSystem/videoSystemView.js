@@ -1,4 +1,4 @@
-import {showFeedBack, defaultCheckElement, newPersonValidation} from './validation.js';
+import { showFeedBack, defaultCheckElement, newPersonValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -33,6 +33,7 @@ class VideoSystemView {
 		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
 		this.newWindows = new Map();
+		this.body = $('body');
 		//actualizar formulario de eliminar persona
 		this.#lastName1Input;
 		this.#lastName2Input;
@@ -785,7 +786,7 @@ class VideoSystemView {
 					</div>
 				</div>
 				<div class="col-lg-8  mx-auto">
-					<button class="btn btn-primary m-1 w-100 mx-auto " type="submit">Enviar</button>
+					<button class="btn btn-primary m-1 w-100 mx-auto" type="submit">Enviar</button>
 				</div>
 				</div>
 			</div>
@@ -796,8 +797,70 @@ class VideoSystemView {
 
 		this.main.append(container)
 	}
-	bindFormNewPerson(handler){
+	bindFormNewPerson(handler) {
 		newPersonValidation(handler);
+	}
+	showFormNewPersonModal(done, name, lastname1, type) {
+
+
+			let modal = (done) ? $(`
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+							<div class="modal-content  bg-success">
+								<div class="modal-header">
+									<h5 class="modal-title" id="staticBackdropLabel">${type} creado correctamente</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<p>Se ha agregado al ${type} ${name} ${lastname1} de forma correcta </p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				`) :
+				`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+				<div class="modal-content  bg-danger">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">No se ha podido crear el ${type} </h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>El  ${type} ${name} ${lastname1} ya esta registrado </p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>`;
+
+			//añadimos el modal al body
+			this.body.append(modal);
+			//creamos el modal
+			let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+			myModal.show()
+			//obtenemos el modal del documento
+			let myModalElem = document.getElementById('staticBackdrop');
+
+			//al modal le asignamos el evento para ocultar el modal
+			myModalElem.querySelector('button').addEventListener('click', () => {
+				myModal.hide();
+			});
+
+			//si se ha ocultado el modal lanzara el evento
+			//hidden.bs.modal entonces vamos a reseteamos el formulario, hacemos focus en la primera entrada, eliminamos el modal
+			myModalElem.addEventListener('hidden.bs.modal', function (event) {
+				if(done){
+					document.formNewPerson.reset();
+				}
+				document.formNewPerson.nameNewPerson.focus();
+				myModalElem.remove();
+			});
+
+
+
 	}
 
 	showFormRemovePerson(actors, directors) {
@@ -1085,12 +1148,12 @@ class VideoSystemView {
 		this.#formDelImage.src = production.image;
 	}
 	updateDefaultRemoveProduction() {
-		if(this.#formDelNationality.value != "Solo Lectura"){
-		this.#formDelNationality.value = "Solo Lectura";
-		this.#formDelPublication.value = "";
-		this.#formDelSynopsis.value = "Solo Lectura";
-		this.#formDelURLImage.value = "Solo Lectura";
-		this.#formDelImage.src = "img/default-production.jpg";
+		if (this.#formDelNationality.value != "Solo Lectura") {
+			this.#formDelNationality.value = "Solo Lectura";
+			this.#formDelPublication.value = "";
+			this.#formDelSynopsis.value = "Solo Lectura";
+			this.#formDelURLImage.value = "Solo Lectura";
+			this.#formDelImage.src = "img/default-production.jpg";
 		}
 	}
 
