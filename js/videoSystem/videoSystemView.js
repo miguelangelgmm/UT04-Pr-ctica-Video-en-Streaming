@@ -1,4 +1,4 @@
-import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation } from './validation.js';
+import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -33,6 +33,9 @@ class VideoSystemView {
 	//Botón de eliminar categoria
 	#buttonRemoveCategory;
 	#selectManagerCategoryRemove;
+	//AsignPerson
+	#imgAsignPerson
+	#imgAsignProduction
 	constructor() {
 		this.categories = $('#navCategories');
 		this.main = $('main');
@@ -58,6 +61,9 @@ class VideoSystemView {
 		this.#buttonRemoveCategory;
 		this.#selectManagerCategoryRemove;
 
+		//AsignPerson
+		this.#imgAsignPerson;
+		this.#imgAsignProduction
 	}
 	//funcion que retorna un div que contiene una lista de personas
 	#showPersons(persons) {
@@ -992,9 +998,8 @@ class VideoSystemView {
 	}
 
 	bindFormRemovePerson(handler) {
-		$('#delButton').click((event) => {
-			removePersonValidation(handler);
-		});
+
+		removePersonValidation(handler);
 	}
 	showFormRemovePersonModal(done, name = "", lastname = "") {
 		let modal = (done) ? $(`
@@ -1465,6 +1470,183 @@ class VideoSystemView {
 					$(this.#selectManagerCategoryRemove).append(`<option  value="${category.name}" "> ${category.name}</option>`);
 				}
 			}
+			myModalElem.remove();
+		});
+	}
+
+
+	showFormAsignPerson(productions,actors,directors){
+
+		this.main.empty();
+		let container = $(`		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4">
+		<form role="form" name="formAsignPerson">
+
+			<div class="row">
+				<h1>Asignar una persona a una producción</h1>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-md-6">
+				<div class="row mt-3 justify-content-center">
+				<img src="img/default-film.jpg" alt="img prueba" class="w-50" id="imgAsignProduction">
+					</div>
+
+					<div class="row mt-3 justify-content-center">
+						<div class="col-8">
+							<div class="color-bg-input form-floating">
+								<input
+									class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0 "
+									list="dataListProductions" id="dataListProductionsInput" placeholder="title" name="nameProduction">
+								<datalist id="dataListProductions">
+								</datalist>
+								<label for="listProductions" class="text-primary">title</label>
+							</div>
+
+						</div>
+					</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row mt-3 justify-content-center">
+							<img src="img/Unknown-Person.png" alt="img prueba" id="imgAsignPerson" class="w-50">
+						</div>
+
+						<div class="row mt-3 justify-content-center">
+							<div class="col-8">
+								<div class="color-bg-input form-floating">
+									<input
+										class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0 "
+										list="datalistOptionsPerson" id="datalistOptionsPersonInput" placeholder="name" name="namePerson">
+									<datalist id="datalistOptionsPerson">
+									</datalist>
+									<label for="listProductions" class="text-primary">name</label>
+								</div>
+
+							</div>
+						</div>
+						</div>
+				</div>
+
+				</div>
+
+			</div>
+			<div class="row mt-4">
+			<div class="col-lg-12  d-flex">
+				<button class="btn btn-primary m-1 w-50 mx-auto " type="submit" id="asignButton">Asignar</button>
+			</div>
+		</form>
+	</section>`);
+
+	let datalistPerson = container.find('#datalistOptionsPerson');
+
+	for (const person of actors) {
+		datalistPerson.append(`<option value='${person.name + `,` + person.lastname1 + "(actor)"}'>`)
+	}
+
+
+	for (const person of directors) {
+		datalistPerson.append(`<option value='${person.name + "," + person.lastname1 + "(director)"}'">`)
+	}
+
+	let dataProductions = container.find("#dataListProductions")
+	for (const production of productions) {
+		dataProductions.append(`<option  value='${production.title}'> ${production.title}</option>`);
+	}
+
+
+	this.main.append(container);
+
+	this.#imgAsignPerson = document.getElementById("imgAsignPerson")
+	this.#imgAsignProduction = document.getElementById("imgAsignProduction")
+	}
+
+	bindUpdateAsignPerson(handler) {
+
+		document.getElementById("datalistOptionsPersonInput").addEventListener("input", (event) => {
+			handler(event.target.value)
+		});
+	}
+	updateAsignPerson(person) {
+		this.#imgAsignPerson.src = person.picture;
+	}
+	updateDefaultAsignPerson() {
+		if(this.#imgAsignPerson != "img/Unknown-Person.png"){
+		this.#imgAsignPerson.src = "img/Unknown-Person.png";
+		}
+	}
+
+	///Acualizar img producción
+
+	bindUpdateAsignProuction(handler) {
+
+		document.getElementById("dataListProductionsInput").addEventListener("input", (event) => {
+			handler(event.target.value)
+		});
+	}
+	updateAsignProduction(production) {
+		this.#imgAsignProduction.src = production.image;
+	}
+	updateDefaultAsignProduction() {
+		if(this.#imgAsignProduction != "img/default-film.jpg"){
+		this.#imgAsignProduction.src = "img/default-film.jpg";
+		}
+	}
+
+	//enlazar evento al botón de asign
+	bindFormAsignPerson(handler){
+		asignPersonValidation(handler)
+	}
+
+	showFormAssignPersonModal(done,msg,title,firstName,lastName) {
+		let modal = (done) ? $(`
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+					<div class="modal-content  bg-success">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Actor asignado</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Se ha asignado el actor ${firstName} ${lastName} a la producción ${title}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`) :
+			`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+		<div class="modal-content  bg-danger">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible la asignación </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>${msg} </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>`;
+
+		//añadimos el modal al body
+		this.body.append(modal);
+		//creamos el modal
+		let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+		myModal.show()
+		//obtenemos el modal del documento
+		let myModalElem = document.getElementById('staticBackdrop');
+
+		//al modal le asignamos el evento para ocultar el modal
+		myModalElem.querySelector('button').addEventListener('click', () => {
+			myModal.hide();
+		});
+
+		//si se ha ocultado el modal lanzara el evento
+
+		myModalElem.addEventListener('hidden.bs.modal', () => {
+
 			myModalElem.remove();
 		});
 	}

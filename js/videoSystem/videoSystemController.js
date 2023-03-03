@@ -385,14 +385,17 @@ class VideoSystemController {
 
 	}
 	handlerAssignPerson = () => {
-		console.log("handlerAssignPerson")
+		this.#videoSystemView.showFormAsignPerson(this.#videoSystem.productions, this.#videoSystem.actors, this.#videoSystem.director);
+		this.#videoSystemView.bindUpdateAsignPerson(this.handleUpdateAsignPerson)
+		this.#videoSystemView.bindUpdateAsignProuction(this.handleUpdateProductionAsignPerson)
+		this.#videoSystemView.bindFormAsignPerson(this.handleAssignProductionAsignPerson)
+
 	}
 	handlerManageCategory = () => {
 		let categories = this.#videoSystem.categories;
 		this.#videoSystemView.showFormManagerCategory(categories);
 		this.#videoSystemView.bindRemoveCategory(this.hadlerRemoveCategory)
 		this.#videoSystemView.bindNewCategory(this.handleNewCategory)
-
 	}
 	handlerNewPerson = () => {
 		this.#videoSystemView.showFormNewPerson();
@@ -429,7 +432,7 @@ class VideoSystemController {
 		name = name.trim();
 		let done;
 		let firstname = "";
-		let lastName= "";
+		let lastName = "";
 		try {
 			if (name.includes("(actor)")) {
 				name = name.replaceAll("(actor)", "")
@@ -444,9 +447,9 @@ class VideoSystemController {
 				lastName = names.slice(1).join(" ");
 				this.#videoSystem.removeDirector(this.#videoSystem.getDirector(firstname, lastName));
 			}
-			done=true;
+			done = true;
 		} catch (e) {
-			done=false;
+			done = false;
 		}
 
 		this.#videoSystemView.showFormRemovePersonModal(done, firstname, lastName)
@@ -491,53 +494,132 @@ class VideoSystemController {
 
 	}
 
-	handlerRemoveProductionDelProduction = (name)=>{
+	handlerRemoveProductionDelProduction = (name) => {
 
 		let done;
 		try {
 			let production = this.#videoSystem.getMovie(name)
 			this.#videoSystem.removeProduction(production);
-			done =true;
+			done = true;
 
 		} catch (error) {
-			done=false;
+			done = false;
 		}
 
-		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.productions)
+		this.#videoSystemView.showFormRemoveProdutionModal(done, name, this.#videoSystem.productions)
 	}
 
-	hadlerRemoveCategory = (title) =>{
+	hadlerRemoveCategory = (title) => {
 
 		let done;
 
-		try{
+		try {
 			let category = this.#videoSystem.getCategory(title);
 			this.#videoSystem.removeCategory(category);
-			done=true;
-		}catch(e){
-			done=false;
+			done = true;
+		} catch (e) {
+			done = false;
 		}
-		this.#videoSystemView.showFormRemoveCategoryModal(done,title,this.#videoSystem.categories)
+		this.#videoSystemView.showFormRemoveCategoryModal(done, title, this.#videoSystem.categories)
 
 		this.onAddCategoryNav();
 
 	}
-	handleNewCategory =(title,inf) =>{
+	handleNewCategory = (title, inf) => {
 
 		let done;
 
-		try{
-			let category = this.#videoSystem.getCategory(title,inf);
+		try {
+			let category = this.#videoSystem.getCategory(title, inf);
 			this.#videoSystem.addCategory(category);
-			done=true;
-		}catch(e){
-			done=false;
+			done = true;
+		} catch (e) {
+			done = false;
 		}
-		this.#videoSystemView.showFormNewCategoryModal(done,title,inf,this.#videoSystem.categories)
+		this.#videoSystemView.showFormNewCategoryModal(done, title, inf, this.#videoSystem.categories)
 
 		this.onAddCategoryNav();
 
 	}
+
+	handleUpdateAsignPerson = (name) => {
+		name = name.trim();
+		if (name.includes("(actor)")) {
+			name = name.replaceAll("(actor)", "")
+			let names = name.split(",");
+			let firstName = names[0];
+			let lastName = names.slice(1).join(" ");
+			if (this.#videoSystem.checkActor(firstName, lastName)) {
+				this.#videoSystemView.updateAsignPerson(this.#videoSystem.getActor(firstName, lastName));
+			}
+		}
+		else if (name.includes("(director)")) {
+			name = name.replaceAll("(director)", "")
+			let names = name.split(",");
+			let firstName = names[0];
+			let lastName = names.slice(1).join(" ");
+			if (this.#videoSystem.checkDirector(firstName, lastName)) {
+				this.#videoSystemView.updateAsignPerson(this.#videoSystem.getDirector(firstName, lastName));
+			}
+		}
+		else {
+			this.#videoSystemView.updateDefaultAsignPerson()
+		}
+	}
+	handleUpdateProductionAsignPerson = (title) => {
+		title = title.trim();
+		try {
+			//si existe esa pelicula la mostramos
+			let production = this.#videoSystem.getMovie(title)
+			this.#videoSystemView.updateAsignProduction(production)
+		} catch (e) {
+			//si no existe mostramos las caracteriscias por defecto
+			this.#videoSystemView.updateDefaultAsignProduction()
+		}
+	}
+
+	handleAssignProductionAsignPerson = (title, name) => {
+
+		let type = (name.includes("(actor)")) ? "actor" : "director";
+		let msg = null;
+		let done;
+		let firstName;
+		let lastName;
+		if (!name.includes("(actor)") && !name.includes("(director)")) {
+			msg = "El nombre introducido no se conoce como actor ni como director";
+		}
+		if (!msg) {
+			try {
+				if (type == "actor") {
+					name = name.replaceAll("(actor)", "")
+				} else {
+					name = name.replaceAll("(director)", "")
+				}
+				let names = name.split(",");
+				firstName = names[0];
+				lastName = names.slice(1).join(" ");
+				let person;
+				let production = this.#videoSystem.getMovie(title)
+
+				if (type == "actor") {
+					person = this.#videoSystem.getActor(firstName, lastName);
+					this.#videoSystem.assignActor(person, production)
+				} else {
+					person = this.#videoSystem.getDirector(firstName, lastName);
+					this.#videoSystem.assignDirector(person, production)
+				}
+				done = true;
+			} catch (e) {
+				done = false;
+				msg = "Ha ocurrido un error en la asignación " + e ;
+			}
+		}
+
+		this.#videoSystemView.showFormAssignPersonModal(done,msg,title,firstName,lastName)
+	}
+
+
+
 }
 
 export default VideoSystemController;

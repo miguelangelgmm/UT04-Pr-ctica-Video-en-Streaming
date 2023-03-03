@@ -122,7 +122,7 @@ function removePersonValidation(handler) {
 			firstInvalidElement.focus();
 		} else {
 			handler(this.delPerson.value)
-			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
+
 		}
 		event.preventDefault();
 		event.stopPropagation();
@@ -169,7 +169,7 @@ function removeProductionValidation(handler) {
 			firstInvalidElement.focus();
 		} else {
 			handler(this.delProduction.value)
-			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
+
 		}
 		event.preventDefault();
 		event.stopPropagation();
@@ -188,14 +188,12 @@ function removeProductionValidation(handler) {
 
 function newCategoryValidation(handler) {
 	let form = document.forms.FormNewCategory;
-	console.log(form)
+
 	$(form).attr('novalidate', true);
 
-	console.log(form.submit)
-	$(form).submit(function (event) {
-		console.log(form.submit)
 
-		console.log("hola")
+	$(form).submit(function (event) {
+
 
 		let isValid = true;
 		let firstInvalidElement = null;
@@ -220,7 +218,7 @@ function newCategoryValidation(handler) {
 		if (!isValid) {
 			firstInvalidElement.focus();
 		} else {
-			console.log("aqui")
+
 			handler(this.newCategoryName.value,this.newCategoryInf.value)
 			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
 		}
@@ -243,4 +241,61 @@ function newCategoryValidation(handler) {
 }
 
 
-export { newPersonValidation ,removePersonValidation,removeProductionValidation,newCategoryValidation};
+
+function asignPersonValidation(handler) {
+	let form = document.forms.formAsignPerson;
+
+	$(form).attr('novalidate', true);
+
+
+	$(form).submit(function (event) {
+		console.log(form.submit)
+
+		let isValid = true;
+		let firstInvalidElement = null;
+
+
+
+		this.namePerson.value = this.namePerson.value.trim();
+		if (!this.namePerson.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.namePerson), false);
+			firstInvalidElement = this.namePerson;
+		} else {
+		//	showFeedBack($(this.nameNewPerson), true);
+		}
+
+		this.nameProduction.value = this.nameProduction.value.trim();
+		if (!this.nameProduction.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.nameProduction), false);
+			firstInvalidElement = this.nameProduction;
+		} else {
+		//	showFeedBack($(this.nameNewPerson), true);
+		}
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+			console.log(this.nameProduction.value,this.namePerson.value)
+			handler(this.nameProduction.value,this.namePerson.value)
+
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		//event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+}
+
+
+export { newPersonValidation ,removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation};

@@ -46,6 +46,12 @@ class CannotDeleteDefaultValueException extends BaseException {
 		this.name = "ParameterValidationException";
 	}
 }
+class ThisPersonIsAlreadyAssignedToaProduction extends BaseException {
+	constructor(fileName, lineNumber) {
+		super(`Esta persona ya esta asignada a la producción.`, fileName, lineNumber);
+		this.name = "Error de asignación";
+	}
+}
 
 export let VideoSystem = (function () {
 	//La función anónima devuelve un método getInstance que permite obtener el objeto único
@@ -704,12 +710,19 @@ export let VideoSystem = (function () {
 					this.addDirector(director);
 					posDirector = this.#getPosDirector(director);
 				}
+
 				//Filtramos la lista y la dejamos solo con las producciones necesarias
 				let prods = productions.filter((product) =>
 					this.#directors[posDirector].productions.every(
 						(p) => p.title != product.title
 					)
 				);
+
+				//si esta vacio es porque ya esta asignado a esa producción
+				if(!prods.length){
+					throw new ThisPersonIsAlreadyAssignedToaProduction();
+				}
+
 				//Si no existen las producciones la añadimos
 
 				this.#directors[posDirector].productions.push(...prods);
@@ -773,6 +786,10 @@ export let VideoSystem = (function () {
 					)
 				);
 				//Si no existen las producciones la añadimos
+				//si esta vacio es porque ya esta asignado a esa producción
+				if(!prods.length){
+					throw new ThisPersonIsAlreadyAssignedToaProduction();
+				}
 
 				this.#actors[posActor].productions.push(...prods);
 				this.#addNewProductions(prods);
