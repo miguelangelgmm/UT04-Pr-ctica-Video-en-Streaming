@@ -34,7 +34,7 @@ class VideoSystemView {
 	#buttonRemoveCategory;
 	#selectManagerCategoryRemove;
 	constructor() {
-		this.categories = $('#navbarSupportedContent ul li');
+		this.categories = $('#navCategories');
 		this.main = $('main');
 		this.newWindows = new Map();
 		this.body = $('body');
@@ -155,7 +155,10 @@ class VideoSystemView {
 	showCategoriesInNav(categories) {
 
 		this.categories.empty()//vaciamos las categorias actuales
-
+		this.categories.append(`<a class="nav-link dropdown-toggle text-white" href="#" role="button"
+		data-bs-toggle="dropdown" aria-expanded="false">
+		Categorias
+	</a>`)
 		let ul = $(`<ul class="dropdown-menu"></ul>`);
 
 		for (let category of categories) {
