@@ -97,57 +97,27 @@ function newPersonValidation(handler) {
 
 }
 
-/*
+
 
 function removePersonValidation(handler) {
 	let form = document.forms.formRemovePerson;
 	$(form).attr('novalidate', true);
 
+	$(form).off('submit'); // Desvincular el evento submit existente si existe
+
 	$(form).submit(function (event) {
 		let isValid = true;
 		let firstInvalidElement = null;
 
-		console.log("estpu en valización")
-		//Solo quiero mostrar si el usuario ha dejado el campo vacio
+		//si el usuario intenta enviar el formulario en blanco mostramos que es necesario que introduzca el nombre a eliminar
 		this.delPerson.value = this.delPerson.value.trim();
 		if (!this.delPerson.checkValidity()) {
 			isValid = false;
 			showFeedBack($(this.delPerson), false);
 			firstInvalidElement = this.delPerson;
 		} else {
-			//showFeedBack($(this.delPerson), true);
+		//	showFeedBack($(this.nameNewPerson), true);
 		}
-
-		if (!isValid) {
-			firstInvalidElement.focus();
-		} else {
-
-			handler(this.delPerson.value)
-		}
-		event.preventDefault();
-		event.stopPropagation();
-
-	});
-
-	form.addEventListener('reset', (function (event) {
-		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
-		feedDivs.removeClass('d-block').addClass('d-none');
-		let inputs = $(this).find('input');
-		inputs.removeClass('is-valid is-invalid');
-	}));
-
-
-}
-*/
-function removePersonValidation(handler) {
-	let form = document.forms.formRemovePerson;
-	$(form).attr('novalidate', true);
-
-	$(form).off('submit'); // Desvincular el evento submit existente si existe
-	$(form).submit(function (event) {
-		let isValid = true;
-		let firstInvalidElement = null;
-
 
 		if (!isValid) {
 			firstInvalidElement.focus();
@@ -176,8 +146,48 @@ function removePersonValidation(handler) {
 
 }
 
+function removeProductionValidation(handler) {
+	let form = document.forms.formRemoveProduction;
+	$(form).attr('novalidate', true);
+
+	$(form).off('submit'); // Desvincular el evento submit existente si existe
+
+	$(form).submit(function (event) {
+		let isValid = true;
+		let firstInvalidElement = null;
+
+		this.delProduction.value = this.delProduction.value.trim();
+		if (!this.delProduction.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.delProduction), false);
+			firstInvalidElement = this.delProduction;
+		} else {
+		//	showFeedBack($(this.nameNewPerson), true);
+		}
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+			handler(this.delProduction.value)
+			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
 
 
 
+}
 
-export { newPersonValidation ,removePersonValidation};
+
+
+export { newPersonValidation ,removePersonValidation,removeProductionValidation};

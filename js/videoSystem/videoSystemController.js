@@ -381,7 +381,7 @@ class VideoSystemController {
 		let productions = this.#videoSystem.productions;
 		this.#videoSystemView.showFormRemoveProduction(productions)
 		this.#videoSystemView.bindUpdateShowRemoveProduction(this.handleUpdateRemoveProduction)
-
+		this.#videoSystemView.bindRemoveProduction(this.handlerRemoveProductionDelProduction)
 
 	}
 	handlerAssignPerson = () => {
@@ -486,6 +486,21 @@ class VideoSystemController {
 			this.#videoSystemView.updateDefaultRemoveProduction()
 		}
 
+	}
+
+	handlerRemoveProductionDelProduction = (name)=>{
+
+		let done;
+		try {
+			let production = this.#videoSystem.getMovie(name)
+			this.#videoSystem.removeProduction(production);
+			done =true;
+
+		} catch (error) {
+			done=false;
+		}
+
+		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.productions)
 	}
 
 }
