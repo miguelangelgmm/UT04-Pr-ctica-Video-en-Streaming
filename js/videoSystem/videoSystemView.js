@@ -1102,7 +1102,7 @@ class VideoSystemView {
 									<label for="selectManagerCategory" class="text-danger">Nombre*</label>
 								</div>
 								<div class="d-flex align-middle">
-									<button class="btn btn-danger w-100 ms-3 d-flex  align-items-center" type="submit">Eliminar categoria</button>
+									<button class="btn btn-danger w-100 ms-3 d-flex  align-items-center" type="button">Eliminar categoria</button>
 								</div>
 							</div>
 						</div>
