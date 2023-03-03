@@ -1230,10 +1230,7 @@ class VideoSystemView {
 	}
 	bindRemoveProduction(handler) {
 
-		document.getElementById("delProduct").addEventListener("click", (event) => {
-
 		removeProductionValidation(handler)
-		});
 	}
 	bindUpdateShowRemoveProduction(handler) {
 
@@ -1402,11 +1399,7 @@ class VideoSystemView {
 	}
 
 	bindNewCategory(handler) {
-
-		document.getElementById("newCategory").onclick = () => {
-
 			newCategoryValidation(handler)
-		};
 	}
 
 	showFormNewCategoryModal(done,name,inf,categories) {

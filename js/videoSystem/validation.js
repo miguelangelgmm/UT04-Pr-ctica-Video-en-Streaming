@@ -104,8 +104,6 @@ function removePersonValidation(handler) {
 	let form = document.forms.formRemovePerson;
 	$(form).attr('novalidate', true);
 
-	$(form).off('submit'); // Desvincular el evento submit existente si existe
-
 	$(form).submit(function (event) {
 		let isValid = true;
 		let firstInvalidElement = null;
@@ -190,6 +188,7 @@ function removeProductionValidation(handler) {
 
 function newCategoryValidation(handler) {
 	let form = document.forms.FormNewCategory;
+	console.log(form)
 	$(form).attr('novalidate', true);
 
 	console.log(form.submit)
@@ -227,7 +226,7 @@ function newCategoryValidation(handler) {
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
+		//event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
 
 	});
 
