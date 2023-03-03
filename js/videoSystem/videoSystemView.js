@@ -1,4 +1,4 @@
-import { newPersonValidation, removePersonValidation,removeProductionValidation } from './validation.js';
+import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -1266,19 +1266,23 @@ class VideoSystemView {
 									<div class=" form-floating color-bg-input">
 										<input type="text"
 											class="form-control  border  border-info border-3 border-top-0 border-start-0 border-end-0"
-											id="lastNamePerson1" placeholder="nombre categoria*" name="lastName1" >
-										<label for="lastNamePerson1" class="text-primary">nombre categoria*</label>
+											id="newCategoryName" placeholder="nombre categoria*" name="newCategoryName" required>
+										<label for="newCategoryName" class="text-primary">nombre categoria*</label>
+										<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+										<div class="valid-feedback ps-4">Correcto.</div>
 									</div>
 								</div>
 								<div class="d-flex">
-									<button class="btn btn-info w-100 ms-3" type="submit">Crear Categoria</button>
+									<button class="btn btn-info w-100 ms-3" type="submit" id="newCategory">Crear Categoria</button>
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="form-floating">
-									<textarea class="form-control border-info" placeholder="Leave a comment here" id="floatingTextarea2"
-										style="height: 100px"></textarea>
-									<label for="floatingTextarea2" class="text-info">información adicional</label>
+									<textarea class="form-control border-info" placeholder="Leave a comment here" id="newCategoryInf"
+										style="height: 100px" name="newCategoryInf"></textarea>
+									<label for="newCategoryInf" class="text-info">información adicional</label>
+									<div class="invalid-feedback ps-4"></div>
+									<div class="valid-feedback ps-4">Correcto.</div>
 								</div>
 							</div>
 							</div>
@@ -1331,7 +1335,7 @@ class VideoSystemView {
 		});
 	}
 
-	showFormRemoveProdutionModal(done,name,categories) {
+	showFormRemoveCategoryModal(done,name,categories) {
 		let modal = (done) ? $(`
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
 					<div class="modal-content  bg-success">
@@ -1397,8 +1401,80 @@ class VideoSystemView {
 		});
 	}
 
+	bindNewCategory(handler) {
 
+		document.getElementById("newCategory").onclick = () => {
 
+			newCategoryValidation(handler)
+		};
+	}
+
+	showFormNewCategoryModal(done,name,inf,categories) {
+		let modal = (done) ? $(`
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+					<div class="modal-content  bg-success">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Categoria Creada</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Se ha creado la categoria ${name} ${inf}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`) :
+			`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+		<div class="modal-content  bg-danger">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible crear la categoria </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>La categoria ${name} ya existe </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>`;
+
+		//añadimos el modal al body
+		this.body.append(modal);
+		//creamos el modal
+		let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+		myModal.show()
+		//obtenemos el modal del documento
+		let myModalElem = document.getElementById('staticBackdrop');
+
+		//al modal le asignamos el evento para ocultar el modal
+		myModalElem.querySelector('button').addEventListener('click', () => {
+			myModal.hide();
+		});
+
+		//si se ha ocultado el modal lanzara el evento
+		//hidden.bs.modal entonces vamos a reseteamos el formulario, hacemos focus en la primera entrada, eliminamos el modal
+
+		myModalElem.addEventListener('hidden.bs.modal', () => {
+
+			document.formRemoveCategory.reset();
+			document.FormNewCategory.reset();
+			document.FormNewCategory.newCategoryName.focus();
+			if(done){
+				this.#selectManagerCategoryRemove.innerHTML="";
+				$(this.#selectManagerCategoryRemove).append(`<option  value="" "></option>`);
+
+				for (const category of categories) {
+					$(this.#selectManagerCategoryRemove).append(`<option  value="${category.name}" "> ${category.name}</option>`);
+				}
+			}
+			myModalElem.remove();
+		});
+	}
 
 }
 

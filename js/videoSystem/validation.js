@@ -24,6 +24,7 @@ function newPersonValidation(handler) {
 	$(form).attr('novalidate', true);
 
 	$(form).submit(function (event) {
+
 		let isValid = true;
 		let firstInvalidElement = null;
 
@@ -183,11 +184,64 @@ function removeProductionValidation(handler) {
 		let inputs = $(this).find('input');
 		inputs.removeClass('is-valid is-invalid');
 	}));
-
-
-
 }
 
 
 
-export { newPersonValidation ,removePersonValidation,removeProductionValidation};
+function newCategoryValidation(handler) {
+	let form = document.forms.FormNewCategory;
+	$(form).attr('novalidate', true);
+
+	console.log(form.submit)
+	$(form).submit(function (event) {
+		console.log(form.submit)
+
+		console.log("hola")
+
+		let isValid = true;
+		let firstInvalidElement = null;
+
+
+		if (!this.newCategoryName.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.newCategoryName), false);
+			firstInvalidElement = this.newCategoryName;
+		} else {
+			showFeedBack($(this.newCategoryName), true);
+		}
+		if (!this.newCategoryInf.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.newCategoryInf), false);
+			firstInvalidElement = this.newCategoryInf;
+		} else {
+			showFeedBack($(this.newCategoryInf), true);
+		}
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+			console.log("aqui")
+			handler(this.newCategoryName.value,this.newCategoryInf.value)
+			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+	//cada vez que hay un cambio mostramos si es correcto
+	$(form.newCategoryName).change(defaultCheckElement);
+
+}
+
+
+export { newPersonValidation ,removePersonValidation,removeProductionValidation,newCategoryValidation};

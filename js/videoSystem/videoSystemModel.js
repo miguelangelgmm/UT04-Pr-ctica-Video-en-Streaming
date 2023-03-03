@@ -259,11 +259,11 @@ export let VideoSystem = (function () {
 				}
 				//Obtenemos las producciones que no disponemos actualemente en la lista de por defecto
 				let prodsDefault = this.#categories[pos].productions.filter((a) =>
-					this.#defaultCategoryProductions.every((b) => a.name != b.name)
+					this.#categories[0].productions.every((b) => a.title != b.title)
 				);
-				//Si la longitud del array es mayor a 0 añadimos las películas a defaultCategoryProductions
+				//Si la longitud del array es mayor a 0 añadimos las películas a categ#categories[0]category
 				if (prodsDefault.length)
-					this.#defaultCategoryProductions.push(...prodsDefault);
+					this.#categories[0].productions.push(...prodsDefault);
 
 				this.#categories.splice(pos, 1);
 				return this.#categories.length;

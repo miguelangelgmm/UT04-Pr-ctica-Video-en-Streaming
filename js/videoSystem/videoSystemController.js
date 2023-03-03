@@ -391,7 +391,7 @@ class VideoSystemController {
 		let categories = this.#videoSystem.categories;
 		this.#videoSystemView.showFormManagerCategory(categories);
 		this.#videoSystemView.bindRemoveCategory(this.hadlerRemoveCategory)
-		//actualizamos la barra de navegación
+		this.#videoSystemView.bindNewCategory(this.handleNewCategory)
 
 	}
 	handlerNewPerson = () => {
@@ -506,18 +506,34 @@ class VideoSystemController {
 		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.productions)
 	}
 
-	hadlerRemoveCategory = (name) =>{
+	hadlerRemoveCategory = (title) =>{
 
 		let done;
 
 		try{
-			let category = this.#videoSystem.getCategory(name);
+			let category = this.#videoSystem.getCategory(title);
 			this.#videoSystem.removeCategory(category);
 			done=true;
 		}catch(e){
 			done=false;
 		}
-		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.categories)
+		this.#videoSystemView.showFormRemoveCategoryModal(done,title,this.#videoSystem.categories)
+
+		this.onAddCategoryNav();
+
+	}
+	handleNewCategory =(title,inf) =>{
+
+		let done;
+
+		try{
+			let category = this.#videoSystem.getCategory(title,inf);
+			this.#videoSystem.addCategory(category);
+			done=true;
+		}catch(e){
+			done=false;
+		}
+		this.#videoSystemView.showFormNewCategoryModal(done,title,inf,this.#videoSystem.categories)
 
 		this.onAddCategoryNav();
 
