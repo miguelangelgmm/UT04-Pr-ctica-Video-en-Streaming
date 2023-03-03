@@ -390,6 +390,9 @@ class VideoSystemController {
 	handlerManageCategory = () => {
 		let categories = this.#videoSystem.categories;
 		this.#videoSystemView.showFormManagerCategory(categories);
+		this.#videoSystemView.bindRemoveCategory(this.hadlerRemoveCategory)
+		//actualizamos la barra de navegación
+
 	}
 	handlerNewPerson = () => {
 		this.#videoSystemView.showFormNewPerson();
@@ -503,6 +506,22 @@ class VideoSystemController {
 		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.productions)
 	}
 
+	hadlerRemoveCategory = (name) =>{
+
+		let done;
+
+		try{
+			let category = this.#videoSystem.getCategory(name);
+			this.#videoSystem.removeCategory(category);
+			done=true;
+		}catch(e){
+			done=false;
+		}
+		this.#videoSystemView.showFormRemoveProdutionModal(done,name,this.#videoSystem.categories)
+
+		this.onAddCategoryNav();
+
+	}
 }
 
 export default VideoSystemController;

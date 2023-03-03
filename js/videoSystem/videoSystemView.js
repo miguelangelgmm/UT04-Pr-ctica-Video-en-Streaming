@@ -29,6 +29,10 @@ class VideoSystemView {
 	#formDelSynopsis;
 	#formDelURLImage;
 	#formDelImage;
+
+	//Botón de eliminar categoria
+	#buttonRemoveCategory;
+	#selectManagerCategoryRemove;
 	constructor() {
 		this.categories = $('#navbarSupportedContent ul li');
 		this.main = $('main');
@@ -50,6 +54,9 @@ class VideoSystemView {
 		this.#formDelURLImage;
 		this.#formDelImage;
 
+		//Botón de eliminar categoria
+		this.#buttonRemoveCategory;
+		this.#selectManagerCategoryRemove;
 
 	}
 	//funcion que retorna un div que contiene una lista de personas
@@ -146,7 +153,8 @@ class VideoSystemView {
 	}
 
 	showCategoriesInNav(categories) {
-		this.categories.find("div").innerHTML=""//vaciamos las categorias actuales
+
+		this.categories.empty()//vaciamos las categorias actuales
 
 		let ul = $(`<ul class="dropdown-menu"></ul>`);
 
@@ -1046,78 +1054,6 @@ class VideoSystemView {
 
 	}
 
-	showFormManagerCategory(categories) {
-		this.main.empty();
-
-		let container = $(`
-		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4 mb-3 pb-4">
-
-			<div class="row">
-				<h1>Gestionar Categoria</h1>
-				<hr>
-			</div>
-				<div class="row">
-					<div class="col-md-6 border-end">
-						<form>
-						<!--Contenido de crear Categoria-->
-						<div class="row g-4">
-							<div class="col-12">
-								<h2>Crear una categoria</h2>
-							</div>
-							<div class="col-12 d-flex align-middle">
-								<div class="w-50 ">
-									<div class=" form-floating color-bg-input">
-										<input type="text"
-											class="form-control  border  border-info border-3 border-top-0 border-start-0 border-end-0"
-											id="lastNamePerson1" placeholder="nombre categoria*" name="lastName1" >
-										<label for="lastNamePerson1" class="text-primary">nombre categoria*</label>
-									</div>
-								</div>
-								<div class="d-flex">
-									<button class="btn btn-info w-100 ms-3" type="submit">Crear Categoria</button>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="form-floating">
-									<textarea class="form-control border-info" placeholder="Leave a comment here" id="floatingTextarea2"
-										style="height: 100px"></textarea>
-									<label for="floatingTextarea2" class="text-info">información adicional</label>
-								</div>
-							</div>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6">
-						<form>
-						<!--Contenido de eliminar categoria-->
-						<div class="row g-4">
-							<h2>Eliminar una categoria</h2>
-						</div>
-						<div class="row g-4 mt-2">
-							<div class="col-12 d-flex ">
-								<div class="w-50 form-floating">
-									<select class="form-select form-control border-danger" id="selectManagerCategory" aria-label="Default select example">
-										<option value=" "selected></option>
-									</select>
-									<label for="selectManagerCategory" class="text-danger">Nombre*</label>
-								</div>
-								<div class="d-flex align-middle">
-									<button class="btn btn-danger w-100 ms-3 d-flex  align-items-center" type="button">Eliminar categoria</button>
-								</div>
-							</div>
-						</div>
-					</form>
-					</div>
-				</div>
-		</section>
-		`)
-		let options = container.find('#selectManagerCategory');
-		for (const category of categories) {
-			options.append(`<option  value="${category.name}" "> ${category.name}</option>`);
-		}
-
-		this.main.append(container);
-	}
 
 	showFormRemoveProduction(productions) {
 		this.main.empty();
@@ -1288,8 +1224,6 @@ class VideoSystemView {
 			this.#formDelImage.src="img/default-production.jpg";
 			myModalElem.remove();
 		});
-
-
 	}
 	bindRemoveProduction(handler) {
 
@@ -1298,14 +1232,170 @@ class VideoSystemView {
 		removeProductionValidation(handler)
 		});
 	}
-
-
 	bindUpdateShowRemoveProduction(handler) {
 
 		this.#datalistDelProductionsOptions.addEventListener("input", (event) => {
 			handler(event.target.value)
 		});
 	}
+
+
+	showFormManagerCategory(categories) {
+		this.main.empty();
+
+		let container = $(`
+		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4 mb-3 pb-4">
+
+			<div class="row">
+				<h1>Gestionar Categoria</h1>
+				<hr>
+			</div>
+				<div class="row">
+					<div class="col-md-6 border-end">
+						<form role="form" name="FormNewCategory">
+						<!--Contenido de crear Categoria-->
+						<div class="row g-4">
+							<div class="col-12">
+								<h2>Crear una categoria</h2>
+							</div>
+							<div class="col-12 d-flex align-middle">
+								<div class="w-50 ">
+									<div class=" form-floating color-bg-input">
+										<input type="text"
+											class="form-control  border  border-info border-3 border-top-0 border-start-0 border-end-0"
+											id="lastNamePerson1" placeholder="nombre categoria*" name="lastName1" >
+										<label for="lastNamePerson1" class="text-primary">nombre categoria*</label>
+									</div>
+								</div>
+								<div class="d-flex">
+									<button class="btn btn-info w-100 ms-3" type="submit">Crear Categoria</button>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-floating">
+									<textarea class="form-control border-info" placeholder="Leave a comment here" id="floatingTextarea2"
+										style="height: 100px"></textarea>
+									<label for="floatingTextarea2" class="text-info">información adicional</label>
+								</div>
+							</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<form role='form' name='formRemoveCategory'>
+						<!--Contenido de eliminar categoria-->
+						<div class="row g-4">
+							<h2>Eliminar una categoria</h2>
+						</div>
+						<div class="row g-4 mt-2">
+							<div class="col-12 d-flex ">
+								<div class="w-50 form-floating">
+									<select class="form-select form-control border-danger" id="selectManagerCategory" aria-label="Default select example" name="selectCategoryRemove" >
+										<option value=""selected></option>
+									</select>
+									<label for="selectManagerCategory" class="text-danger">Nombre*</label>
+								</div>
+								<div class="d-flex align-middle">
+									<button class="btn btn-danger w-100 ms-3 d-flex  align-items-center" type="button" id="eliminar">Eliminar categoria</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					</div>
+				</div>
+		</section>
+		`)
+		let options = container.find('#selectManagerCategory');
+		for (const category of categories) {
+			options.append(`<option  value="${category.name}" "> ${category.name}</option>`);
+		}
+
+		this.main.append(container);
+
+		this.#selectManagerCategoryRemove = document.getElementById("selectManagerCategory");
+		this.#buttonRemoveCategory = document.getElementById("eliminar");
+
+	}
+
+	bindRemoveCategory(handler) {
+
+		let category = this.#selectManagerCategoryRemove;
+		this.#buttonRemoveCategory.addEventListener("click", (event) => {
+
+			handler(category.value)
+			event.preventDefault();
+			event.stopPropagation();
+		});
+	}
+
+	showFormRemoveProdutionModal(done,name,categories) {
+		let modal = (done) ? $(`
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+					<div class="modal-content  bg-success">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Categoria eliminada</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Se ha eliminado categoria ${name}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`) :
+			`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+		<div class="modal-content  bg-danger">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible eliminar la categoria </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Debes seleccionar una categoria, la categoria General no se puede eliminar </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>`;
+
+		//añadimos el modal al body
+		this.body.append(modal);
+		//creamos el modal
+		let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+		myModal.show()
+		//obtenemos el modal del documento
+		let myModalElem = document.getElementById('staticBackdrop');
+
+		//al modal le asignamos el evento para ocultar el modal
+		myModalElem.querySelector('button').addEventListener('click', () => {
+			myModal.hide();
+		});
+
+		//si se ha ocultado el modal lanzara el evento
+		//hidden.bs.modal entonces vamos a reseteamos el formulario, hacemos focus en la primera entrada, eliminamos el modal
+
+		myModalElem.addEventListener('hidden.bs.modal', () => {
+
+			document.formRemoveCategory.reset();
+			document.formRemoveCategory.selectCategoryRemove.focus();
+			if(done){
+				this.#selectManagerCategoryRemove.innerHTML="";
+				$(this.#selectManagerCategoryRemove).append(`<option  value="" "></option>`);
+
+				for (const category of categories) {
+					$(this.#selectManagerCategoryRemove).append(`<option  value="${category.name}" "> ${category.name}</option>`);
+				}
+			}
+			myModalElem.remove();
+		});
+	}
+
+
+
 
 }
 
