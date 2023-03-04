@@ -950,10 +950,10 @@ class VideoSystemView {
 		const datalist = container.find('#datalistOptions');
 
 		actorsView.forEach(person => {
-			datalist.append(`<option value='${person.name + `,` + person.lastname1 + "(actor)"}'>`)
+			datalist.append(`<option value='${person.name + ` ` + person.lastname1 + "(actor)"}'>`)
 		});
 		directorsView.forEach(person => {
-			datalist.append(`<option value='${person.name + "," + person.lastname1 + "(director)"}'">`)
+			datalist.append(`<option value='${person.name + " " + person.lastname1 + "(director)"}'">`)
 		});
 		// Agregar evento input al input del datalist
 
@@ -1001,7 +1001,7 @@ class VideoSystemView {
 
 		removePersonValidation(handler);
 	}
-	showFormRemovePersonModal(done, name = "", lastname = "") {
+	showFormRemovePersonModal(done, name = "") {
 		let modal = (done) ? $(`
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
 					<div class="modal-content  bg-success">
@@ -1010,7 +1010,7 @@ class VideoSystemView {
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<p>Se ha eliminado la persona de nombre ${name} ${lastname}</p>
+							<p>Se ha eliminado la persona de nombre ${name}</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -1539,12 +1539,12 @@ class VideoSystemView {
 	let datalistPerson = container.find('#datalistOptionsPerson');
 
 	for (const person of actors) {
-		datalistPerson.append(`<option value='${person.name + `,` + person.lastname1 + "(actor)"}'>`)
+		datalistPerson.append(`<option value='${person.name + ` ` + person.lastname1 + "(actor)"}'>`)
 	}
 
 
 	for (const person of directors) {
-		datalistPerson.append(`<option value='${person.name + "," + person.lastname1 + "(director)"}'">`)
+		datalistPerson.append(`<option value='${person.name + " " + person.lastname1 + "(director)"}'">`)
 	}
 
 	let dataProductions = container.find("#dataListProductions")
@@ -1565,12 +1565,35 @@ class VideoSystemView {
 			handler(event.target.value)
 		});
 	}
-	updateAsignPerson(person) {
+
+	updateAsignPerson(person,handler) {
 		this.#imgAsignPerson.src = person.picture;
+		this.#imgAsignPerson.setAttribute("data-name", `${person.name + "||" + person.lastname1}`);
+		this.#imgAsignPerson.classList.add("imgHover");
+
+		this.bindShowPersonInAssign(handler)
+
 	}
+	bindShowPersonInAssign(handler){
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+		this.#imgAsignPerson.onclick = function(event) {
+			let name = this.dataset.name;
+			excecuteHandler(
+				handler, [name],
+				{ action: 'showPerson', name: name },
+				`#Person-${name.replaceAll("||", "-")}`, event
+			);
+		};
+	}
+
 	updateDefaultAsignPerson() {
 		if(this.#imgAsignPerson != "img/Unknown-Person.png"){
 		this.#imgAsignPerson.src = "img/Unknown-Person.png";
+		//eliminamos el evento click
+		this.#imgAsignPerson.onclick=null;
+		this.#imgAsignPerson.classList.remove("imgHover");
+
 		}
 	}
 
@@ -1582,12 +1605,35 @@ class VideoSystemView {
 			handler(event.target.value)
 		});
 	}
-	updateAsignProduction(production) {
+	updateAsignProduction(production,handler) {
 		this.#imgAsignProduction.src = production.image;
+		this.#imgAsignProduction.setAttribute("data-title", `${production.title}`);
+
+		this.#imgAsignProduction.classList.add("imgHover");
+		this.bindShowProductionInAssign(handler);
 	}
+
+	bindShowProductionInAssign(handler){
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+		this.#imgAsignProduction.onclick = function(event) {
+			let production = this.dataset.title;
+			excecuteHandler(
+				handler, [production],
+				{ action: 'production', production: production },
+				`#Production-${production.replaceAll(" ", "-")}`, event
+			);
+		};
+	}
+
 	updateDefaultAsignProduction() {
 		if(this.#imgAsignProduction != "img/default-film.jpg"){
 		this.#imgAsignProduction.src = "img/default-film.jpg";
+		this.#imgAsignProduction.removeAttribute("data-title");
+		//eliminamos el evento onclick
+		this.#imgAsignProduction.onclick=null;
+		//le quitamos la clase imgHover, solo da efecto hover
+		this.#imgAsignProduction.classList.remove("imgHover");
 		}
 	}
 
@@ -1596,7 +1642,7 @@ class VideoSystemView {
 		asignPersonValidation(handler)
 	}
 
-	showFormAssignPersonModal(done,msg,title,firstName,lastName) {
+	showFormAssignPersonModal(done,msg,title,name) {
 		let modal = (done) ? $(`
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
 					<div class="modal-content  bg-success">
@@ -1605,7 +1651,7 @@ class VideoSystemView {
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<p>Se ha asignado el actor ${firstName} ${lastName} a la producción ${title}</p>
+							<p>Se ha asignado el actor ${name} a la producción ${title}</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -1630,11 +1676,15 @@ class VideoSystemView {
 	</div>
 </div>`;
 
+	//obtenemos el estado actual del historial
+		const currentState = history.state;
+
 		//añadimos el modal al body
 		this.body.append(modal);
 		//creamos el modal
 		let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
 		myModal.show()
+
 		//obtenemos el modal del documento
 		let myModalElem = document.getElementById('staticBackdrop');
 
@@ -1646,9 +1696,10 @@ class VideoSystemView {
 		//si se ha ocultado el modal lanzara el evento
 
 		myModalElem.addEventListener('hidden.bs.modal', () => {
-
 			myModalElem.remove();
 		});
+		//evitamos que el modal afecte al historial
+
 	}
 
 }

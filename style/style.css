@@ -11147,4 +11147,8 @@ select, option {
 .person, .person-max {
   width: 270px;
   height: 360px;
+}
+
+.imgHover:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

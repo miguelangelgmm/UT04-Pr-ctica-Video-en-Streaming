@@ -52,6 +52,13 @@ class ThisPersonIsAlreadyAssignedToaProduction extends BaseException {
 		this.name = "Error de asignación";
 	}
 }
+class ThisPersonNotExist extends BaseException {
+	constructor(fileName, lineNumber) {
+		super(`Error: This person does not exist.`, fileName, lineNumber);
+		this.name = "ParameterValidationException";
+	}
+}
+
 
 export let VideoSystem = (function () {
 	//La función anónima devuelve un método getInstance que permite obtener el objeto único
@@ -533,7 +540,6 @@ export let VideoSystem = (function () {
 						}) == 0
 					);
 				});
-
 				let actor;
 				if (position == -1) {
 					actor = new Person(name, lastname1, lastname2, born, picture);
@@ -545,6 +551,25 @@ export let VideoSystem = (function () {
 
 				return actor;
 			}
+			//Factoria de Actores
+			getActorFullName(fullName) {
+				if (fullName === "undefined" || fullName === "")
+					throw new EmptyValueException("fullName");
+				let position = this.#actors.findIndex((act) => {
+					return (fullName.localeCompare(act.actor.name + " " + act.actor.lastname1)==0);
+				});
+				let actor;
+				if (position == -1) {
+					//si no existe va a lanzar un error
+					throw new ThisPersonNotExist();
+				} else {
+					//si no existe la producción
+					actor = this.#actors[position].actor;
+				}
+				//si existe lo recuperamos de la lista de categorias
+				return actor;
+			}
+
 			//Comprueba si existe un actor
 			checkActor(name,lastname1){
 				return this.#actors.findIndex((act) => {
@@ -626,6 +651,24 @@ export let VideoSystem = (function () {
 
 				return director;
 			}
+				//Factoria de Directores
+				getDirectorFullName(FullName) {
+					if (FullName === "undefined" || FullName === "")
+						throw new EmptyValueException("name");
+					let position = this.#directors.findIndex(
+						(direct) =>
+						FullName.localeCompare(direct.director.name + " " +direct.director.lastname1)==0);
+
+					let director;
+					if(position == -1){
+						throw new ThisPersonNotExist();//si no existe la producción, va a lanzar un error
+
+					}
+						(director = this.#directors[position].director); //si existe lo recuperamos de la lista de categorias
+
+					return director;
+				}
+
 			/**
 			 * Asigna una o más producciones a una categoria
 			 * @param category - Category
