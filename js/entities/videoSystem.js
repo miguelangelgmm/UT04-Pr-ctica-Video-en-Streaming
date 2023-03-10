@@ -187,7 +187,7 @@ export class Movie extends Production {
 		nationality = "",
 		publication,
 		synopsis = "",
-		image = "",
+		image = "/img/default-p.jpg",
 		resource = new Resource(0, "www.default.com"),
 		locations = []
 	) {
@@ -234,7 +234,7 @@ export class Serie extends Production {
 		image = "",
 		resources = [],
 		locations = [],
-		season = 0
+		season = 1
 	) {
 		super(title, nationality, publication, synopsis, image);
 		//compruebo si el valor que le hemos introducido es un recurso o si no es vacio
@@ -267,7 +267,7 @@ export class Serie extends Production {
 	}
 
 	get season(){
-		return this.season;
+		return this.#season;
 	}
 	*getResource(){
 		for (const reso of this.#resource) {

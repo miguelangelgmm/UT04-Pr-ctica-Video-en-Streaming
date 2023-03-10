@@ -1,4 +1,4 @@
-import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation } from './validation.js';
+import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation,NewProductionValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -36,6 +36,9 @@ class VideoSystemView {
 	//AsignPerson
 	#imgAsignPerson
 	#imgAsignProduction
+	//NuevaProducción
+	#typeProduction;
+	#seasonsForm;
 	constructor() {
 		this.categories = $('#navCategories');
 		this.main = $('main');
@@ -64,6 +67,10 @@ class VideoSystemView {
 		//AsignPerson
 		this.#imgAsignPerson;
 		this.#imgAsignProduction
+		//nueva Producción
+		this.#typeProduction;
+		this.#seasonsForm;
+
 	}
 	//funcion que retorna un div que contiene una lista de personas
 	#showPersons(persons) {
@@ -437,6 +444,8 @@ class VideoSystemView {
 							<span>
 							${production.synopsis}
 							</span>
+							<span id="seasons">
+							</span>
 						</div>
 						<div class="row">
 						<button id="b-open" data-title="${production.title}" class="btn btn-primary text-uppercase mr-2 px-4">Abrir en nueva ventana</button>
@@ -446,7 +455,10 @@ class VideoSystemView {
 
 		</div>
 		`);
-
+		//si dispone de una temporada
+		if("season" in production){
+			container.find("#seasons").append("Número de temporadas " + production.season)
+		}
 		//si no tiene la propiedad resource es una serie
 		if ("resource" in production) {
 			container.children().prepend(this.#showFrameFilm(production))
@@ -1637,6 +1649,7 @@ class VideoSystemView {
 		}
 	}
 
+
 	//enlazar evento al botón de asign
 	bindFormAsignPerson(handler){
 		asignPersonValidation(handler)
@@ -1699,9 +1712,274 @@ class VideoSystemView {
 			myModalElem.remove();
 		});
 		//evitamos que el modal afecte al historial
-
 	}
 
+	showFormAddProduction(categories,actors, directors){
+		this.main.empty();
+		let container = $(`
+		<section class="container  bg-dark p-2 rounded-4 mt-5">
+			<div class="row">
+				<h1>Agregar una producción</h1>
+			</div>
+			<form name="formNewProduction" role="form" novalidate>
+				<div class="row  align-items-center mt-4">
+					<div class="col-3">
+						<div class=" form-floating color-bg-input ">
+							<select class="form-select custom-select  border-0 ps-4" aria-label="Default select example"
+								id="typeProductionSelect" name="typeProductionSelect">
+								<option value="Pelicula" selected>Pelicula</option>
+								<option value="Serie">Serie</option>
+							</select>
+							<label for="typeProductionSelect" class="text-primary">Tipo</label>
+							<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+						</div>
+					</div>
+
+					<div class="col-3">
+						<div class=" form-floating color-bg-input">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="titleProduction" placeholder="Nombre" name="titleProduction" required>
+							<label for="titleProduction" class="text-primary">Título*</label>
+							<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class=" form-floating color-bg-input">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="nationality" placeholder="Nacionalidad" pattern="^[A-Z]{3}$" name="nacionalityForm">
+							<label for="nationality" class="text-primary"  name="nationality">Nacionalidad</label>
+							<div class="invalid-feedback ps-4">Este campo es incorrecto formato ESP, USA</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class=" form-floating color-bg-input">
+							<input type="date"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="dateProduction" placeholder="Fecha" name="dateProduction" required>
+							<label for="dateProduction" class="text-primary">fecha de publicación*</label>
+							<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row-12 mt-4 " id="categoriesForm">
+				</div>
+
+				<div class="row mt-4">
+					<div class="form-floating">
+						<textarea class="form-control " placeholder="Descripción" name="synosisProduction" id="floatingTextarea2"
+							style="height: 100px"></textarea>
+						<label for="floatingTextarea2">Descripción</label>
+						<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+						<div class="valid-feedback ps-4">Correcto.</div>
+					</div>
+				</div>
+
+				<div class="row px-3">
+					<label for="actorsSelect">Lista de actores:</label>
+					<select name="actorsSelect" id="actorsSelect" multiple>
+
+					</select>
+				</div>
+				<div class="row px-3">
+					<label for="directorsSelect">Lista de directores:</label>
+					<select name="directorsSelect" id="directorsSelect" multiple>
+
+					</select>
+				</div>
+				<div class="row justify-content-center mt-2">
+					<div class="col-11">
+						<div class=" form-floating color-bg-input">
+							<input type="url"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="urlImg" placeholder="URL de la imagen" pattern=".*\.(jpe?g|png|webp)$"  name="UrlImg">
+							<label for="urlImg" class="text-primary">URL de la imagen</label>
+							<div class="invalid-feedback ps-4">El formato de la url es incorrecto, debe terminar en jpg,png, webp.</div>
+							<div class="valid-feedback ps-4">Es correcto</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row justify-content-center mt-2">
+					<div class="col-11">
+						<div class=" form-floating color-bg-input">
+							<input type="text"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="urlRecource" pattern ="^https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]{11}$" placeholder="URL de la imagen" name="resourceForm">
+							<label for="urlRecource" class="text-primary">Recursos</label>
+							<div class="invalid-feedback ps-4">Este campo es incorrecto Ejemplo https://www.youtube.com/embed/U2DkSxMGfGE</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						<input type="number"
+
+						class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="latitudForm" placeholder="latitud" min="-90" max="90" name=latitudForm>
+								<div class="invalid-feedback ps-4">Este campo es erroneo máximo 90 min -90</div>
+								<div class="valid-feedback ps-4">Correcto.</div>
+					</div>
+					<div class="col-6">
+						<input type="number"
+
+							class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="longitude" placeholder="longitud" min="-180" max="180" name=longitudeForm>
+								<div class="invalid-feedback ps-4">Este campo es erroneo max:90 min:-90</div>
+								<div class="valid-feedback ps-4">Correcto.</div>
+					</div>
+					<div class="col-6">
+					<input type="number"
+
+						class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+							id="time" placeholder="duración" min="0" max="300" name=time>
+							<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+							<div class="valid-feedback ps-4">Correcto.</div>
+				</div>
+					<div class="col-6 d-none" id="seasonsForm">
+					<label for="seasons">Temporadas </label>
+					<input type="number"
+								name="seasonsForm"
+								class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0"
+								id="seasonsForm" placeholder="longitud" id="seasons" value="1" min="1" max="12" name="seasonsForm">
+
+					</div>
+				</div>
+				<div class ="row px-4 my-3">
+
+				</div>
+				<div class="row px-4 my-3">
+				<button class="btn btn-primary m-1 w-100 mx-auto " type="submit"  id="AddProductionButton">Agregar</button>
+
+				</div>
+			</form>
+
+		</section>
+		`);
+
+		let selectActor = container.find('#actorsSelect');
+		let selectDirector = container.find('#directorsSelect');
+
+		for (const person of actors) {
+			selectActor.append(`<option  value='${person.name + ` ` + person.lastname1 }'> ${person.name + ` ` + person.lastname1 } </option>`)
+		}
+
+
+		for (const person of directors) {
+			selectDirector.append(`<option value='${person.name + " " + person.lastname1 }' ">${person.name + " " + person.lastname1 }  </option>`)
+		}
+
+		let categoriesForm = container.find("#categoriesForm");
+		let count = 0;
+		for (const category of categories) {
+			categoriesForm.append(`
+			<div class="form-check form-check-inline mx-2">
+			<input class="form-check-input" type="checkbox" value="${category.name}" id="category${count}">
+			<label class="form-check-label" for="category${count}">
+			${category.name}
+			</label>
+		</div>
+			`)
+			count++;
+		}
+
+		this.main.append(container);
+
+		this.#typeProduction = document.getElementById("typeProductionSelect");
+		this.#seasonsForm = document.getElementById("seasonsForm");
+
+		this.bindUpdateshowFormAddProduction();
+	}
+
+	bindUpdateshowFormAddProduction() {
+		let season= this.#seasonsForm.classList;
+		//no uso función callback porque quiero que this tenga la referencia de typeProduction el input
+		this.#typeProduction.addEventListener("change", function() {
+			if(this.value=="Serie"){
+				season.remove("d-none")
+			}else{
+				season.add("d-none")
+			}
+
+		});
+	}
+
+
+	bindFormNewProduction(handler){
+		NewProductionValidation(handler)
+	}
+
+	showFormAddProductionModal(done,title) {
+		let modal = (done) ? $(`
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+					<div class="modal-content  bg-success">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Producción creada</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Se creado la producción ${title}</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`) :
+			`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+		<div class="modal-content  bg-danger">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible la asignación </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>La producción que tratas de añadir ya ha sido creada</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>`;
+
+		//añadimos el modal al body
+		this.body.append(modal);
+		//creamos el modal
+		let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+		myModal.show()
+
+		//obtenemos el modal del documento
+		let myModalElem = document.getElementById('staticBackdrop');
+
+		//al modal le asignamos el evento para ocultar el modal
+		myModalElem.querySelector('button').addEventListener('click', () => {
+			myModal.hide();
+		});
+
+		//si se ha ocultado el modal lanzara el evento
+
+		myModalElem.addEventListener('hidden.bs.modal', () => {
+			if (done) {
+				document.formNewProduction.reset();
+			}else{
+				document.formNewProduction.titleProduction.focus();
+
+			}
+
+			myModalElem.remove();
+		});
+		//evitamos que el modal afecte al historial
+	}
 }
 
 export default VideoSystemView;

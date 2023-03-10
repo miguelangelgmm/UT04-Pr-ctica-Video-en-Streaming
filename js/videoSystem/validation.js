@@ -75,7 +75,7 @@ function newPersonValidation(handler) {
 		if (!isValid) {
 			firstInvalidElement.focus();
 		} else {
-			handler(this.nameNewPerson.value,this.lastName1.value,this.lastName2.value,this.born.value,this.selectType.value,this.picturePerson.value)
+			handler(this.nameNewPerson.value, this.lastName1.value, this.lastName2.value, this.born.value, this.selectType.value, this.picturePerson.value)
 			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
 		}
 		event.preventDefault();
@@ -115,7 +115,7 @@ function removePersonValidation(handler) {
 			showFeedBack($(this.delPerson), false);
 			firstInvalidElement = this.delPerson;
 		} else {
-		//	showFeedBack($(this.nameNewPerson), true);
+			//	showFeedBack($(this.nameNewPerson), true);
 		}
 
 		if (!isValid) {
@@ -161,7 +161,7 @@ function removeProductionValidation(handler) {
 			showFeedBack($(this.delProduction), false);
 			firstInvalidElement = this.delProduction;
 		} else {
-		//	showFeedBack($(this.nameNewPerson), true);
+			//	showFeedBack($(this.nameNewPerson), true);
 		}
 
 
@@ -219,12 +219,12 @@ function newCategoryValidation(handler) {
 			firstInvalidElement.focus();
 		} else {
 
-			handler(this.newCategoryName.value,this.newCategoryInf.value)
+			handler(this.newCategoryName.value, this.newCategoryInf.value)
 			//handler(this.ncTitle.value, this.ncUrl.value, this.ncDescription.value);
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		//event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
+
 
 	});
 
@@ -239,8 +239,6 @@ function newCategoryValidation(handler) {
 	$(form.newCategoryName).change(defaultCheckElement);
 
 }
-
-
 
 function asignPersonValidation(handler) {
 	let form = document.forms.formAsignPerson;
@@ -262,7 +260,7 @@ function asignPersonValidation(handler) {
 			showFeedBack($(this.namePerson), false);
 			firstInvalidElement = this.namePerson;
 		} else {
-		//	showFeedBack($(this.nameNewPerson), true);
+			//	showFeedBack($(this.nameNewPerson), true);
 		}
 
 		this.nameProduction.value = this.nameProduction.value.trim();
@@ -271,20 +269,171 @@ function asignPersonValidation(handler) {
 			showFeedBack($(this.nameProduction), false);
 			firstInvalidElement = this.nameProduction;
 		} else {
-		//	showFeedBack($(this.nameNewPerson), true);
+			//	showFeedBack($(this.nameNewPerson), true);
 		}
 
 
 		if (!isValid) {
 			firstInvalidElement.focus();
 		} else {
-			console.log(this.nameProduction.value,this.namePerson.value)
-			handler(this.nameProduction.value,this.namePerson.value)
+
+			handler(this.nameProduction.value, this.namePerson.value)
 
 		}
 		event.preventDefault();
 		event.stopPropagation();
-		//event.stopImmediatePropagation(); //Porque si no lo corto en este momento continua la propagación del evento?
+
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+}
+
+function NewProductionValidation(handler) {
+	let form = document.forms.formNewProduction;
+
+	$(form).attr('novalidate', true);
+
+
+	$(form).submit(function (event) {
+
+
+		let isValid = true;
+		let firstInvalidElement = null;
+
+		if (!this.seasonsForm.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.seasonsForm), false);
+			firstInvalidElement = this.seasonsForm;
+		} else {
+			showFeedBack($(this.seasonsForm), true);
+		}
+
+		if (!this.time.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.time), false);
+			firstInvalidElement = this.time;
+		} else {
+			showFeedBack($(this.time), true);
+		}
+
+
+		if (!this.longitudeForm.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.longitudeForm), false);
+			firstInvalidElement = this.longitudeForm;
+		} else {
+			showFeedBack($(this.longitudeForm), true);
+		}
+
+		if (!this.latitudForm.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.latitudForm), false);
+			firstInvalidElement = this.latitudForm;
+		} else {
+			showFeedBack($(this.latitudForm), true);
+		}
+
+		this.resourceForm.value = this.resourceForm.value.trim();
+		if (!this.resourceForm.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.resourceForm), false);
+			firstInvalidElement = this.resourceForm;
+		} else {
+			showFeedBack($(this.resourceForm), true);
+		}
+
+		this.UrlImg.value = this.UrlImg.value.trim();
+		if (!this.UrlImg.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.UrlImg), false);
+			firstInvalidElement = this.UrlImg;
+		} else {
+			showFeedBack($(this.UrlImg), true);
+		}
+
+		this.synosisProduction.value = this.synosisProduction.value.trim();
+		if (!this.synosisProduction.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.synosisProduction), false);
+			firstInvalidElement = this.synosisProduction;
+		} else {
+			showFeedBack($(this.synosisProduction), true);
+		}
+
+		if (!this.dateProduction.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.dateProduction), false);
+			firstInvalidElement = this.dateProduction;
+		} else {
+			showFeedBack($(this.dateProduction), true);
+		}
+
+		this.nacionalityForm.value = this.nacionalityForm.value.trim();
+		if (!this.nacionalityForm.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.nacionalityForm), false);
+			firstInvalidElement = this.nacionalityForm;
+		} else {
+			showFeedBack($(this.nacionalityForm), true);
+		}
+
+		this.titleProduction.value = this.titleProduction.value.trim();
+		if (!this.titleProduction.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.titleProduction), false);
+			firstInvalidElement = this.titleProduction;
+		} else {
+			showFeedBack($(this.titleProduction), true);
+		}
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+			//obtenemos todas las categorias que tengan check
+			let categories = form.querySelectorAll('input[type="checkbox"][id^="category"]:checked');
+			let categoriesValue = [];
+			categories.forEach((category) => {
+				categoriesValue.push(category.value);
+			});
+			let actorsValue = [];
+			Array.from(	this.actorsSelect.selectedOptions).forEach((actor) => {
+				actorsValue.push(actor.value);
+			});
+			let directorsValue = [];
+			Array.from(	this.directorsSelect.selectedOptions).forEach((director) => {
+				directorsValue.push(director.value);
+			});
+
+
+			handler(
+								this.typeProductionSelect.value,
+                this.titleProduction.value,
+                this.nacionalityForm.value,
+                new Date(Date.parse(this.dateProduction.value)),
+                categoriesValue,
+                this.synosisProduction.value,
+                actorsValue,
+                directorsValue,
+                this.UrlImg.value,
+                this.resourceForm.value,
+                this.latitudForm.value,
+								this.longitudeForm.value,
+								this.seasonsForm.value,
+								this.time.value
+            );
+
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
 
 	});
 
@@ -298,4 +447,5 @@ function asignPersonValidation(handler) {
 }
 
 
-export { newPersonValidation ,removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation};
+
+export { newPersonValidation, removePersonValidation, removeProductionValidation, newCategoryValidation, asignPersonValidation, NewProductionValidation };

@@ -375,7 +375,11 @@ class VideoSystemController {
 	//----Formulario
 
 	handlerNewProduction = () => {
-		console.log("handlerNewProduction")
+
+		this.#videoSystemView.showFormAddProduction(this.#videoSystem.categories,this.#videoSystem.actors,this.#videoSystem.director);
+		this.#videoSystemView.bindFormNewProduction(this.handleNewProduction)
+
+
 	}
 	handlerRemoveProduction = () => {
 		let productions = this.#videoSystem.productions;
@@ -609,7 +613,52 @@ class VideoSystemController {
 		this.#videoSystemView.showFormAssignPersonModal(done, msg, title,name)
 	}
 
+	handleNewProduction = (type, title,nationality,date,categories,synopsis,actors,directors,urlImg,resource,lat,long,season,time) => {
 
+		let done;
+		urlImg = urlImg || "/img/default-p.jpg";
+		resource = resource || "https://www.youtube.com/embed/U2DkSxMGfGE";
+		time = parseInt(time) || 0;
+		lat = parseInt(lat) || 0;
+		long = parseInt(long) || 0;
+
+		try{
+			//Si puede obtener una película es porque esa película ya existe entonces no podemos crear otra
+			this.#videoSystem.getMovie(title);
+			done=false;
+		}catch(e){
+			let production;
+			if(type != "Serie"){
+
+				production =	this.#videoSystem.getMovie(title,nationality,date,synopsis,urlImg,new Resource(time,resource),[new Coordinate(lat, long)]);
+			}
+			else{
+				production =	this.#videoSystem.getSerie(title,nationality,date,synopsis,urlImg, [new Resource(time,resource)],[new Coordinate(lat, long)],season)
+			}
+			//añadimos la producción
+			this.#videoSystem.addProduction(production);
+			//si hay actores para añadir
+			if(actors.length > 0){
+				actors.forEach(actor => {
+					this.#videoSystem.assignActor(this.#videoSystem.getActorFullName(actor),production)
+				});
+				}
+				if(directors.length > 0){
+					directors.forEach(director => {
+						this.#videoSystem.assignDirector(this.#videoSystem.getDirectorFullName(director),production)
+					});
+					}
+				if(categories.length > 0){
+					categories.forEach(category => {
+						this.#videoSystem.assignCategory(this.#videoSystem.getCategory(category),production)
+					});
+				}
+				done=true;
+		}
+
+		this.#videoSystemView.showFormAddProductionModal(done,title)
+
+	}
 
 }
 
