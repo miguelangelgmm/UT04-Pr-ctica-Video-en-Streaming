@@ -11151,4 +11151,12 @@ select, option {
 
 .imgHover:hover {
   cursor: pointer;
+}
+
+#login {
+  cursor: pointer;
+}
+
+#CloseSession {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

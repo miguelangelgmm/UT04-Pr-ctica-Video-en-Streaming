@@ -1,4 +1,4 @@
-import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation,NewProductionValidation } from './validation.js';
+import { newPersonValidation, removePersonValidation,removeProductionValidation,newCategoryValidation,asignPersonValidation,NewProductionValidation,LoginUserValidation } from './validation.js';
 class VideoSystemView {
 
 	#excecuteHandler(handler, handlerArguments, data, url, event) {
@@ -39,6 +39,10 @@ class VideoSystemView {
 	//NuevaProducción
 	#typeProduction;
 	#seasonsForm;
+	//login
+	#login;
+	#divCloseSesion;
+
 	constructor() {
 		this.categories = $('#navCategories');
 		this.main = $('main');
@@ -71,6 +75,9 @@ class VideoSystemView {
 		this.#typeProduction;
 		this.#seasonsForm;
 
+		//login
+		this.#login = $('#login');
+		this.#divCloseSesion = $('#divCloseSession');
 	}
 	//funcion que retorna un div que contiene una lista de personas
 	#showPersons(persons) {
@@ -713,7 +720,9 @@ class VideoSystemView {
 	</ul>
 		`);
 
+
 		navbar.append(container)
+
 	}
 
 	bindAdminMenu(handlerNewProduction, handlerRemoveProduction, handlerAssignPerson, handlerManageCategory, handlerNewPerson, handlerRemoveCategory) {
@@ -1980,6 +1989,204 @@ class VideoSystemView {
 		});
 		//evitamos que el modal afecte al historial
 	}
+
+
+
+	//--------------------------------------------------Almacenamiento----------------------------------------
+	bindShowFormLogin(handler){
+		//guardamos la referencia
+		let excecuteHandler = this.#excecuteHandler;
+		document.getElementById('logintxt').onclick = (event) => {
+			excecuteHandler(handler, [], { action: "login" }, "#login", event)
+		}
+	}
+
+	showFormLogin(){
+		this.main.empty();
+		let container = $(`
+		<section class="container  bg-dark p-2 rounded-4 mt-5 px-4">
+		<form name = "formLogin">
+
+			<div class="row">
+				<h1>Iniciar Sesion</h1>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-lg-6">
+
+					<div class="row mt-3 justify-content-center">
+						<div class="col-8">
+							<div class="color-bg-input form-floating">
+								<input
+									class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0 "
+									id="nameUser" placeholder="Nombre" name = "userUser" required>
+									<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+									<div class="valid-feedback ps-4">Correcto.</div>
+								<label for="nameUser" class="text-primary">Nombre</label>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+
+					<div class="row mt-3 justify-content-center">
+						<div class="col-8">
+							<div class="color-bg-input form-floating">
+								<input
+									class="form-control  border  border-info border-5 border-top-0 border-start-0 border-end-0 "
+									id="password" placeholder="contraseña" type="password" name = "password" required>
+									<div class="invalid-feedback ps-4">Este campo es obligatorio</div>
+									<div class="valid-feedback ps-4">Correcto.</div>
+								<label for="password" class="text-primary">contraseña</label>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-8  mx-auto">
+					<button class="btn btn-primary m-1 w-100 mx-auto" id="btn-login" type="submit">Iniciar Sesion</button>
+				</div>
+			</div>
+			</div>
+		</form>
+	</section>
+		`);
+
+		this.main.append(container);
+	}
+
+		//enlazar evento al botón de iniciar sesion
+		bindFormLogin(handler){
+			LoginUserValidation(handler)
+		}
+
+		showFormLoginModal(done) {
+			let modal = (done) ? $(`
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+						<div class="modal-content  bg-success">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">Producción creada</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p>Se ha logueado correctamente</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			`) :
+				`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+			<div class="modal-content  bg-danger">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible la asignación </h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>No se ha podido iniciar sesión</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>`;
+
+			//añadimos el modal al body
+			this.body.append(modal);
+			//creamos el modal
+			let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+			myModal.show()
+
+			//obtenemos el modal del documento
+			let myModalElem = document.getElementById('staticBackdrop');
+
+			//al modal le asignamos el evento para ocultar el modal
+			myModalElem.querySelector('button').addEventListener('click', () => {
+				myModal.hide();
+			});
+
+			//si se ha ocultado el modal lanzara el evento
+
+			myModalElem.addEventListener('hidden.bs.modal', () => {
+				if (done) {
+
+					history.replaceState({action:"init"},null,"#")
+
+
+				}else{
+					document.formLogin.reset();
+					document.formLogin.nameUser.focus();
+
+				}
+
+				myModalElem.remove();
+			});
+
+		}
+
+		//mostramos la cookie de admin si el usuario ha sido logueado
+		showAdminCookie(){
+			this.#login.empty();
+			let container = $(`
+			<h1 class="h1" id="login">Hola Admin</h1>
+			`);
+			this.#login.append(container);
+
+			this.#login.onclick = null;
+
+		}
+		//enlazamos al elemento CloseSession la función que va a permitir eliminar la cookie
+		bindRemoveCookie(handler){
+		let close =	document.getElementById("CloseSession");
+
+			close.addEventListener("click",(event)=>{
+				handler();
+			})
+		}
+
+		//cambiamos hola admin por iniciar
+		CloseAdminCookie(){
+			this.#login.empty();
+			let container = $(`
+			<h1 class="h1" id="logintxt">Iniciar Sesion</h1>
+			`);
+			this.#login.append(container);
+		}
+
+		//función que va a comprobar si tenemos la cookie de sesion una vez que entremos en la página
+		loadNavbar(cookie) {
+			this.#login.empty();
+
+			let container;
+			if (cookie) {
+				container = $(`
+					<h1 class="h1" id="logintxt">Hola Admin</h1>
+				`);
+			} else {
+				container = $(`
+					<h1 class="h1" id="logintxt">Iniciar Sesion</h1>
+				`);
+			}
+
+			this.#login.append(container);
+		}
+
+		bttnCloseSession(){
+			let container = $(`
+				<a class="nav-link" id="CloseSession">Cerrar sesion</a>
+			`);
+			this.#divCloseSesion.append(container);
+		}
+
+		bttnCloseSessionEmpty(){
+			this.#divCloseSesion.empty();
+		}
 }
 
 export default VideoSystemView;

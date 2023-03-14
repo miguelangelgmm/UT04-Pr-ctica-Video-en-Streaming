@@ -16,7 +16,7 @@ const historyActions = {
 	manageCategory:() =>VideoSystemApp.handlerManageCategory(),
 	newPerson:() =>VideoSystemApp.handlerNewPerson(),
 	delPerson:() =>VideoSystemApp.handleRemovePerson(),
-
+	login:() =>VideoSystemApp.handleShowLogin()
 
 }
 

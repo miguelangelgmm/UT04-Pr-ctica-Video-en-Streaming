@@ -7,7 +7,7 @@ class VideoSystemController {
 	#randomProductions;
 	#loadVideoSystemObjects() {
 		/**Usuario */
-		this.#videoSystem.addUser(this.#videoSystem.getUser("Miguel", "miguel@gmail.com", "1234"))
+		this.#videoSystem.addUser(this.#videoSystem.getUser("admin", "admin@gmail.com", "admin"))
 
 		/**Categorias*/
 		this.#videoSystem.addCategory(this.#videoSystem.getCategory("Comedia", "Género que busca hacer reír al espectador y proporcionar un escape de la vida cotidiana a través del humor"));
@@ -234,6 +234,32 @@ class VideoSystemController {
 			this.handlerNewPerson,
 			this.handleRemovePerson
 		);
+
+		if (document.cookie == "username=admin") {
+			this.#videoSystemView.loadNavbar(true);
+			//mostramos el boton de cerrra sesion
+			this.#videoSystemView.bttnCloseSession();
+			//asignamos el evento para eliminar la cookie
+			this.#videoSystemView.bindRemoveCookie(this.handleRemoveCookie);
+		} else {
+			this.#videoSystemView.loadNavbar(false);
+
+			this.#videoSystemView.bindShowFormLogin(this.handleShowLogin)
+
+		}
+
+
+		/*
+	if(document.cookie == "username=admin"){
+
+		this.#videoSystemView.showAdminCookie();
+		this.#videoSystemView.removeCookie(this.handleRemoveCookie);
+
+	}else{
+		//vinculamos el texto de iniciar sesión al formulario
+	}
+*/
+
 	}
 	//Cuando vuelvo a home
 	onInit = () => {
@@ -376,7 +402,7 @@ class VideoSystemController {
 
 	handlerNewProduction = () => {
 
-		this.#videoSystemView.showFormAddProduction(this.#videoSystem.categories,this.#videoSystem.actors,this.#videoSystem.director);
+		this.#videoSystemView.showFormAddProduction(this.#videoSystem.categories, this.#videoSystem.actors, this.#videoSystem.director);
 		this.#videoSystemView.bindFormNewProduction(this.handleNewProduction)
 
 
@@ -545,7 +571,7 @@ class VideoSystemController {
 
 			try {
 				//le mando el controlador de showPerson para que el usuario pueda hacer click en la imagen y ver los resultados de la asignación
-				this.#videoSystemView.updateAsignPerson(this.#videoSystem.getActorFullName(name),this.handleShowPerson);
+				this.#videoSystemView.updateAsignPerson(this.#videoSystem.getActorFullName(name), this.handleShowPerson);
 			} catch (error) {
 			}
 
@@ -554,7 +580,7 @@ class VideoSystemController {
 			name = name.replaceAll("(director)", "")
 
 			try {
-			this.#videoSystemView.updateAsignPerson(this.#videoSystem.getDirectorFullName(name));
+				this.#videoSystemView.updateAsignPerson(this.#videoSystem.getDirectorFullName(name));
 			} catch (error) {
 			}
 
@@ -568,7 +594,7 @@ class VideoSystemController {
 		try {
 			//si existe esa pelicula la mostramos
 			let production = this.#videoSystem.getMovie(title)
-			this.#videoSystemView.updateAsignProduction(production,this.handleCategoryListProduction)
+			this.#videoSystemView.updateAsignProduction(production, this.handleCategoryListProduction)
 		} catch (e) {
 			//si no existe mostramos las caracteriscias por defecto
 			this.#videoSystemView.updateDefaultAsignProduction()
@@ -580,8 +606,8 @@ class VideoSystemController {
 		let type = (name.includes("(actor)")) ? "actor" : "director";
 		let msg = null;
 		let done;
-	//	let firstName;
-	//	let lastName;
+		//	let firstName;
+		//	let lastName;
 		if (!name.includes("(actor)") && !name.includes("(director)")) {
 			msg = "El nombre introducido no se conoce como actor ni como director";
 		}
@@ -610,10 +636,10 @@ class VideoSystemController {
 			}
 		}
 
-		this.#videoSystemView.showFormAssignPersonModal(done, msg, title,name)
+		this.#videoSystemView.showFormAssignPersonModal(done, msg, title, name)
 	}
 
-	handleNewProduction = (type, title,nationality,date,categories,synopsis,actors,directors,urlImg,resource,lat,long,season,time) => {
+	handleNewProduction = (type, title, nationality, date, categories, synopsis, actors, directors, urlImg, resource, lat, long, season, time) => {
 
 		let done;
 		urlImg = urlImg || "/img/default-p.jpg";
@@ -622,42 +648,89 @@ class VideoSystemController {
 		lat = parseInt(lat) || 0;
 		long = parseInt(long) || 0;
 
-		try{
+		try {
 			//Si puede obtener una película es porque esa película ya existe entonces no podemos crear otra
 			this.#videoSystem.getMovie(title);
-			done=false;
-		}catch(e){
+			done = false;
+		} catch (e) {
 			let production;
-			if(type != "Serie"){
+			if (type != "Serie") {
 
-				production =	this.#videoSystem.getMovie(title,nationality,date,synopsis,urlImg,new Resource(time,resource),[new Coordinate(lat, long)]);
+				production = this.#videoSystem.getMovie(title, nationality, date, synopsis, urlImg, new Resource(time, resource), [new Coordinate(lat, long)]);
 			}
-			else{
-				production =	this.#videoSystem.getSerie(title,nationality,date,synopsis,urlImg, [new Resource(time,resource)],[new Coordinate(lat, long)],season)
+			else {
+				production = this.#videoSystem.getSerie(title, nationality, date, synopsis, urlImg, [new Resource(time, resource)], [new Coordinate(lat, long)], season)
 			}
 			//añadimos la producción
 			this.#videoSystem.addProduction(production);
 			//si hay actores para añadir
-			if(actors.length > 0){
+			if (actors.length > 0) {
 				actors.forEach(actor => {
-					this.#videoSystem.assignActor(this.#videoSystem.getActorFullName(actor),production)
+					this.#videoSystem.assignActor(this.#videoSystem.getActorFullName(actor), production)
 				});
-				}
-				if(directors.length > 0){
-					directors.forEach(director => {
-						this.#videoSystem.assignDirector(this.#videoSystem.getDirectorFullName(director),production)
-					});
-					}
-				if(categories.length > 0){
-					categories.forEach(category => {
-						this.#videoSystem.assignCategory(this.#videoSystem.getCategory(category),production)
-					});
-				}
-				done=true;
+			}
+			if (directors.length > 0) {
+				directors.forEach(director => {
+					this.#videoSystem.assignDirector(this.#videoSystem.getDirectorFullName(director), production)
+				});
+			}
+			if (categories.length > 0) {
+				categories.forEach(category => {
+					this.#videoSystem.assignCategory(this.#videoSystem.getCategory(category), production)
+				});
+			}
+			done = true;
 		}
 
-		this.#videoSystemView.showFormAddProductionModal(done,title)
+		this.#videoSystemView.showFormAddProductionModal(done, title)
 
+	}
+
+	handleShowLogin = () => {
+
+		this.#videoSystemView.showFormLogin();
+		this.#videoSystemView.bindFormLogin(this.handleLoginUser);
+
+		//this.#videoSystemView.bindUpdateShowRemovePerson(this.handleUpdateRemovePerson)
+		//	this.#videoSystemView.bindFormRemovePerson(this.handledelRemovePerson)
+	}
+	handleLoginUser = (name, password) => {
+		let users = this.#videoSystem.users;
+
+		let authenticated = false;
+		for (const user of users) {
+			if (user.username == name && user.password == password) {
+				//si se ha encontrado al usuario admin
+				authenticated = true;
+				break;
+			}
+		}
+		this.#videoSystemView.showFormLoginModal(authenticated);
+
+		if (authenticated) {
+			document.cookie = `username=admin`;
+			//actulizamos el nav
+			this.#videoSystemView.showAdminCookie();
+			//volemos a inicio
+			this.onInit();
+			//mostramos el boton de cerrra sesion
+			this.#videoSystemView.bttnCloseSession();
+			//asignamos el evento para eliminar la cookie
+			this.#videoSystemView.bindRemoveCookie(this.handleRemoveCookie);
+
+		}
+
+	}
+
+	handleRemoveCookie = () => {
+		//hacemos que la cookie expire
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		//quitamos bttn de cerrar sesion
+		this.#videoSystemView.bttnCloseSessionEmpty();
+		//ponemos otra vez iniciar Session
+		this.#videoSystemView.CloseAdminCookie();
+		//enlazamos el evento para el formulario de inicio de sesion
+		this.#videoSystemView.bindShowFormLogin(this.handleShowLogin)
 	}
 
 }

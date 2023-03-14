@@ -446,6 +446,60 @@ function NewProductionValidation(handler) {
 
 }
 
+function LoginUserValidation(handler) {
+	let form = document.forms.formLogin;
+
+	$(form).attr('novalidate', true);
 
 
-export { newPersonValidation, removePersonValidation, removeProductionValidation, newCategoryValidation, asignPersonValidation, NewProductionValidation };
+	$(form).submit(function (event) {
+
+		let isValid = true;
+		let firstInvalidElement = null;
+
+		this.nameUser.value = this.nameUser.value.trim();
+
+		if (!this.nameUser.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.nameUser), false);
+			firstInvalidElement = this.nameUser;
+		} else {
+			showFeedBack($(this.nameUser), true);
+		}
+		this.password.value = this.password.value.trim();
+
+		if (!this.password.checkValidity()) {
+			isValid = false;
+			showFeedBack($(this.password), false);
+			firstInvalidElement = this.password;
+		} else {
+			showFeedBack($(this.password), true);
+		}
+
+
+
+		if (!isValid) {
+			firstInvalidElement.focus();
+		} else {
+
+			handler(this.nameUser.value,this.password.value);
+
+		}
+		event.preventDefault();
+		event.stopPropagation();
+
+
+	});
+
+	form.addEventListener('reset', (function (event) {
+		let feedDivs = $(this).find('div.valid-feedback, div.invalid-feedback');
+		feedDivs.removeClass('d-block').addClass('d-none');
+		let inputs = $(this).find('input');
+		inputs.removeClass('is-valid is-invalid');
+	}));
+
+}
+
+
+
+export { newPersonValidation, removePersonValidation, removeProductionValidation, newCategoryValidation, asignPersonValidation, NewProductionValidation,LoginUserValidation };
