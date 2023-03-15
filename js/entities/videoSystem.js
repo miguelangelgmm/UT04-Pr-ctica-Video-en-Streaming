@@ -187,7 +187,7 @@ export class Movie extends Production {
 		nationality = "",
 		publication,
 		synopsis = "",
-		image = "/img/default-p.jpg",
+		image = "img/default-p.jpg",
 		resource = new Resource(0, "www.default.com"),
 		locations = []
 	) {

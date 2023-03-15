@@ -23,6 +23,7 @@ const historyActions = {
 //ejecutamos una acción cada vez que pulsemos las flechas
 window.addEventListener('popstate', function(event) {
 	if (event.state){
+		console.log(event)
 		historyActions[event.state.action](event);
 	}
 });

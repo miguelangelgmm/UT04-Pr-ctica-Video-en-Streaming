@@ -1698,8 +1698,7 @@ class VideoSystemView {
 	</div>
 </div>`;
 
-	//obtenemos el estado actual del historial
-		const currentState = history.state;
+
 
 		//añadimos el modal al body
 		this.body.append(modal);
@@ -2115,7 +2114,7 @@ class VideoSystemView {
 
 			myModalElem.addEventListener('hidden.bs.modal', () => {
 				if (done) {
-
+					
 					history.replaceState({action:"init"},null,"#")
 
 

@@ -1,0 +1,1081 @@
+{	
+	"users":[
+		{
+			"name":"admin",
+			"mail":"admin@gmail.com",
+			"password":"admin"
+		}
+	],
+	"categories": [
+		{
+			"name": "Comedia",
+			"description": "Género que busca hacer reír al espectador y proporcionar un escape de la vida cotidiana a través del humor",
+			"movies":["El día del Sí","Noche de juegos","Resacón en Las Vegas","Supersalidos"],
+			"series":[]			
+		},
+		{
+			"name": "Acción",
+			"description": "Género emocionante que se centra en la acción y el suspense. Estas películas a menudo incluyen persecuciones, peleas, explosiones y otros efectos especiales para crear una experiencia de visualización intensa y emocionante.",
+			"movies":["Uncharted","Bullet Train","John Wick (Otro día para matar)","Matrix Resurrections"],
+			"series":[]			
+		},
+		{
+			"name": "Fantasía",
+			"description": "Género que se basa en elementos imaginarios, como magia, seres fantásticos, mundos imaginarios y otros elementos que no existen en el mundo real. Este género permite a los cineastas explorar historias y personajes que van más allá de lo posible en la vida real.",
+			"movies":["El hombre de acero","El gato con botas: El último deseo","Los vengadores: End Game","The Super Mario Bros"],
+			"series":[]			
+
+		},
+		{
+			"name": "General",
+			"description": "",
+			"movies":["Uncharted"],
+			"series":["Marvel Studios: leyendas"]			
+
+		}
+	],
+	"productions": {
+		"El hombre de acero": {
+			"title": "El hombre de acero",
+			"nationality": "ESP",
+			"publication": "2015-1-1",
+			"synopsis": "Desde Krypton, un lejano planeta muy avanzado tecnológicamente, un bebé es enviado en una cápsula a través del espacio a la Tierra para que viva entre los humanos. Educado en una granja en Kansas en los valores de sus padres adoptivos, Martha (Diane Lane) y Jonathan Kent (Kevin Costner), el joven Clark Kent (Henry Cavill) comienza desde niño a desarrollar poderes sobrehumanos, y al llegar a la edad adulta llega a la conclusión de que esos poderes le exigen grandes responsabilidades, para proteger no sólo a los que quiere, sino también para representar una esperanza para el mundo.",
+			"image": "img/Productions/man_of_steel_superman.jpg",
+			"Resource": {
+				"time": 143,
+				"link": "https://www.youtube.com/embed/VzeDi7YR6gs"
+			},
+			"Coordinate": [
+				{
+					"lat": 140,
+					"long": 120
+				}
+			],
+			"actors": [
+				"Henry Cavill",
+				"Diane Lane",
+				"Kevin Costner",
+				"Russell Crowe",
+				"Michael Shannon",
+				"Laurence Fishburne",
+				"Antje Traue",
+				"Christopher Meloni",
+				"Richard Schiff"
+			],
+			"directors": [
+				"Zack Snyder"
+			]
+		},
+		"El gato con botas: El último deseo": {
+			"title": "El gato con botas: El último deseo",
+			"nationality": "ESP",
+			"publication": "2022-11-12",
+			"synopsis": "Secuela de 'El gato con botas' (2011). El Gato con Botas descubre que su pasión por la aventura le ha pasado factura: ha consumido ocho de sus nueve vidas, por ello emprende un viaje épico para encontrar el mítico Último Deseo y restaurar sus nueve vidas... ",
+			"image": "img/Productions/puss_in_boots_the_last_wish.jpg",
+			"Resource": {
+				"time": 110,
+				"link": "https://www.youtube.com/embed/18v5EPO5ySs"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Antonio Banderas",
+				"Florence Pugh",
+				"Harvey Guillén",
+				"Olivia Colman",
+				"John Mulaney",
+				"Samson Kayo"
+			],
+			"directors": [
+				"Joel Crawford"
+			]
+		},
+		"Los vengadores: End Game": {
+			"title": "Los vengadores: End Game",
+			"nationality": "ESP",
+			"publication": "2019-10-12",
+			"synopsis": "Después de los eventos devastadores de 'Avengers: Infinity War', el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar deshacer sus acciones y restaurar el orden en el universo de una vez por todas, sin importar cuáles son las consecuencias... Cuarta y última entrega de la saga \"Vengadores\"",
+			"image": "img/Productions/avengers_endgame.jpg",
+			"Resource": {
+				"time": 181,
+				"link": "https://www.youtube.com/embed/TcMBFSGVi1c"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Robert Downey",
+				"Chris Evans",
+				"Scarlett Johansson",
+				"Chris Hemsworth",
+				"Mark Ruffalo",
+				"Jeremy Renner",
+				"Brie Larson",
+				"Donald Cheadle",
+				"Elizabeth Olsen"
+			],
+			"directors": [
+				"Anthony Russo"
+			],
+			"categories":[
+				"Fantasía"
+			]
+		},
+		"The Super Mario Bros": {
+			"title": "The Super Mario Bros",
+			"nationality": "ESP",
+			"publication": "2023-04-12",
+			"synopsis": "Película de animación basada en la franquicia de videojuegos Super Mario Bros. de Nintendo. Está producida por Shigeru Miyamoto, creador de la licencia, y la producirá y animará Illumination Entertainment",
+			"image": "img/Productions/the_super_mario_bros_movie.jpg",
+			"Resource": {
+				"time": 181,
+				"link": "https://www.youtube.com/embed/_1f2RLdxQfA"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Chris Pratt",
+				"Charles Martinet",
+				"Anya Taylor",
+				"Charlie Day",
+				"Jack Black",
+				"Keegan Michael",
+				"Seth Rogen"
+			],
+			"directors": [
+				"Aaron Horvath",
+				"Michael Jelenic"
+			]
+		},
+		"Uncharted": {
+			"title": "Uncharted",
+			"nationality": "ESP",
+			"publication": "2023-01-10",
+			"synopsis": "Basada en una de las series de videojuegos más vendidas y aclamadas por la crítica de todos los tiempos, \"Uncharted\" presenta a un joven, astuto y carismático, Nathan Drake (Tom Holland) en su primera aventura como cazatesoros con su ingenioso compañero Victor “Sully” Sullivan (Mark Wahlberg). En una aventura de acción que se extiende por todo el mundo, ambos se embarcan en una peligrosa búsqueda de “el mayor tesoro nunca antes encontrado” al tiempo que rastrean las claves que les podrían conducir al hermano de Nathan, perdido hace ya mucho tiempo",
+			"image": "img/Productions/uncharted.jpg",
+			"Resource": {
+				"time": 143,
+				"link": "https://www.youtube.com/embed/Sn5sRX6jaxk"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Antonio Banderas",
+				"Tom Holland",
+				"Sophia Ali",
+				"Alana Boden",
+				"Manuel de Blas"
+			],
+			"directors": [
+				"Todd Phillips"
+			]
+		},
+		"Bullet Train": {
+			"title": "Bullet Train",
+			"nationality": "ESP",
+			"publication": "2022-11-12",
+			"synopsis": "Cinco asesinos a sueldo se encuentran a bordo de un tren bala que viaja de Tokio a Morioka con unas pocas paradas intermedias. Descubren que sus misiones no son ajenas entre sí. La pregunta es quién saldrá vivo del tren y qué les espera en la estación final.",
+			"image": "img/Productions/bullet_train.jpg",
+			"Resource": {
+				"time": 124,
+				"link": "https://www.youtube.com/embed/0IOsk2Vlc4o"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Michael Shannon",
+				"Brad Pitt",
+				"Joey King",
+				"David Leitch",
+				"Sandra Bullock",
+				"Ryan Reynolds",
+				"Masi Oka"
+			],
+			"directors": [
+				"David Leitch"
+			]
+		},
+		"John Wick (Otro día para matar)": {
+			"title": "John Wick (Otro día para matar)",
+			"nationality": "ESP",
+			"publication": "2010-10-12",
+			"synopsis": "En Nueva York, John Wick, un asesino a sueldo retirado, vuelve otra vez a la acción para vengarse de los gángsters que le quitaron todo.",
+			"image": "img/Productions/john_wick.jpg",
+			"Resource": {
+				"time": 121,
+				"link": "https://www.youtube.com/embed/TWRxFTiNTyU"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Laurence Fishburne",
+				"Keanu Reeves",
+				"Ian McShane",
+				"Lance Reddick",
+				"Bridget Moynahan",
+				"Willem Dafoe",
+				"Alfie Allen"
+			],
+			"directors": [
+				"Chad Stahelski"
+			]
+		},
+		"Matrix Resurrections": {
+			"title": "Matrix Resurrections",
+			"nationality": "ESP",
+			"publication": "2020-12-3",
+			"synopsis": "Neo vive una vida normal y corriente en San Francisco mientras su terapeuta le prescribe pastillas azules. Hasta que Morfeo le ofrece la pastilla roja y vuelve a abrir su mente al mundo de Matrix. ",
+			"image": "img/Productions/the_matrix_resurrections.jpg",
+			"Resource": {
+				"time": 181,
+				"link": "https://www.youtube.com/embed/qjnvX44LoQw"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Keanu Reeves",
+				"Jessica Henwick",
+				"Priyanka Chopra",
+				"Jonathan Groff",
+				"Lambert Wilson"
+			],
+			"directors": [
+				"Lana Wachowski"
+			]
+		},
+		"El día del Sí": {
+			"title": "El día del Sí",
+			"nationality": "ESP",
+			"publication": "2019-01-01",
+			"synopsis": "Sintiendo como si siempre dijeran NO a sus hijos y compañeros de trabajo, Allison y Carlos deciden dar a sus tres hijos un YES DAY, en el que durante 24 horas los niños mandarán. No se imaginaban que se embarcarían en una aventura vertiginosa en torno a Los Ángeles, que unirá a su familia más que nunca.",
+			"image": "img/Productions/yes_day.jpg",
+			"Resource": {
+				"time": 123,
+				"link": "https://www.youtube.com/embed/4J0Of6wqzxk"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Jenna Ortega",
+				"Jennifer Garner",
+				"Édgar Ramírez",
+				"Julian Lerner"
+			],
+			"directors": [
+				"Miguel Arteta"
+			]
+		},
+		"Noche de juegos": {
+			"title": "Noche de juegos",
+			"nationality": "ESP",
+			"publication": "2020-11-12",
+			"synopsis": "Max y Annie quedan todas las semanas con sus amigos para celebrar una noche de juegos. Competitivos hasta el extremo, ahora están preocupados por la vuelta del hermano de Max, un presuntuoso ganador que lleva toda la vida menospreciándolo. Un día, Max, Annie y sus amigos son invitados por Brooks, el carismático hermano de Max, a lo que afirma será una noche de juegos inolvidable. Cuando llegan a su formidable casa, Brooks les informa de en qué consiste el juego: ha contratado a una empresa que secuestrará a uno de los presentes y, si no lo encuentran en un tiempo determinado, el secuestrado morirá.",
+			"image": "img/Productions/game_night.jpg",
+			"Resource": {
+				"time": 124,
+				"link": "https://www.youtube.com/embed/oDcq4GBOaTg"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Jason Bateman",
+				"Rachel McAdams",
+				"John Francis",
+				"Jonathan Goldstein",
+				"Jesse Plemons",
+				"Sharon Horgan",
+				"Kyle Chandler",
+				"Lamorne Morris"
+			],
+			"directors": [
+				"John Francis",
+				"Jonathan Goldstein"
+			]
+		},
+		"Resacón en Las Vegas": {
+			"title": "Resacón en Las Vegas",
+			"nationality": "ESP",
+			"publication": "2009-10-12",
+			"synopsis": "Historia de una desmadrada despedida de soltero en la que el novio y tres amigos se montan una gran juerga en Las Vegas. Como era de esperar, a la mañana siguiente tienen una resaca tan monumental que no pueden recordar nada de lo ocurrido la noche anterior. Lo más extraordinario es que el novio ha desaparecido y en la suite del hotel se encuentran un tigre y un bebé",
+			"image": "img/Productions/the_hangover.jpg",
+			"Resource": {
+				"time": 121,
+				"link": "https://www.youtube.com/embed/_esKPsFVjsg"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Bradley Cooper",
+				"Zach Galifianakis",
+				"Ed Helms",
+				"Todd Phillips",
+				"Justin Bartha",
+				"Ken Jeong",
+				"Heather Graham"
+			],
+			"directors": [
+				"Todd Phillips",
+				"Jonathan Goldstein"
+			],
+			"categories":[
+				"Comedia"
+			]
+		},
+		"Supersalidos": {
+			"title": "Supersalidos",
+			"nationality": "ESP",
+			"publication": "2007-12-03",
+			"synopsis": "En una de sus últimas noches como estudiantes de instituto, Evan (Michael Cera) y Seth (Jonah Hill), dos amigos inadaptados, tropezarán con diversas dificultades para comprar bebidas para una fiesta a la que han invitado a las chicas de sus sueños. En su peripecia les acompañará el indescriptible McLovin (Christopher Mintz-Plasse), otro inadaptado que acaba de comprarse un carnet falso para que le sirva de salvoconducto en la compra de alcohol",
+			"image": "img/Productions/superbad.jpg",
+			"Resource": {
+				"time": 114,
+				"link": "https://www.youtube.com/embed/b8ht6ObDlyQ"
+			},
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"actors": [
+				"Seth Rogen",
+				"Jonah Hill",
+				"Michael Cera",
+				"Emma Stone",
+				"Bill Hader"
+			],
+			"directors": [
+				"Jonathan Goldstein"
+			]
+		},
+		"Marvel Studios: leyendas": {
+			"title": "Marvel Studios: leyendas",
+			"nationality": "ESP",
+			"publication": "2017-12-3",
+			"synopsis": "La serie muestra personajes individuales en cada episodio, destacando algunos de sus momentos icónicos en el Universo Cinematográfico de Marvel (MCU).",
+			"image": "img/Productions/leyendas.jpg",
+			"Resource": [
+				{
+					"time": 114,
+					"link": "https://www.youtube.com/embed/aKL3gZYO5tg"
+				},
+				{
+					"time": 114,
+					"link": "https://www.youtube.com/embed/jfZk3i46QG4"
+				}
+			],
+			"Coordinate": [
+				{
+					"lat": 40,
+					"long": 40
+				}
+			],
+			"season": 2,
+			"actors": [
+				"Robert Downey",
+				"Chris Evans",
+				"Scarlett Johansson",
+				"Chris Hemsworth",
+				"Mark Ruffalo",
+				"Jeremy Renner"
+			],
+			"directors": [
+				"Anthony Russo"
+			]
+		}
+	},
+	"directors": {
+		"Zack Snyder": {
+			"name": "Zack",
+			"lastname1": "Snyder",
+			"lastname2": "",
+			"born": "1978-1-2",
+			"picture": "img/Directors/ZackSnyder.jpg"
+		},
+		"Joel Crawford": {
+			"name": "Joel",
+			"lastname1": "Crawford",
+			"lastname2": "",
+			"born": "1980-1-0",
+			"picture": "img/Directors/JoelCrawford.jpg"
+		},
+		"Anthony Russo": {
+			"name": "Anthony",
+			"lastname1": "Russo",
+			"lastname2": "",
+			"born": "1970-3-1",
+			"picture": "img/Directors/AnthonyRusso.jpg"
+		},
+		"Aaron Horvath": {
+			"name": "Aaron",
+			"lastname1": "Horvath",
+			"lastname2": "",
+			"born": "1980-19-7",
+			"picture": "img/Directors/AaronHorvath.jpg"
+		},
+		"Michael Jelenic": {
+			"name": "Michael",
+			"lastname1": "Jelenic",
+			"lastname2": "",
+			"born": "1977-12-4",
+			"picture": "img/Directors/MichaelJelenic.jpg"
+		},
+		"Miguel Arteta": {
+			"name": "Miguel",
+			"lastname1": "Arteta",
+			"lastname2": "",
+			"born": "1965-7-29",
+			"picture": "img/Directors/MiguelArteta.jpg"
+		},
+		"John Francis": {
+			"name": "John",
+			"lastname1": "Francis",
+			"lastname2": "Daley",
+			"born": "1985-4-20",
+			"picture": "img/Directors/JohnFrancisDaley.webp"
+		},
+		"Jonathan Goldstein": {
+			"name": "Jonathan",
+			"lastname1": "Goldstein",
+			"lastname2": "",
+			"born": "1968-5-12",
+			"picture": "img/Directors/JonathanGoldstein.jpg"
+		},
+		"Todd Phillips": {
+			"name": "Todd",
+			"lastname1": "Phillips",
+			"lastname2": "",
+			"born": "1970-11-20",
+			"picture": "img/Directors/ToddPhillips.jpg"
+		},
+		"David Leitch": {
+			"name": "David",
+			"lastname1": "Leitch",
+			"lastname2": "",
+			"born": "1970-11-20",
+			"picture": "img/Directors/DavidLeitch.jpg"
+		},
+		"Chad Stahelski": {
+			"name": "Chad",
+			"lastname1": "Stahelski",
+			"lastname2": "",
+			"born": "1980-11-20",
+			"picture": "img/Directors/ChadStahelski.jpg"
+		},
+		"Lana Wachowski": {
+			"name": "Lana",
+			"lastname1": "Wachowski",
+			"lastname2": "",
+			"born": "1964-05-26",
+			"picture": "img/Directors/LanaWachowski.jpg"
+		}
+	},
+	"actors": {
+		"Henry Cavill": {
+			"name": "Henry",
+			"lastname1": "Cavill",
+			"lastname2": "",
+			"born": "1986-05-06",
+			"picture": "img/Actors/HenryCavill.webp"
+		},
+		"Diane Lane": {
+			"name": "Diane",
+			"lastname1": "Lane",
+			"lastname2": "",
+			"born": "1965-01-22",
+			"picture": "img/Actors/DianeLane.jpg"
+		},
+		"Kevin Costner": {
+			"name": "Kevin",
+			"lastname1": "Costner",
+			"lastname2": "",
+			"born": "1955-01-18",
+			"picture": "img/Actors/KevinCostner.jpg"
+		},
+		"Russell Crowe": {
+			"name": "Russell",
+			"lastname1": "Crowe",
+			"lastname2": "",
+			"born": "1964-04-07",
+			"picture": "img/Actors/RussellCrowe.jpg"
+		},
+		"Michael Shannon": {
+			"name": "Michael",
+			"lastname1": "Shannon",
+			"lastname2": "",
+			"born": "1974-08-07",
+			"picture": "img/Actors/MichaelShannon.jpg"
+		},
+		"Laurence Fishburne": {
+			"name": "Laurence",
+			"lastname1": "Fishburne",
+			"lastname2": "",
+			"born": "1961-07-30",
+			"picture": "img/Actors/LaurenceFishburne.jpg"
+		},
+		"Antje Traue": {
+			"name": "Antje",
+			"lastname1": "Traue",
+			"lastname2": "",
+			"born": "1981-01-18",
+			"picture": "img/Actors/AntjeTraue.jpg"
+		},
+		"Christopher Meloni": {
+			"name": "Christopher",
+			"lastname1": "Meloni",
+			"lastname2": "",
+			"born": "1961-04-02",
+			"picture": "img/Actors/ChristopherMeloni.jpg"
+		},
+		"Richard Schiff": {
+			"name": "Richard",
+			"lastname1": "Schiff",
+			"lastname2": "",
+			"born": "1955-05-27",
+			"picture": "img/Actors/RichardSchiff.jpg"
+		},
+		"Antonio Banderas": {
+			"name": "Antonio",
+			"lastname1": "Banderas",
+			"lastname2": "",
+			"born": "1960-11-10",
+			"picture": "img/Actors/AntonioBanderas.jpg"
+		},
+		"Florence Pugh": {
+			"name": "Florence",
+			"lastname1": "Pugh",
+			"lastname2": "",
+			"born": "1996-04-01",
+			"picture": "img/Actors/FlorencePugh.jpg"
+		},
+		"Harvey Guillén": {
+			"name": "Harvey",
+			"lastname1": "Guillén",
+			"lastname2": "",
+			"born": "1999-04-05",
+			"picture": "img/Actors/HarveyGuillén.jpg"
+		},
+		"Olivia Colman": {
+			"name": "Olivia",
+			"lastname1": "Colman",
+			"lastname2": "",
+			"born": "1974-01-30",
+			"picture": "img/Actors/OliviaColman.jpg"
+		},
+		"John Mulaney": {
+			"name": "John",
+			"lastname1": "Mulaney",
+			"lastname2": "",
+			"born": "1982-08-26",
+			"picture": "img/Actors/JohnMulaney.jpg"
+		},
+		"Samson Kayo": {
+			"name": "Samson",
+			"lastname1": "Kayo",
+			"lastname2": "",
+			"born": "1992-02-01",
+			"picture": "img/Actors/SamsonKayo.jpg"
+		},
+		"Robert Downey": {
+			"name": "Robert",
+			"lastname1": "Downey",
+			"lastname2": "Jr",
+			"born": "1965-03-03",
+			"picture": "img/Actors/RobertDowneyJr.jpg"
+		},
+		"Chris Evans": {
+			"name": "Chris",
+			"lastname1": "Evans",
+			"lastname2": "",
+			"born": "1981-4-13",
+			"picture": "img/Actors/ChrisEvans.jpg"
+		},
+		"Scarlett Johansson": {
+			"name": "Scarlett",
+			"lastname1": "Johansson",
+			"lastname2": "",
+			"born": "1984-10-22",
+			"picture": "img/Actors/ScarlettJohansson.jpg"
+		},
+		"Chris Hemsworth": {
+			"name": "Chris",
+			"lastname1": "Hemsworth",
+			"lastname2": "",
+			"born": "1983-10-22",
+			"picture": "img/Actors/ChrisHemsworth.jpg"
+		},
+		"Mark Ruffalo": {
+			"name": "Mark",
+			"lastname1": "Ruffalo",
+			"lastname2": "",
+			"born": "1967-10-22",
+			"picture": "img/Actors/MarkRuffalo.jpg"
+		},
+		"Jeremy Renner": {
+			"name": "Jeremy",
+			"lastname1": "Renner",
+			"lastname2": "",
+			"born": "1971-1-7",
+			"picture": "img/Actors/JeremyRenner.jpg"
+		},
+		"Brie Larson": {
+			"name": "Brie",
+			"lastname1": "Larson",
+			"lastname2": "",
+			"born": "1989-1-7",
+			"picture": "img/Actors/BrieLarson.jpg"
+		},
+		"Paul Rudd": {
+			"name": "Paul",
+			"lastname1": "Rudd",
+			"lastname2": "",
+			"born": "1969-1-7",
+			"picture": "img/Actors/PaulRudd.jpg"
+		},
+		"Donald Cheadle": {
+			"name": "Donald",
+			"lastname1": "Cheadle",
+			"lastname2": "",
+			"born": "1964-10-29",
+			"picture": "img/Actors/DonaldCheadles.jpg"
+		},
+		"Elizabeth Olsen": {
+			"name": "Elizabeth",
+			"lastname1": "Olsen",
+			"lastname2": "",
+			"born": "1989-10-29",
+			"picture": "img/Actors/ElizabethOlsen.jpg"
+		},
+		"Chadwick Boseman": {
+			"name": "Chadwick",
+			"lastname1": "Boseman",
+			"lastname2": "",
+			"born": "1989-10-29",
+			"picture": "img/Actors/ChadwickBoseman.jpg"
+		},
+		"Tom Holland": {
+			"name": "Tom",
+			"lastname1": "Holland",
+			"lastname2": "",
+			"born": "1996-1-5",
+			"picture": "img/Actors/TomHolland.jpg"
+		},
+		"Chris Pratt": {
+			"name": "Chris",
+			"lastname1": "Pratt",
+			"lastname2": "",
+			"born": "1979-1-5",
+			"picture": "img/Actors/ChrisPratt.jpg"
+		},
+		"Charles Martinet": {
+			"name": "Charles",
+			"lastname1": "Martinet",
+			"lastname2": "",
+			"born": "1955-10-17",
+			"picture": "img/Actors/CharlesMartinet.jpg"
+		},
+		"Anya Taylor": {
+			"name": "Anya",
+			"lastname1": "Taylor",
+			"lastname2": "Joy",
+			"born": "1996-05-16",
+			"picture": "img/Actors/AnyaTailorJoy.jpg"
+		},
+		"Charlie Day": {
+			"name": "Charlie",
+			"lastname1": "Day",
+			"lastname2": "",
+			"born": "1976-01-09",
+			"picture": "img/Actors/CharlieDay.jpg"
+		},
+		"Jack Black": {
+			"name": "Jack",
+			"lastname1": "Black",
+			"lastname2": "",
+			"born": "1969-02-28",
+			"picture": "img/Actors/JackBlack.jpg"
+		},
+		"Keegan Michael": {
+			"name": "Keegan",
+			"lastname1": "Michael",
+			"lastname2": "Key",
+			"born": "1971-02-22",
+			"picture": "img/Actors/Keegan-MichaelKey.jpg"
+		},
+		"Seth Rogen": {
+			"name": "Seth",
+			"lastname1": "Rogen",
+			"lastname2": "",
+			"born": "1982-05-15",
+			"picture": "img/Actors/SethRogen.jpg"
+		},
+		"Sophia Ali": {
+			"name": "Sophia",
+			"lastname1": "Ali",
+			"lastname2": "",
+			"born": "1995-12-07",
+			"picture": "img/Actors/SophiaAli.jpg"
+		},
+		"Mark Wahlberg": {
+			"name": "Mark",
+			"lastname1": "Wahlberg",
+			"lastname2": "",
+			"born": "1971-06-05",
+			"picture": "img/Actors/MarkWahlberg.jpg"
+		},
+		"Alana Boden": {
+			"name": "Alana",
+			"lastname1": "Boden",
+			"lastname2": "",
+			"born": "1997-01-01",
+			"picture": "img/Actors/AlanaBoden.jpg"
+		},
+		"Manuel de Blas": {
+			"name": "Manuel",
+			"lastname1": "de Blas",
+			"lastname2": "",
+			"born": "1941-12-05",
+			"picture": "img/Actors/ManueldeBlas.jpg"
+		},
+		"Brad Pitt": {
+			"name": "Brad",
+			"lastname1": "Pitt",
+			"lastname2": "",
+			"born": "1963-11-18",
+			"picture": "img/Actors/BradPitt.jpg"
+		},
+		"Aaron Taylor-Johnson": {
+			"name": "Aaron",
+			"lastname1": "Taylor",
+			"lastname2": "Johnson",
+			"born": "1990-06-13",
+			"picture": "img/Actors/AaronTaylor-Johnson.jpg"
+		},
+		"Joey King": {
+			"name": "Joey",
+			"lastname1": "King",
+			"lastname2": "",
+			"born": "1999-06-30",
+			"picture": "img/Actors/JoeyKing.jpg"
+		},
+		"David Leitch": {
+			"name": "David",
+			"lastname1": "Leitch",
+			"lastname2": "",
+			"born": "1975-10-16",
+			"picture": "img/Actors/DavidLeitch.jpg"
+		},
+		"Sandra Bullock": {
+			"name": "Sandra",
+			"lastname1": "Bullock",
+			"lastname2": "",
+			"born": "1964-05-26",
+			"picture": "img/Actors/SandraBullock.jpg"
+		},
+		"Logan Lerman": {
+			"name": "Logan",
+			"lastname1": "Lerman",
+			"lastname2": "",
+			"born": "1992-01-19",
+			"picture": "img/Actors/LoganLerman.jpg"
+		},
+		"Ryan Reynolds": {
+			"name": "Ryan",
+			"lastname1": "Reynolds",
+			"lastname2": "",
+			"born": "1976-09-23",
+			"picture": "img/Actors/RyanReynolds.jpg"
+		},
+		"Masi Oka": {
+			"name": "Masi",
+			"lastname1": "Oka",
+			"lastname2": "",
+			"born": "1974-11-27",
+			"picture": "img/Actors/MasiOka.jpg"
+		},
+		"Keanu Reeves": {
+			"name": "Keanu",
+			"lastname1": "Reeves",
+			"lastname2": "",
+			"born": "1964-03-02",
+			"picture": "img/Actors/KeanuReeves.jpg"
+		},
+		"Ian McShane": {
+			"name": "Ian",
+			"lastname1": "McShane",
+			"lastname2": "",
+			"born": "1942-09-29",
+			"picture": "img/Actors/IanMcShane.jpg"
+		},
+		"Lance Reddick": {
+			"name": "Lance",
+			"lastname1": "Reddick",
+			"lastname2": "",
+			"born": "1962-12-31",
+			"picture": "img/Actors/LanceReddick.jpg"
+		},
+		"Bridget Moynahan": {
+			"name": "Bridget",
+			"lastname1": "Moynahan",
+			"lastname2": "",
+			"born": "1971-04-28",
+			"picture": "img/Actors/BridgetMoynahan.jpg"
+		},
+		"Willem Dafoe": {
+			"name": "Willem",
+			"lastname1": "Dafoe",
+			"lastname2": "",
+			"born": "1955-07-22",
+			"picture": "img/Actors/WillemDafoe.jpg"
+		},
+		"Alfie Allen": {
+			"name": "Alfie",
+			"lastname1": "Allen",
+			"lastname2": "",
+			"born": "1986-09-12",
+			"picture": "img/Actors/AlfieAllen.jpg"
+		},
+		"Jessica Henwick": {
+			"name": "Jessica",
+			"lastname1": "Henwick",
+			"lastname2": "",
+			"born": "1992-10-30",
+			"picture": "img/Actors/JessicaHenwick.jpg"
+		},
+		"Priyanka Chopra": {
+			"name": "Priyanka",
+			"lastname1": "Chopra",
+			"lastname2": "",
+			"born": "1982-06-18",
+			"picture": "img/Actors/PriyankaChopra.jpg"
+		},
+		"Jonathan Groff": {
+			"name": "Jonathan",
+			"lastname1": "Groff",
+			"lastname2": "",
+			"born": "1985-02-26",
+			"picture": "img/Actors/JonathanGroff.jpg"
+		},
+		"Erendira Ibarra": {
+			"name": "Erendira",
+			"lastname1": "Ibarra",
+			"lastname2": "",
+			"born": "1985-10-25",
+			"picture": "img/Actors/ErendiraIbarra.jpg"
+		},
+		"Lambert Wilson": {
+			"name": "Lambert",
+			"lastname1": "Wilson",
+			"lastname2": "",
+			"born": "1958-09-03",
+			"picture": "img/Actors/LambertWilson.jpg"
+		},
+		"Jennifer Garner": {
+			"name": "Jennifer",
+			"lastname1": "Garner",
+			"lastname2": "",
+			"born": "1972-04-17",
+			"picture": "img/Actors/JenniferGarner.jpg"
+		},
+		"Édgar Ramírez": {
+			"name": "Édgar",
+			"lastname1": "Ramírez",
+			"lastname2": "",
+			"born": "1977-02-25",
+			"picture": "img/Actors/ÉdgarRamírez.jpg"
+		},
+		"Julian Lerner": {
+			"name": "Julian",
+			"lastname1": "Lerner",
+			"lastname2": "",
+			"born": "2006-10-05",
+			"picture": "img/Actors/JulianLerner.jpg"
+		},
+		"Jason Bateman": {
+			"name": "Jason",
+			"lastname1": "Bateman",
+			"lastname2": "",
+			"born": "1969-01-14",
+			"picture": "img/Actors/JasonBateman.jpg"
+		},
+		"Rachel McAdams": {
+			"name": "Rachel",
+			"lastname1": "McAdams",
+			"lastname2": "",
+			"born": "1978-11-17",
+			"picture": "img/Actors/RachelMcAdams.jpg"
+		},
+		"John Francis": {
+			"name": "John",
+			"lastname1": "Francis",
+			"lastname2": "Daley",
+			"born": "1985-07-20",
+			"picture": "img/Actors/JohnFrancisDaley.jpg"
+		},
+		"Jonathan Goldstein": {
+			"name": "Jonathan",
+			"lastname1": "Goldstein",
+			"lastname2": "",
+			"born": "1969-09-20",
+			"picture": "img/Actors/JonathanGoldstein.jpg"
+		},
+		"Jesse Plemons": {
+			"name": "Jesse",
+			"lastname1": "Plemons",
+			"lastname2": "",
+			"born": "1988-04-02",
+			"picture": "img/Actors/JessePlemons.jpg"
+		},
+		"Sharon Horgan": {
+			"name": "Sharon",
+			"lastname1": "Horgan",
+			"lastname2": "",
+			"born": "1970-07-13",
+			"picture": "img/Actors/SharonHorgan.jpg"
+		},
+		"Kyle Chandler": {
+			"name": "Kyle",
+			"lastname1": "Chandler",
+			"lastname2": "",
+			"born": "1965-09-17",
+			"picture": "img/Actors/KyleChandler.jpg"
+		},
+		"Lamorne Morris": {
+			"name": "Lamorne",
+			"lastname1": "Morris",
+			"lastname2": "",
+			"born": "1983-08-14",
+			"picture": "img/Actors/LamorneMorris.jpg"
+		},
+		"Bradley Cooper": {
+			"name": "Bradley",
+			"lastname1": "Cooper",
+			"lastname2": "",
+			"born": "1975-05-05",
+			"picture": "img/Actors/BradleyCooper.jpg"
+		},
+		"Zach Galifianakis": {
+			"name": "Zach",
+			"lastname1": "Galifianakis",
+			"lastname2": "",
+			"born": "1969-10-01",
+			"picture": "img/Actors/ZachGalifianakis.jpg"
+		},
+		"Ed Helms": {
+			"name": "Ed",
+			"lastname1": "Helms",
+			"lastname2": "",
+			"born": "1974-01-24",
+			"picture": "img/Actors/EdHelms.jpg"
+		},
+		"Todd Phillips": {
+			"name": "Todd",
+			"lastname1": "Phillips",
+			"lastname2": "",
+			"born": "1970-12-20",
+			"picture": "img/Actors/ToddPhillips.jpg"
+		},
+		"Justin Bartha": {
+			"name": "Justin",
+			"lastname1": "Bartha",
+			"lastname2": "",
+			"born": "1978-07-21",
+			"picture": "img/Actors/JustinBartha.jpg"
+		},
+		"Ken Jeong": {
+			"name": "Ken",
+			"lastname1": "Jeong",
+			"lastname2": "",
+			"born": "1969-06-13",
+			"picture": "img/Actors/KenJeong.jpg"
+		},
+		"Heather Graham": {
+			"name": "Heather",
+			"lastname1": "Graham",
+			"lastname2": "",
+			"born": "1970-01-29",
+			"picture": "img/Actors/HeatherGraham.jpg"
+		},
+		"Jonah Hill": {
+			"name": "Jonah",
+			"lastname1": "Hill",
+			"lastname2": "",
+			"born": "1983-12-20",
+			"picture": "img/Actors/JonahHill.jpg"
+		},
+		"Michael Cera": {
+			"name": "Michael",
+			"lastname1": "Cera",
+			"lastname2": "",
+			"born": "1988-06-07",
+			"picture": "img/Actors/MichaelCera.jpg"
+		},
+		"Christopher Mintz-Plasse": {
+			"name": "Christopher",
+			"lastname1": "Mintz",
+			"lastname2": "Plasse",
+			"born": "1989-06-20",
+			"picture": "img/Actors/ChristopherMintz-Plasse.jpg"
+		},
+		"Emma Stone": {
+			"name": "Emma",
+			"lastname1": "Stone",
+			"lastname2": "",
+			"born": "1988-11-06",
+			"picture": "img/Actors/EmmaStone.jpg"
+		},
+		"Bill Hader": {
+			"name": "Bill",
+			"lastname1": "Hader",
+			"lastname2": "",
+			"born": "1978-06-07",
+			"picture": "img/Actors/BillHader.jpg"
+		},
+		"Jenna Ortega": {
+			"name": "Jenna",
+			"lastname1": "Ortega",
+			"lastname2": "",
+			"born": "2001-06-05",
+			"picture": "img/Actors/JennaOrtega.jpg"
+		}
+	}
+}
