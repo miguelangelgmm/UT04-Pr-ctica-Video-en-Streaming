@@ -82,6 +82,9 @@ export class Category {
 	get name() {
 		return this.#name;
 	}
+	get description(){
+		return this.#description;
+	}
 }
 
 export class Resource {

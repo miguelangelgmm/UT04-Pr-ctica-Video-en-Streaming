@@ -73,6 +73,8 @@ export let VideoSystem = (function () {
 
 			#defaultCategory = new Category("General"); //Categoría por defecto
 
+			#backupData; //Permite almacenar los datos de los objetos crados
+
 			#categories = [];
 			/*{
 			category;
@@ -130,10 +132,10 @@ export let VideoSystem = (function () {
 
 				return this.#actors.findIndex(
 
-					(act) =>{
+					(act) => {
 						return (
-							act.actor.name.localeCompare(actor.name, "en", {sensitivity: "base",}) == 0 &&
-							act.actor.lastname1.localeCompare(actor.lastname1,"en",{sensitivity:"base"})==0
+							act.actor.name.localeCompare(actor.name, "en", { sensitivity: "base", }) == 0 &&
+							act.actor.lastname1.localeCompare(actor.lastname1, "en", { sensitivity: "base" }) == 0
 						)
 					}
 
@@ -203,6 +205,16 @@ export let VideoSystem = (function () {
 				this.addCategory(this.#defaultCategory);
 				//Asignamos la dirección de memoria de las producciones por defecto a defaultCategoryProductions
 				this.#defaultCategoryProductions = this.#categories[0].productions;
+
+				this.#backupData = {
+					users:[],
+					categories:[],
+					series:[],
+					movies:[],
+					persons:[]
+				};//array para el backup
+				this.#backupData.categories.push(this.#defaultCategory)
+
 			}
 			//Retorna el nombre del sistema
 			get name() {
@@ -293,6 +305,11 @@ export let VideoSystem = (function () {
 					? (category = new Category(name, description)) //si no existe la categoria la creamos
 					: (category = this.#categories[position].category); //si existe la recuperamos de la lista de categorias
 
+				//Backup
+				if (position == -1) {
+					this.#backupData.categories.push(new Category(name, description))
+				}
+
 				return category;
 			}
 			//	Devuelve un iterador que permite recorrer los usuarios del sistema
@@ -361,6 +378,11 @@ export let VideoSystem = (function () {
 				position == -1
 					? (user = new User(username, email, password)) //si no existe el usuario lo creamos
 					: (user = this.#users[position]); //si existe lo recuperamos de la lista de categorias
+
+				if (position == -1) {
+					//Backup
+					this.#backupData.users.push(new User(username, email, password))
+				}
 
 				return user;
 			}
@@ -451,6 +473,13 @@ export let VideoSystem = (function () {
 					);
 				} else production = this.#productions[position]; //si existe lo recuperamos de la lista de productions
 
+				if (position == -1) {
+					//Backup
+					this.#backupData.series.push(new Serie(title, nationality, publication, synopsis, image, resource, locations, seasons))
+				}
+
+
+
 				return production;
 			}
 			//Factoria de Peliculas
@@ -488,6 +517,11 @@ export let VideoSystem = (function () {
 					);
 				} else production = this.#productions[position]; //si existe lo recuperamos de la lista de productions
 
+				if (position == -1) {
+					//Backup
+					this.#backupData.movies.push(new Movie(title, nationality, publication, synopsis, image, resource, locations))
+				}
+
 				return production;
 			}
 			//ACTORES
@@ -509,7 +543,7 @@ export let VideoSystem = (function () {
 					throw new InvalidValueException("actor", "Person");
 				if (!actor) throw new EmptyValueException("actor");
 
-				if (this.#actors.findIndex((act) =>{return act.actor.name == actor.name && act.actor.lastname1 == actor.lastname1}) != -1)
+				if (this.#actors.findIndex((act) => { return act.actor.name == actor.name && act.actor.lastname1 == actor.lastname1 }) != -1)
 					throw new DataAlreadyExistsException("actor");
 
 				this.#actors.push({ actor: actor, productions: [] });
@@ -534,7 +568,7 @@ export let VideoSystem = (function () {
 				let position = this.#actors.findIndex((act) => {
 					return (
 						name.localeCompare(act.actor.name, "es", { sensitivity: "base" }) ==
-							0 &&
+						0 &&
 						lastname1.localeCompare(act.actor.lastname1, "es", {
 							sensitivity: "base",
 						}) == 0
@@ -543,20 +577,23 @@ export let VideoSystem = (function () {
 				let actor;
 				if (position == -1) {
 					actor = new Person(name, lastname1, lastname2, born, picture);
+				//Backup
+				this.#backupData.persons.push(new Person(name, lastname1, lastname2, born, picture))
 				} else {
 					//si no existe la producción
 					actor = this.#actors[position].actor;
 				}
 				//si existe lo recuperamos de la lista de categorias
 
+
 				return actor;
 			}
-			//Factoria de Actores
+
 			getActorFullName(fullName) {
 				if (fullName === "undefined" || fullName === "")
 					throw new EmptyValueException("fullName");
 				let position = this.#actors.findIndex((act) => {
-					return (fullName.localeCompare(act.actor.name + " " + act.actor.lastname1)==0);
+					return (fullName.localeCompare(act.actor.name + " " + act.actor.lastname1) == 0);
 				});
 				let actor;
 				if (position == -1) {
@@ -567,15 +604,16 @@ export let VideoSystem = (function () {
 					actor = this.#actors[position].actor;
 				}
 				//si existe lo recuperamos de la lista de categorias
+
 				return actor;
 			}
 
 			//Comprueba si existe un actor
-			checkActor(name,lastname1){
+			checkActor(name, lastname1) {
 				return this.#actors.findIndex((act) => {
 					return (
 						name.localeCompare(act.actor.name, "es", { sensitivity: "base" }) ==
-							0 &&
+						0 &&
 						lastname1.localeCompare(act.actor.lastname1, "es", {
 							sensitivity: "base",
 						}) == 0
@@ -583,11 +621,11 @@ export let VideoSystem = (function () {
 				}) != -1
 			}
 			//Comprueba si existe un director
-			checkDirector(name,lastname1){
+			checkDirector(name, lastname1) {
 				return this.#directors.findIndex((director) => {
 					return (
 						name.localeCompare(director.director.name, "es", { sensitivity: "base" }) ==
-							0 &&
+						0 &&
 						lastname1.localeCompare(director.director.lastname1, "es", {
 							sensitivity: "base",
 						}) == 0
@@ -651,23 +689,23 @@ export let VideoSystem = (function () {
 
 				return director;
 			}
-				//Factoria de Directores
-				getDirectorFullName(FullName) {
-					if (FullName === "undefined" || FullName === "")
-						throw new EmptyValueException("name");
-					let position = this.#directors.findIndex(
-						(direct) =>
-						FullName.localeCompare(direct.director.name + " " +direct.director.lastname1)==0);
+			//Factoria de Directores
+			getDirectorFullName(FullName) {
+				if (FullName === "undefined" || FullName === "")
+					throw new EmptyValueException("name");
+				let position = this.#directors.findIndex(
+					(direct) =>
+						FullName.localeCompare(direct.director.name + " " + direct.director.lastname1) == 0);
 
-					let director;
-					if(position == -1){
-						throw new ThisPersonNotExist();//si no existe la producción, va a lanzar un error
+				let director;
+				if (position == -1) {
+					throw new ThisPersonNotExist();//si no existe la producción, va a lanzar un error
 
-					}
-						(director = this.#directors[position].director); //si existe lo recuperamos de la lista de categorias
-
-					return director;
 				}
+				(director = this.#directors[position].director); //si existe lo recuperamos de la lista de categorias
+
+				return director;
+			}
 
 			/**
 			 * Asigna una o más producciones a una categoria
@@ -762,7 +800,7 @@ export let VideoSystem = (function () {
 				);
 
 				//si esta vacio es porque ya esta asignado a esa producción
-				if(!prods.length){
+				if (!prods.length) {
 					throw new ThisPersonIsAlreadyAssignedToaProduction();
 				}
 
@@ -830,7 +868,7 @@ export let VideoSystem = (function () {
 				);
 				//Si no existen las producciones la añadimos
 				//si esta vacio es porque ya esta asignado a esa producción
-				if(!prods.length){
+				if (!prods.length) {
 					throw new ThisPersonIsAlreadyAssignedToaProduction();
 				}
 
@@ -925,7 +963,7 @@ export let VideoSystem = (function () {
 				// referencia para habilitar el closure en el objeto
 				let categories = this.#categories;
 				for (const category of categories) {
-					if(category.productions.includes(production)){
+					if (category.productions.includes(production)) {
 						yield category.category
 					}
 
@@ -947,6 +985,74 @@ export let VideoSystem = (function () {
 					}
 				}
 			}
+
+			get getBackupCat() {
+				let backup = this.#backupData.categories;
+				return {
+					*[Symbol.iterator]() {
+						for (let back of backup) {
+							yield {
+								name:back.name,
+								description:back.description
+							};
+						}
+					},
+				};
+			}
+			get getBackupMov() {
+				let backup = this.#backupData.movies;
+				return {
+					*[Symbol.iterator]() {
+						for (let back of backup) {
+							yield {
+								title:back.title,
+								nationality:back.nationality,
+								publication:back.publication.toLocaleDateString(),
+								synopsis:back.synopsis,
+								image:back.image,
+								resource:back.resource.toString(),
+								locations:back.locations
+							};
+						}
+					},
+				};
+			}
+			get getBackupSerie() {
+				let backup = this.#backupData.series;
+				return {
+					*[Symbol.iterator]() {
+						for (let back of backup) {
+							yield {
+								title:back.title,
+								nationality:back.nationality,
+								publication:back.publication.toLocaleDateString(),
+								synopsis:back.synopsis,
+								image:back.image,
+								resource:back.resource,
+								locations:back.locations,
+								season:back.season
+							};
+						}
+					},
+				};
+			}
+			get getBackupPerson() {
+				let backup = this.#backupData.persons;
+				return {
+					*[Symbol.iterator]() {
+						for (let back of backup) {
+							yield {
+								name:back.name,
+								lastname1:back.lastname1,
+								lastname2:back.lastname2,
+								born:back.born.toLocaleDateString(),
+								picture:back.picture
+							};
+						}
+					},
+				};
+			}
+
 		}
 		let instance = new VideoSystem(name); //Devolvemos el objeto ImageManager para que sea una instancia única.
 		Object.freeze(instance);

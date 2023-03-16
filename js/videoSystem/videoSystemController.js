@@ -132,8 +132,9 @@ class VideoSystemController {
 				});
 
 			}).then(() => {
+				this.onLoad();
+
 				this.loadNavJSON()
-				this.#randomProductions = [...this.#videoSystem.randomProductions()];
 				this.onAddRandomProductionLoad();
 				this.#videoSystemView.bindProductions(this.handleCategoryListProduction)
 			}
@@ -144,15 +145,6 @@ class VideoSystemController {
 
 
 
-
-		/**Categorias*/
-		/*
-		this.#videoSystem.addCategory(this.#videoSystem.getCategory("Comedia", "Género que busca hacer reír al espectador y proporcionar un escape de la vida cotidiana a través del humor"));
-		this.#videoSystem.addCategory(this.#videoSystem.getCategory("Acción", "Género emocionante que se centra en la acción y el suspense. Estas películas a menudo incluyen persecuciones, peleas, explosiones y otros efectos especiales para crear una experiencia de visualización intensa y emocionante."));
-		this.#videoSystem.addCategory(this.#videoSystem.getCategory("Fantasía", "Género que se basa en elementos imaginarios, como magia, seres fantásticos, mundos imaginarios y otros elementos que no existen en el mundo real. Este género permite a los cineastas explorar historias y personajes que van más allá de lo posible en la vida real."));
-
-*/
-
 	}
 	constructor(model, view) {
 		this.#videoSystem = model;
@@ -161,11 +153,6 @@ class VideoSystemController {
 		//Cargamos todos los objetos
 		this.#loadVideoSystemObjects();
 
-		//Obtengo 3 producciones aleatorias para mostrarlas al cargar, las voy a guardar en un array para mantener las mismas al usuario
-		//hasta que reinicie la página ahora se va a cargar una vez se cargen los datos del JSON
-		//!	this.#randomProductions = [...model.randomProductions()];
-
-		this.onLoad();
 
 	}
 
@@ -193,7 +180,8 @@ class VideoSystemController {
 			this.handlerAssignPerson,
 			this.handlerManageCategory,
 			this.handlerNewPerson,
-			this.handleRemovePerson
+			this.handleRemovePerson,
+			this.handerBackup
 		);
 
 		if (document.cookie == "username=admin") {
@@ -238,7 +226,7 @@ class VideoSystemController {
 	//muestra 3 producciones aleatorias
 	onAddRandomProductionLoad = () => {
 		//puedo generar otras 3 peliculas aleatorias o mantenerlas
-		this.#videoSystemView.showProductionInLoad(this.#randomProductions);
+		this.#videoSystemView.showProductionInLoad(this.#videoSystem.randomProductions());
 	}
 	//va a mostrar la lista de categorias en el main y vincular el evento para listar las películas de cada categoria
 	onAddCategoryMain = () => {
@@ -598,12 +586,15 @@ class VideoSystemController {
 	handleNewProduction = (type, title, nationality, date, categories, synopsis, actors, directors, urlImg, resource, lat, long, season, time) => {
 
 		let done;
-		urlImg = urlImg || "/img/default-p.jpg";
+		urlImg = urlImg || "img/default-p.jpg";
 		resource = resource || "https://www.youtube.com/embed/U2DkSxMGfGE";
 		time = parseInt(time) || 0;
 		lat = parseInt(lat) || 0;
 		long = parseInt(long) || 0;
-
+		//Por defecto si no se selecciona una categoria van a ir a general
+		if(categories.length == 0){
+			categories=["General"]
+		}
 		try {
 			//Si puede obtener una película es porque esa película ya existe entonces no podemos crear otra
 			this.#videoSystem.getMovie(title);
@@ -687,6 +678,33 @@ class VideoSystemController {
 		this.#videoSystemView.CloseAdminCookie();
 		//enlazamos el evento para el formulario de inicio de sesion
 		this.#videoSystemView.bindShowFormLogin(this.handleShowLogin)
+	}
+
+
+	//-----------Backup
+	handerBackup = () => {
+		//guardamos la referencia del view
+		let showModal = this.#videoSystemView;
+		//obtenemos los iteradores
+		let categoriesBody = [...this.#videoSystem.getBackupCat];
+		let personsBody = [...this.#videoSystem.getBackupPerson];
+		let serieBody = [...this.#videoSystem.getBackupSerie];
+		let movieBody = [...this.#videoSystem.getBackupMov];
+
+
+		let base = location.protocol + '//' + location.host + location.pathname;
+		let url = new URL('backup.php', base);
+
+
+		fetch(url, {
+			method: 'post',//generamos el json
+			body: JSON.stringify({"Categories":categoriesBody,"persons":personsBody,"series":serieBody,"movies":movieBody})
+		}).then(function(response) {
+			showModal.showbackupModal(true);
+		}).catch(function(err) {
+			showModal.showbackupModal(false);
+			console.log('No se ha recibido respuesta.');
+		});
 	}
 
 }

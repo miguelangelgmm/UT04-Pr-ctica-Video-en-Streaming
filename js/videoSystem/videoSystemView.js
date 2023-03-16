@@ -715,6 +715,7 @@ class VideoSystemView {
 			<li><a id="manageCategory" class="dropdown-item show-form">Gestionar categorias</a></li>
 			<li><a id="newPerson" class="dropdown-item show-form">Nueva persona</a></li>
 			<li><a id="delPerson" class="dropdown-item show-form">Eliminar Persona</a></li>
+			<li><a id="backup" class="dropdown-item show-form">backup</a></li>
 		</ul>
 	</li>
 	</ul>
@@ -725,7 +726,7 @@ class VideoSystemView {
 
 	}
 
-	bindAdminMenu(handlerNewProduction, handlerRemoveProduction, handlerAssignPerson, handlerManageCategory, handlerNewPerson, handlerRemoveCategory) {
+	bindAdminMenu(handlerNewProduction, handlerRemoveProduction, handlerAssignPerson, handlerManageCategory, handlerNewPerson, handlerRemoveCategory,handerBackup) {
 		$('#newProduction').click((event) => {
 			this.#excecuteHandler(handlerNewProduction, [], { action: 'newProduction' }, '#new-Production', event);
 		});
@@ -743,6 +744,9 @@ class VideoSystemView {
 		});
 		$('#delPerson').click((event) => {
 			this.#excecuteHandler(handlerRemoveCategory, [], { action: 'delPerson' }, '#remove-category', event);
+		});
+		$('#backup').click((event) => {
+			handerBackup();
 		});
 	}
 
@@ -2185,6 +2189,62 @@ class VideoSystemView {
 
 		bttnCloseSessionEmpty(){
 			this.#divCloseSesion.empty();
+		}
+
+		showbackupModal(done) {
+			let modal = (done) ? $(`
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+						<div class="modal-content  bg-success">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">Backup Realizado</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p>Proceso realizado correctamente</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			`) :
+				`<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">						<div class="modal-dialog">
+			<div class="modal-content  bg-danger">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">No ha sido posible el backup </h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>No se ha podido realizar backup</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>`;
+
+			//añadimos el modal al body
+			this.body.append(modal);
+			//creamos el modal
+			let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+			myModal.show()
+
+			//obtenemos el modal del documento
+			let myModalElem = document.getElementById('staticBackdrop');
+
+			//al modal le asignamos el evento para ocultar el modal
+			myModalElem.querySelector('button').addEventListener('click', () => {
+				myModal.hide();
+			});
+
+			//si se ha ocultado el modal lanzara el evento
+			myModalElem.addEventListener('hidden.bs.modal', () => {
+
+				myModalElem.remove();
+			});
+
 		}
 }
 
